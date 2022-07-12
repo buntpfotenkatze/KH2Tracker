@@ -566,6 +566,18 @@ namespace KhTracker.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EmitProofKeystroke {
+            get {
+                return ((bool)(this["EmitProofKeystroke"]));
+            }
+            set {
+                this["EmitProofKeystroke"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AntiForm {
             get {
                 return ((bool)(this["AntiForm"]));

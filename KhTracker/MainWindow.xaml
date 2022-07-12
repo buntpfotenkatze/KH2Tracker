@@ -51,6 +51,7 @@
                 <MenuItem Header="Reset Tracker" 	 Click="OnReset"/>
                 <MenuItem Header="Always on Top" 	 Click="TopMostToggle"  x:Name="TopMostOption"     IsCheckable="True" IsChecked="False"/>
                 <MenuItem Header="Drag and Drop" 	 Click="DragDropToggle" x:Name="DragAndDropOption" IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="Emit proof keystroke" Click="EmitProofKeystrokeToggle" x:Name="EmitProofKeystrokeOption" IsCheckable="True" IsChecked="True"/>
                 <Separator/>
                 <MenuItem Header="Reset Window Size" Click="ResetSize"/>
                 <MenuItem Header="Show Disconnect Message" Click="DisconnectToggle" x:Name="Disconnect" IsCheckable="True" IsChecked="True"/>
@@ -131,7 +132,7 @@
                 <MenuItem Header="Puzzles" 						Click="PuzzleToggle" 			x:Name="PuzzleOption"			IsCheckable="True" IsChecked="True"/>
             </MenuItem>
             <MenuItem x:Name="ModeDisplay" Header=" " Focusable="False" IsHitTestVisible="False" HorizontalAlignment="Right"/>
-            <!--MenuItem Header="-DA 1.6.8-" IsHitTestVisible="False" Focusable="False" HorizontalAlignment="Right"/-->
+            <!--MenuItem Header="-ppk 1.6.8-" IsHitTestVisible="False" Focusable="False" HorizontalAlignment="Right"/-->
         </Menu>
 
         <Grid>

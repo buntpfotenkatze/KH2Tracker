@@ -223,6 +223,9 @@
     <PackageReference Include="GrayscaleEffect">
       <Version>1.0.1</Version>
     </PackageReference>
+    <PackageReference Include="GregsStack.InputSimulatorStandard">
+      <Version>1.3.5</Version>
+    </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.4</Version>
     </PackageReference>

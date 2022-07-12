@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using GregsStack.InputSimulatorStandard;
+using GregsStack.InputSimulatorStandard.Native;
 
 namespace KhTracker
 {
@@ -54,6 +56,11 @@ namespace KhTracker
         public static int Ability_Count = 0;
         public static int Report_Count = 0;
         public static int Visit_Count = 0;
+
+        private static bool ProofOfConnectionObtained = false;
+        private static bool ProofOfNonExistenceObtained = false;
+        private static bool ProofOfPeaceObtained = false;
+        private static int NumProofsObtained = 0;
 
         //A single spot to have referenced for the opacity of the ghost checks idk where to put this
         public static double universalOpacity = 0.5;
@@ -194,6 +201,49 @@ namespace KhTracker
                 {
                     window.UpdatePointScore(TableReturn(button.Name) * addRemove);
                 }
+            }
+
+            switch (button.Name)
+            {
+                case "Connection":
+                    ProofOfConnectionObtained = add;
+                    break;
+                case "Nonexistence":
+                    ProofOfNonExistenceObtained = add;
+                    break;
+                case "Peace":
+                    ProofOfPeaceObtained = add;
+                    break;
+                default:
+                    return;
+            }
+
+            var proofsObtained = (ProofOfConnectionObtained ? 1 : 0) +
+                                 (ProofOfNonExistenceObtained ? 1 : 0) +
+                                 (ProofOfPeaceObtained ? 1 : 0);
+
+            if (NumProofsObtained != proofsObtained && Properties.Settings.Default.EmitProofKeystroke)
+            {
+                NumProofsObtained = proofsObtained;
+                var simu = new InputSimulator();
+                var keycode = VirtualKeyCode.F5;
+                switch (NumProofsObtained)
+                {
+                    case 1:
+                        keycode = VirtualKeyCode.F6;
+                        break;
+                    case 2: 
+                        keycode = VirtualKeyCode.F7;
+                        break;
+                    case 3: 
+                        keycode = VirtualKeyCode.F8;
+                        break;
+                }
+
+                simu.Keyboard
+                    .KeyDown(VirtualKeyCode.CONTROL).KeyDown(VirtualKeyCode.SHIFT).KeyDown(keycode)
+                    .Sleep(100)
+                    .KeyUp(keycode).KeyUp(VirtualKeyCode.SHIFT).KeyUp(VirtualKeyCode.CONTROL);
             }
         }
 

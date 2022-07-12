@@ -678,6 +678,17 @@ namespace KhTracker
             }
         }
 
+        private void EmitProofKeystrokeToggle(object sender, RoutedEventArgs e)
+        {
+            EmitProofKeystrokeToggle(EmitProofKeystrokeOption.IsChecked);
+        }
+
+        private void EmitProofKeystrokeToggle(bool toggle)
+        {
+            Properties.Settings.Default.EmitProofKeystroke = toggle;
+            EmitProofKeystrokeOption.IsChecked = toggle;
+        }
+
         private void SoraLevel01Toggle(object sender, RoutedEventArgs e)
         {
             SoraLevel01Toggle(SoraLevel01Option.IsChecked);

@@ -421,6 +421,10 @@ namespace KhTracker
 
             Width = Properties.Settings.Default.Width;
             Height = Properties.Settings.Default.Height;
+
+            EmitProofKeystrokeOption.IsChecked = Properties.Settings.Default.EmitProofKeystroke;
+            if (EmitProofKeystrokeOption.IsChecked)
+                EmitProofKeystrokeToggle(null, null);
         }
 
         /// 
