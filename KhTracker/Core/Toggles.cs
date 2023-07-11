@@ -92,6 +92,11 @@ namespace KhTracker
             Properties.Settings.Default.AutoSaveProgress = AutoSaveProgressOption.IsChecked;
         }
 
+        private void AutoSaveProgress2Toggle(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.AutoSaveProgress2 = AutoSaveProgress2Option.IsChecked;
+        }
+
         private void TopMostToggle(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.TopMost = TopMostOption.IsChecked;
@@ -136,6 +141,11 @@ namespace KhTracker
                     }
                 }
             }
+        }
+
+        private void AutoConnectToggle(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.AutoDetect = AutoConnectOption.IsChecked;
         }
 
         //private void AutoDetectToggle(object sender, RoutedEventArgs e)
@@ -1133,6 +1143,26 @@ namespace KhTracker
                 SetItemImage();
                 //reload world icons
                 SetWorldImage();
+            }
+        }
+
+        private void SetProgressIcons()
+        {
+            bool OldToggled = Properties.Settings.Default.OldProg;
+            bool CustomToggled = Properties.Settings.Default.CustomIcons;
+            string Prog = "Min-"; //Default
+            if (OldToggled)
+                Prog = "Old-";
+            if (CustomProgFound && CustomToggled)
+                Prog = "Cus-";
+
+            foreach (string world in data.WorldsData.Keys.ToList())
+            {
+                if (world == "SorasHeart" || world == "DriveForms" || world == "PuzzSynth")
+                    continue;
+
+                data.WorldsData[world].progression.SetResourceReference(ContentProperty, Prog + data.ProgressKeys[world][data.WorldsData[world].progress]);
+                data.WorldsData[world].progression.ToolTip = data.ProgressKeys[world + "Desc"][data.WorldsData[world].progress];
             }
         }
 

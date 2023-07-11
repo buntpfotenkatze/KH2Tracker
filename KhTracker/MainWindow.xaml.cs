@@ -46,17 +46,14 @@ namespace KhTracker
 
             OnReset(null, null);
 
-            //Init auto-detect
-            //AutoDetectOption.IsChecked = Properties.Settings.Default.AutoDetect;
-            //AutoDetectToggle(null, null);
-
             //hotkey stuff
             HotkeysManager.SetupSystemHook();
-
             LoadHotkeyBind();
 
-            //GlobalHotkey startAutoTracker1 = new GlobalHotkey(ModifierKeys.Control, Key.F7, StartHotkey);
-            //HotkeysManager.AddHotkey(startAutoTracker1);
+            //start auto-connect if enabled
+            AutoConnectOption.IsChecked = Properties.Settings.Default.AutoConnect;
+            if (AutoConnectOption.IsChecked)
+                InitTracker();
         }
 
         private void InitData()
@@ -199,6 +196,7 @@ namespace KhTracker
             DragDropToggle(null, null);
 
             AutoSaveProgressOption.IsChecked = Properties.Settings.Default.AutoSaveProgress;
+            AutoSaveProgress2Option.IsChecked = Properties.Settings.Default.AutoSaveProgress;
 
             #endregion
 
