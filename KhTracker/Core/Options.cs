@@ -135,7 +135,7 @@ public partial class MainWindow
         counterInfo[4] = Data.DriveLevels[4];
         if (stats != null)
             counterInfo[5] = stats.Level;
-        counterInfo[6] = DeathCounter;
+        counterInfo[6] = deathCounter;
         counterInfo[7] = Data.UsedPages;
         #endregion
 
@@ -316,7 +316,7 @@ public partial class MainWindow
             >(events.ToString()!);
             foreach (var e in eventlist)
             {
-                UpdateWorldProgress(null, true, e);
+                UpdateWorldProgress(true, e);
             }
         }
 
@@ -328,7 +328,7 @@ public partial class MainWindow
             >(savefile["BossEvents"].ToString()!);
             foreach (var bossEvent in bossEventlist)
             {
-                GetBoss(null, true, bossEvent);
+                GetBoss(true, bossEvent);
             }
         }
 
@@ -1400,11 +1400,14 @@ public partial class MainWindow
                 VisitLockToggle(false);
                 break;
             case "second_visit_locking":
-                VisitLockToggle(true);
-                break;
             case "first_and_second_visit_locking":
                 VisitLockToggle(true);
                 break;
+        }
+
+        if (Data.WasTracking)
+        {
+            InitTracker();
         }
     }
 
@@ -1440,61 +1443,6 @@ public partial class MainWindow
     }
 
     //hint helpers
-
-    private void SetMode(Mode mode)
-    {
-        /*if (mode == Mode.ShanHints || mode == Mode.OpenKHShanHints)
-        {
-            ModeDisplay.Header = "Shan Hints";
-            data.mode = mode;
-            //ReportsToggle(false);
-        }
-        else if (mode == Mode.JsmarteeHints || mode == Mode.OpenKHJsmarteeHints)
-        {
-            ModeDisplay.Header = "Jsmartee Hints";
-            data.mode = mode;
-            //ReportsToggle(true);
-        }
-        else if (mode == Mode.PointsHints)
-        {
-            ModeDisplay.Header = "Points Hints";
-            data.mode = mode;
-            //ReportsToggle(true);
-
-            UpdatePointScore(0);
-            ShowCheckCountToggle(null, null);
-        }
-        else if (mode == Mode.PathHints)
-        {
-            ModeDisplay.Header = "Path Hints";
-            data.mode = mode;
-            //ReportsToggle(true);
-        }
-        else if (mode == Mode.SpoilerHints)
-        {
-            ModeDisplay.Header = "Spoiler Hints";
-            data.mode = mode;
-        }
-
-        if (data.ScoreMode && mode != Mode.PointsHints)
-        {
-            UpdatePointScore(0);
-            ShowCheckCountToggle(null, null);
-
-            ModeDisplay.Header += " | HSM";
-        }
-
-        if (data.UsingProgressionHints)
-        {
-            CollectionGrid.Visibility = Visibility.Collapsed;
-            ScoreGrid.Visibility = Visibility.Collapsed;
-            ProgressionCollectionGrid.Visibility = Visibility.Visible;
-
-            ChestIcon.SetResourceReference(ContentProperty, "ProgPoints");
-
-            ModeDisplay.Header += " | Progression";
-        }*/
-    }
 
     private void LoadSettings(string settings)
     {
@@ -1677,7 +1625,7 @@ public partial class MainWindow
         HintTextBegin.Text = "";
         HintTextEnd.Text = "";
         Data.Mode = Mode.None;
-        Collected = 0;
+        collected = 0;
         Data.UsedPages = 0;
         CollectedValue.Text = "0";
         Data.ForcedFinal = false;
@@ -1786,12 +1734,8 @@ public partial class MainWindow
             for (var j = worldData.WorldGrid.Children.Count - 1; j >= 0; --j)
             {
                 var item = worldData.WorldGrid.Children[j] as Item;
-                Grid pool;
 
-                if (item.Name.StartsWith("Ghost_"))
-                    pool = VisualTreeHelper.GetChild(ItemPool, 4) as Grid;
-                else
-                    pool = Data.Items[item.Name].Item2;
+                var pool = Data.Items[item!.Name].Item2;
 
                 worldData.WorldGrid.Children.Remove(worldData.WorldGrid.Children[j]);
                 pool.Children.Add(item);
@@ -1959,38 +1903,38 @@ public partial class MainWindow
         PageCount.Text = "5";
         MunnyCount.Text = "2";
 
-        FireCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        FireCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        FireCount.Fill = (LinearGradientBrush)FindResource("Color_Fire");
-        FireCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        BlizzardCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        BlizzardCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        BlizzardCount.Fill = (LinearGradientBrush)FindResource("Color_Blizzard");
-        BlizzardCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        ThunderCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        ThunderCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        ThunderCount.Fill = (LinearGradientBrush)FindResource("Color_Thunder");
-        ThunderCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        CureCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        CureCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        CureCount.Fill = (LinearGradientBrush)FindResource("Color_Cure");
-        CureCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        MagnetCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        MagnetCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        MagnetCount.Fill = (LinearGradientBrush)FindResource("Color_Magnet");
-        MagnetCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        ReflectCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        ReflectCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        ReflectCount.Fill = (LinearGradientBrush)FindResource("Color_Reflect");
-        ReflectCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        PageCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        PageCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        PageCount.Fill = (LinearGradientBrush)FindResource("Color_Page");
-        PageCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
-        MunnyCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-        MunnyCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
-        MunnyCount.Fill = (LinearGradientBrush)FindResource("Color_Pouch");
-        MunnyCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+        FireCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        FireCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        FireCount.Fill = (LinearGradientBrush)FindResource("ColorFire");
+        FireCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        BlizzardCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        BlizzardCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        BlizzardCount.Fill = (LinearGradientBrush)FindResource("ColorBlizzard");
+        BlizzardCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        ThunderCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        ThunderCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        ThunderCount.Fill = (LinearGradientBrush)FindResource("ColorThunder");
+        ThunderCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        CureCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        CureCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        CureCount.Fill = (LinearGradientBrush)FindResource("ColorCure");
+        CureCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        MagnetCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        MagnetCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        MagnetCount.Fill = (LinearGradientBrush)FindResource("ColorMagnet");
+        MagnetCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        ReflectCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        ReflectCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        ReflectCount.Fill = (LinearGradientBrush)FindResource("ColorReflect");
+        ReflectCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        PageCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        PageCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        PageCount.Fill = (LinearGradientBrush)FindResource("ColorPage");
+        PageCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
+        MunnyCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+        MunnyCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
+        MunnyCount.Fill = (LinearGradientBrush)FindResource("ColorPouch");
+        MunnyCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
 
         Data.WorldItems.Clear();
         Data.TrackedReports.Clear();
@@ -2019,7 +1963,7 @@ public partial class MainWindow
         TornPagesToggle(true);
         VisitLockToggle(VisitLockOption.IsChecked);
 
-        DeathCounter = 0;
+        deathCounter = 0;
         DeathValue.Text = "0";
         DeathCol.Width = new GridLength(0, GridUnitType.Star);
 

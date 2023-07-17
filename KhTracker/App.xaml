@@ -1,7 +1,6 @@
 ﻿<Application x:Class="KhTracker.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:KhTracker"
              StartupUri="MainWindow.xaml"
              Exit="App_Exit">
     <Application.Resources>
@@ -9,7 +8,7 @@
             <FontFamily x:Key="Classic">pack://application:,,,/Fonts/#HVD Comic Serif Pro</FontFamily>
             <FontFamily x:Key="Gummi">pack://application:,,,/Fonts/#KHGummi</FontFamily>
             <FontFamily x:Key="Menu">pack://application:,,,/Fonts/#KHMenu</FontFamily>
-            <FontFamily x:Key="KHIcon">pack://application:,,,/Fonts/#KHIcon</FontFamily>
+            <FontFamily x:Key="KhIcon">pack://application:,,,/Fonts/#KHIcon</FontFamily>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="MainDictionary.xaml" />
                 <ResourceDictionary Source="ItemDictionary.xaml" />

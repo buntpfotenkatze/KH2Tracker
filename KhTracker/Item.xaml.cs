@@ -71,8 +71,8 @@ public partial class Item
         }
     }
 
-    [DllImport("user32.dll")]
-    private static extern void GetCursorPos(ref PInPoint p);
+    [LibraryImport("user32.dll", EntryPoint = "GetCursorPos")]
+    private static partial void GetCursorPos(ref PInPoint p);
 
     private ItemAdorner myAdornment;
     private PInPoint pointRef;
@@ -127,20 +127,6 @@ public partial class Item
     public void HandleItemReturn()
     {
         var data = MainWindow.Data;
-
-        if (Name.StartsWith("Ghost_"))
-        {
-            var ghostRow = VisualTreeHelper.GetChild(mainW.ItemPool, 4) as Grid; //ghost grid always at this position
-            if (Parent != ghostRow)
-            {
-                var parent = Parent as WorldGrid;
-                ((WorldGrid)Parent).Handle_WorldGrid(this, false);
-
-                ghostRow!.Children.Add(this);
-                parent!.Children.Remove(this);
-            }
-            return;
-        }
 
         //int index = data.Items.IndexOf(this);
         //Grid ItemRow = data.ItemsGrid[index];

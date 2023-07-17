@@ -19,9 +19,9 @@ namespace KhTracker;
 public partial class MainWindow
 {
     public static Data Data;
-    public int Collected;
+    private int collected;
     private int total;
-    public int DeathCounter = 0;
+    private int deathCounter;
 
     public MainWindow()
     {
@@ -58,17 +58,31 @@ public partial class MainWindow
         Data.TornPages.Add(TornPage4);
         Data.TornPages.Add(TornPage5);
 
-        Data.VisitLocks.Add(AuronWep);
-        Data.VisitLocks.Add(MulanWep);
-        Data.VisitLocks.Add(BeastWep);
-        Data.VisitLocks.Add(JackWep);
-        Data.VisitLocks.Add(SimbaWep);
-        Data.VisitLocks.Add(SparrowWep);
-        Data.VisitLocks.Add(AladdinWep);
-        Data.VisitLocks.Add(TronWep);
-        Data.VisitLocks.Add(MembershipCard);
-        Data.VisitLocks.Add(IceCream);
-        Data.VisitLocks.Add(Picture);
+        Data.VisitLocks.Add(AuronWep1);
+        Data.VisitLocks.Add(AuronWep2);
+        Data.VisitLocks.Add(MulanWep1);
+        Data.VisitLocks.Add(MulanWep2);
+        Data.VisitLocks.Add(BeastWep1);
+        Data.VisitLocks.Add(BeastWep2);
+        Data.VisitLocks.Add(JackWep1);
+        Data.VisitLocks.Add(JackWep2);
+        Data.VisitLocks.Add(SimbaWep1);
+        Data.VisitLocks.Add(SimbaWep2);
+        Data.VisitLocks.Add(SparrowWep1);
+        Data.VisitLocks.Add(SparrowWep2);
+        Data.VisitLocks.Add(AladdinWep1);
+        Data.VisitLocks.Add(AladdinWep2);
+        Data.VisitLocks.Add(TronWep1);
+        Data.VisitLocks.Add(TronWep2);
+        Data.VisitLocks.Add(MembershipCard1);
+        Data.VisitLocks.Add(MembershipCard2);
+        Data.VisitLocks.Add(IceCream1);
+        Data.VisitLocks.Add(IceCream2);
+        Data.VisitLocks.Add(IceCream3);
+        Data.VisitLocks.Add(NaminesSketches);
+        Data.VisitLocks.Add(DisneyCastleKey1);
+        Data.VisitLocks.Add(DisneyCastleKey2);
+        Data.VisitLocks.Add(WayToTheDawn);
 
         Data.WorldsData.Add(
             "SorasHeart",
@@ -667,20 +681,10 @@ public partial class MainWindow
             {
                 if (item is Item check)
                 {
-                    if (!check.Name.StartsWith("Ghost_"))
-                    {
-                        Data.Items.Add(
-                            check.Name,
-                            new Tuple<Item, Grid>(check, check.Parent as Grid)
-                        ); //list of all valid items
-                        //data.ItemsGrid.Add(check.Parent as Grid);   //list of grids each item belongs to
-                        ++total;
-                        //Console.WriteLine(check.Name);
-                    }
-                    else
-                    {
-                        Data.GhostItems.Add(check.Name, check); //list of all valid ghost items (why is this a dictionary????)
-                    }
+                    Data.Items.Add(check.Name, new Tuple<Item, Grid>(check, check.Parent as Grid)); //list of all valid items
+                    //data.ItemsGrid.Add(check.Parent as Grid);   //list of grids each item belongs to
+                    ++total;
+                    //Console.WriteLine(check.Name);
                 }
             }
         }
@@ -963,7 +967,7 @@ public partial class MainWindow
                 }
                 break;
             case MouseButton.Right: //for setting world cross icon
-                if (Data.WorldsData.ContainsKey(button.Name))
+                if (Data.WorldsData.ContainsKey(button!.Name))
                 {
                     //string crossname = button.Name + "Cross";
                     //
@@ -1034,8 +1038,8 @@ public partial class MainWindow
             case Key.PageDown when Data.Selected != null:
             {
                 if (
-                    Data.WorldsData.ContainsKey(Data.Selected.Name)
-                    && Data.WorldsData[Data.Selected.Name].Value != null
+                    Data.WorldsData.TryGetValue(Data.Selected.Name, out var value)
+                    && value.Value != null
                 )
                 {
                     SetWorldValue(Data.WorldsData[Data.Selected.Name].Value, -1);
@@ -1046,8 +1050,8 @@ public partial class MainWindow
             case Key.PageUp when Data.Selected != null:
             {
                 if (
-                    Data.WorldsData.ContainsKey(Data.Selected.Name)
-                    && Data.WorldsData[Data.Selected.Name].Value != null
+                    Data.WorldsData.TryGetValue(Data.Selected.Name, out var value)
+                    && value.Value != null
                 )
                 {
                     SetWorldValue(Data.WorldsData[Data.Selected.Name].Value, 1);
@@ -1127,7 +1131,7 @@ public partial class MainWindow
         hint.Text = num.ToString();
     }
 
-    public void SetWorldValue(OutlinedTextBlock worldValue, int value)
+    private void SetWorldValue(OutlinedTextBlock worldValue, int value)
     {
         var color = (SolidColorBrush)FindResource("DefaultWhite"); //default
 
@@ -1147,14 +1151,14 @@ public partial class MainWindow
     public void SetCollected(bool add)
     {
         if (add)
-            ++Collected;
+            ++collected;
         else
-            --Collected;
+            --collected;
 
-        CollectedValue.Text = Collected.ToString();
+        CollectedValue.Text = collected.ToString();
     }
 
-    public void SetTotal(bool add)
+    private void SetTotal(bool add)
     {
         if (add)
             ++total;
@@ -1178,22 +1182,30 @@ public partial class MainWindow
                         case 0:
                             TwilightTownLock1.Visibility = Visibility.Collapsed;
                             TwilightTownLock2.Visibility = Visibility.Collapsed;
+                            TwilightTownLock3.Visibility = Visibility.Collapsed;
                             TwilightTown.Opacity = 1;
+                            IceCreamCount.Text = " ";
                             break;
                         case 1:
-                            TwilightTownLock1.Visibility = Visibility.Visible;
+                            TwilightTownLock1.Visibility = Visibility.Collapsed;
                             TwilightTownLock2.Visibility = Visibility.Collapsed;
+                            TwilightTownLock3.Visibility = Visibility.Visible;
                             TwilightTown.Opacity = 0.45;
+                            IceCreamCount.Text = "1";
                             break;
-                        case 10:
+                        case 2:
                             TwilightTownLock1.Visibility = Visibility.Collapsed;
                             TwilightTownLock2.Visibility = Visibility.Visible;
+                            TwilightTownLock3.Visibility = Visibility.Visible;
                             TwilightTown.Opacity = 0.45;
+                            IceCreamCount.Text = "2";
                             break;
                         default:
                             TwilightTownLock1.Visibility = Visibility.Visible;
                             TwilightTownLock2.Visibility = Visibility.Visible;
+                            TwilightTownLock3.Visibility = Visibility.Visible;
                             TwilightTown.Opacity = 0.45;
+                            IceCreamCount.Text = "3";
                             break;
                     }
                     break;
@@ -1201,12 +1213,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["HollowBastion"].VisitLocks)
                     {
                         case 0:
-                            HollowBastionLock.Visibility = Visibility.Hidden;
+                            HollowBastionLock1.Visibility = Visibility.Collapsed;
+                            HollowBastionLock2.Visibility = Visibility.Collapsed;
                             HollowBastion.Opacity = 1;
+                            MembershipCardCount.Text = " ";
+                            break;
+                        case 1:
+                            HollowBastionLock1.Visibility = Visibility.Collapsed;
+                            HollowBastionLock2.Visibility = Visibility.Visible;
+                            HollowBastion.Opacity = 0.45;
+                            MembershipCardCount.Text = "1";
                             break;
                         default:
-                            HollowBastionLock.Visibility = Visibility.Visible;
+                            HollowBastionLock1.Visibility = Visibility.Visible;
+                            HollowBastionLock2.Visibility = Visibility.Visible;
                             HollowBastion.Opacity = 0.45;
+                            MembershipCardCount.Text = "2";
                             break;
                     }
                     break;
@@ -1214,12 +1236,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["BeastsCastle"].VisitLocks)
                     {
                         case 0:
-                            BeastsCastleLock.Visibility = Visibility.Hidden;
+                            BeastsCastleLock1.Visibility = Visibility.Collapsed;
+                            BeastsCastleLock2.Visibility = Visibility.Collapsed;
                             BeastsCastle.Opacity = 1;
+                            BeastWepCount.Text = " ";
+                            break;
+                        case 1:
+                            BeastsCastleLock1.Visibility = Visibility.Collapsed;
+                            BeastsCastleLock2.Visibility = Visibility.Visible;
+                            BeastsCastle.Opacity = 0.45;
+                            BeastWepCount.Text = "1";
                             break;
                         default:
-                            BeastsCastleLock.Visibility = Visibility.Visible;
+                            BeastsCastleLock1.Visibility = Visibility.Visible;
+                            BeastsCastleLock2.Visibility = Visibility.Visible;
                             BeastsCastle.Opacity = 0.45;
+                            BeastWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1227,12 +1259,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["OlympusColiseum"].VisitLocks)
                     {
                         case 0:
-                            OlympusColiseumLock.Visibility = Visibility.Hidden;
+                            OlympusColiseumLock1.Visibility = Visibility.Collapsed;
+                            OlympusColiseumLock2.Visibility = Visibility.Collapsed;
                             OlympusColiseum.Opacity = 1;
+                            AuronWepCount.Text = " ";
+                            break;
+                        case 1:
+                            OlympusColiseumLock1.Visibility = Visibility.Collapsed;
+                            OlympusColiseumLock2.Visibility = Visibility.Visible;
+                            OlympusColiseum.Opacity = 0.45;
+                            AuronWepCount.Text = "1";
                             break;
                         default:
-                            OlympusColiseumLock.Visibility = Visibility.Visible;
+                            OlympusColiseumLock1.Visibility = Visibility.Visible;
+                            OlympusColiseumLock2.Visibility = Visibility.Visible;
                             OlympusColiseum.Opacity = 0.45;
+                            AuronWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1240,12 +1282,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["Agrabah"].VisitLocks)
                     {
                         case 0:
-                            AgrabahLock.Visibility = Visibility.Hidden;
+                            AgrabahLock1.Visibility = Visibility.Collapsed;
+                            AgrabahLock2.Visibility = Visibility.Collapsed;
                             Agrabah.Opacity = 1;
+                            AladdinWepCount.Text = " ";
+                            break;
+                        case 1:
+                            AgrabahLock1.Visibility = Visibility.Collapsed;
+                            AgrabahLock2.Visibility = Visibility.Visible;
+                            Agrabah.Opacity = 0.45;
+                            AladdinWepCount.Text = "1";
                             break;
                         default:
-                            AgrabahLock.Visibility = Visibility.Visible;
+                            AgrabahLock1.Visibility = Visibility.Visible;
+                            AgrabahLock2.Visibility = Visibility.Visible;
                             Agrabah.Opacity = 0.45;
+                            AladdinWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1253,12 +1305,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["LandofDragons"].VisitLocks)
                     {
                         case 0:
-                            LandofDragonsLock.Visibility = Visibility.Hidden;
+                            LandofDragonsLock1.Visibility = Visibility.Collapsed;
+                            LandofDragonsLock2.Visibility = Visibility.Collapsed;
                             LandofDragons.Opacity = 1;
+                            MulanWepCount.Text = " ";
+                            break;
+                        case 1:
+                            LandofDragonsLock1.Visibility = Visibility.Collapsed;
+                            LandofDragonsLock2.Visibility = Visibility.Visible;
+                            LandofDragons.Opacity = 0.45;
+                            MulanWepCount.Text = "1";
                             break;
                         default:
-                            LandofDragonsLock.Visibility = Visibility.Visible;
+                            LandofDragonsLock1.Visibility = Visibility.Visible;
+                            LandofDragonsLock2.Visibility = Visibility.Visible;
                             LandofDragons.Opacity = 0.45;
+                            MulanWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1266,12 +1328,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["PrideLands"].VisitLocks)
                     {
                         case 0:
-                            PrideLandsLock.Visibility = Visibility.Hidden;
+                            PrideLandsLock1.Visibility = Visibility.Collapsed;
+                            PrideLandsLock2.Visibility = Visibility.Collapsed;
                             PrideLands.Opacity = 1;
+                            SimbaWepCount.Text = " ";
+                            break;
+                        case 1:
+                            PrideLandsLock1.Visibility = Visibility.Collapsed;
+                            PrideLandsLock2.Visibility = Visibility.Visible;
+                            PrideLands.Opacity = 0.45;
+                            SimbaWepCount.Text = "1";
                             break;
                         default:
-                            PrideLandsLock.Visibility = Visibility.Visible;
+                            PrideLandsLock1.Visibility = Visibility.Visible;
+                            PrideLandsLock2.Visibility = Visibility.Visible;
                             PrideLands.Opacity = 0.45;
+                            SimbaWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1279,12 +1351,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["HalloweenTown"].VisitLocks)
                     {
                         case 0:
-                            HalloweenTownLock.Visibility = Visibility.Hidden;
+                            HalloweenTownLock1.Visibility = Visibility.Collapsed;
+                            HalloweenTownLock2.Visibility = Visibility.Collapsed;
                             HalloweenTown.Opacity = 1;
+                            JackWepCount.Text = " ";
+                            break;
+                        case 1:
+                            HalloweenTownLock1.Visibility = Visibility.Collapsed;
+                            HalloweenTownLock2.Visibility = Visibility.Visible;
+                            HalloweenTown.Opacity = 0.45;
+                            JackWepCount.Text = "1";
                             break;
                         default:
-                            HalloweenTownLock.Visibility = Visibility.Visible;
+                            HalloweenTownLock1.Visibility = Visibility.Visible;
+                            HalloweenTownLock2.Visibility = Visibility.Visible;
                             HalloweenTown.Opacity = 0.45;
+                            JackWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1292,12 +1374,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["PortRoyal"].VisitLocks)
                     {
                         case 0:
-                            PortRoyalLock.Visibility = Visibility.Hidden;
+                            PortRoyalLock1.Visibility = Visibility.Collapsed;
+                            PortRoyalLock2.Visibility = Visibility.Collapsed;
                             PortRoyal.Opacity = 1;
+                            SparrowWepCount.Text = " ";
+                            break;
+                        case 1:
+                            PortRoyalLock1.Visibility = Visibility.Collapsed;
+                            PortRoyalLock2.Visibility = Visibility.Visible;
+                            PortRoyal.Opacity = 0.45;
+                            SparrowWepCount.Text = "1";
                             break;
                         default:
-                            PortRoyalLock.Visibility = Visibility.Visible;
+                            PortRoyalLock1.Visibility = Visibility.Visible;
+                            PortRoyalLock2.Visibility = Visibility.Visible;
                             PortRoyal.Opacity = 0.45;
+                            SparrowWepCount.Text = "2";
                             break;
                     }
                     break;
@@ -1305,12 +1397,75 @@ public partial class MainWindow
                     switch (Data.WorldsData["SpaceParanoids"].VisitLocks)
                     {
                         case 0:
-                            SpaceParanoidsLock.Visibility = Visibility.Hidden;
+                            SpaceParanoidsLock1.Visibility = Visibility.Collapsed;
+                            SpaceParanoidsLock2.Visibility = Visibility.Collapsed;
                             SpaceParanoids.Opacity = 1;
+                            TronWepCount.Text = " ";
+                            break;
+                        case 1:
+                            SpaceParanoidsLock1.Visibility = Visibility.Collapsed;
+                            SpaceParanoidsLock2.Visibility = Visibility.Visible;
+                            SpaceParanoids.Opacity = 0.45;
+                            TronWepCount.Text = "1";
                             break;
                         default:
-                            SpaceParanoidsLock.Visibility = Visibility.Visible;
+                            SpaceParanoidsLock1.Visibility = Visibility.Visible;
+                            SpaceParanoidsLock2.Visibility = Visibility.Visible;
                             SpaceParanoids.Opacity = 0.45;
+                            TronWepCount.Text = "2";
+                            break;
+                    }
+                    break;
+                case "SimulatedTwilightTown":
+                    switch (Data.WorldsData["SimulatedTwilightTown"].VisitLocks)
+                    {
+                        case 0:
+                            SimulatedTwilightTownLock.Visibility = Visibility.Collapsed;
+                            SimulatedTwilightTown.Opacity = 1;
+                            NaminesSketchesCount.Text = " ";
+                            break;
+                        default:
+                            SimulatedTwilightTownLock.Visibility = Visibility.Visible;
+                            SimulatedTwilightTown.Opacity = 0.45;
+                            NaminesSketchesCount.Text = "1";
+                            break;
+                    }
+                    break;
+                case "DisneyCastle":
+                    switch (Data.WorldsData["DisneyCastle"].VisitLocks)
+                    {
+                        case 0:
+                            DisneyCastleLock1.Visibility = Visibility.Collapsed;
+                            DisneyCastleLock2.Visibility = Visibility.Collapsed;
+                            DisneyCastle.Opacity = 1;
+                            DisneyCastleKeyCount.Text = " ";
+                            break;
+                        case 1:
+                            DisneyCastleLock1.Visibility = Visibility.Collapsed;
+                            DisneyCastleLock2.Visibility = Visibility.Visible;
+                            DisneyCastle.Opacity = 0.45;
+                            DisneyCastleKeyCount.Text = "1";
+                            break;
+                        default:
+                            DisneyCastleLock1.Visibility = Visibility.Visible;
+                            DisneyCastleLock2.Visibility = Visibility.Visible;
+                            DisneyCastle.Opacity = 0.45;
+                            DisneyCastleKeyCount.Text = "2";
+                            break;
+                    }
+                    break;
+                case "TWTNW":
+                    switch (Data.WorldsData["TWTNW"].VisitLocks)
+                    {
+                        case 0:
+                            TwtnwLock.Visibility = Visibility.Collapsed;
+                            Twtnw.Opacity = 1;
+                            WayToTheDawnCount.Text = " ";
+                            break;
+                        default:
+                            TwtnwLock.Visibility = Visibility.Visible;
+                            Twtnw.Opacity = 0.45;
+                            WayToTheDawnCount.Text = "1";
                             break;
                     }
                     break;

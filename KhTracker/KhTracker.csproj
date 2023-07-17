@@ -25,10 +25,12 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
     <OutputPath>bin\Release\2.0\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>tracker.ico</ApplicationIcon>
@@ -43,6 +45,9 @@
     <Resource Include="Fonts\KHMenu-Italic.otf" />
     <Resource Include="Fonts\KHTitle.otf" />
     <Resource Include="Fonts\KHIcon.otf" />
+    <Resource Include="Images\Checks\Min\lock_disneycastlekey.png" />
+    <Resource Include="Images\Checks\Min\lock_naminessketches.png" />
+    <Resource Include="Images\Checks\Min\lock_waytothedawn.png" />
     <Resource Include="Images\FailBar.png" />
     <Resource Include="Images\FailX.png" />
   </ItemGroup>

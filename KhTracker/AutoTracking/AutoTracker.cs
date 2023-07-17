@@ -19,7 +19,7 @@ public partial class MainWindow
 {
     #region Variables
 
-    private MemoryReader memory; //, testMemory;
+    private MemoryReader memory;
 
     private int addressOffset;
     private static DispatcherTimer _aTimer;
@@ -77,9 +77,6 @@ public partial class MainWindow
 
     private bool onContinue; //for death counter
     private bool eventInProgress; //boss detection
-
-    //private int lastVersion = 0;
-
     #endregion
 
     ///
@@ -96,7 +93,6 @@ public partial class MainWindow
         if (vercheck == 2)
         {
             InitAutoTracker();
-            return;
         }
         else
         {
@@ -182,17 +178,7 @@ public partial class MainWindow
                 _checkTimer = null;
             }
 
-            //set correct connect visual
-            if (Data.LastVersion == 1)
-            {
-                //Console.WriteLine("PCSX2 Found, starting Auto-Tracker");
-                Connect2.Source = Data.AdPs2;
-            }
-            else
-            {
-                //Console.WriteLine("PC Found, starting Auto-Tracker");
-                Connect2.Source = Data.AdPCred;
-            }
+            Connect2.Source = Data.AdPCred;
 
             //make visual visible
             Connect.Visibility = Visibility.Collapsed;
@@ -238,13 +224,13 @@ public partial class MainWindow
     private async void InitAutoTracker()
     {
         // PC Address anchors
-        var now = 0x0714DB8;
-        var save = 0x09A70B0;
-        var sys3 = 0x2A59DF0;
-        var bt10 = 0x2A74880;
-        var btlEnd = 0x2A0D3E0;
-        var slot1 = 0x2A20C98;
-        var nextSlot = 0x278;
+        const int now = 0x0714DB8;
+        const int save = 0x09A70B0;
+        const int sys3 = 0x2A59DF0;
+        const int bt10 = 0x2A74880;
+        const int btlEnd = 0x2A0D3E0;
+        const int slot1 = 0x2A20C98;
+        const int nextSlot = 0x278;
 
         //check for if the system files are loaded every 1/2 second.
         //this helps ensure that ICs on levels/drives never mistrack
@@ -283,8 +269,8 @@ public partial class MainWindow
 
     private void CheckPcOffset()
     {
-        var testAddr = 0x009AA376 - 0x1000;
-        var good = "F680";
+        const int testAddr = 0x009AA376 - 0x1000;
+        const string good = "F680";
         var tester = BytesToHex(memory.ReadMemory(testAddr, 2));
         if (tester == good)
         {
@@ -295,18 +281,13 @@ public partial class MainWindow
     private bool CheckPcLoaded()
     {
         ////checks if these files have been loaded into memeory
-        var obj0 = 0x2A22BD0;
+        const int obj0 = 0x2A22BD0;
         var prg0 = obj0 + ReadMemInt(obj0 - 0x10) + 0x10;
         var sys3 = prg0 + ReadMemInt(prg0 - 0x10) + 0x10;
         var btl0 = ReadMemInt(sys3 - 0x10);
-        if (btl0 > 0x20)
-        {
-            //all important files loaded
-            return true;
-        }
 
-        //Console.WriteLine("Not yet");
-        return false;
+        // all important files loaded?
+        return btl0 > 0x20;
     }
 
     private void FinishSetup(
@@ -405,12 +386,12 @@ public partial class MainWindow
             );
         }
 
-        var fireCount = fire != null ? fire.Level : 0;
-        var blizzardCount = blizzard != null ? blizzard.Level : 0;
-        var thunderCount = thunder != null ? thunder.Level : 0;
-        var cureCount = cure != null ? cure.Level : 0;
-        var magnetCount = magnet != null ? magnet.Level : 0;
-        var reflectCount = reflect != null ? reflect.Level : 0;
+        var fireCount = fire?.Level ?? 0;
+        var blizzardCount = blizzard?.Level ?? 0;
+        var thunderCount = thunder?.Level ?? 0;
+        var cureCount = cure?.Level ?? 0;
+        var magnetCount = magnet?.Level ?? 0;
+        var reflectCount = reflect?.Level ?? 0;
 
         importantChecks.Add(fire = new Magic(memory, save + 0x3594, addressOffset, "Fire"));
         importantChecks.Add(blizzard = new Magic(memory, save + 0x3595, addressOffset, "Blizzard"));
@@ -620,9 +601,9 @@ public partial class MainWindow
 
             //updates
             stats.UpdateMemory(correctSlot);
-            HighlightWorld(world);
+            HighlightWorld();
             UpdateStatValues();
-            UpdateWorldProgress(world, false, null);
+            UpdateWorldProgress(false, null);
             UpdateFormProgression();
             DeathCheck();
 
@@ -720,11 +701,7 @@ public partial class MainWindow
         //reminder: FF = none | 01 = save menu | 03 = load menu | 05 = moogle | 07 = item popup | 08 = pause menu (cutscene/fight) | 0A = pause Menu (normal)
         var menu = BytesToHex(memory.ReadMemory(0x741320, 2)); //in a menu
 
-        if ((jounal == "FFFF" && menu == "0500") || (jounal != "FFFF" && menu == "0A00")) // in moogle shop / in puzzle menu
-        {
-            return true;
-        }
-        return false;
+        return (jounal == "FFFF" && menu == "0500") || (jounal != "FFFF" && menu == "0A00"); // in moogle shop / in puzzle menu
     }
 
     //private bool CheckTornPage(Item item)
@@ -783,11 +760,11 @@ public partial class MainWindow
         // then increase death count and set oncontinue
         if (pauseCheck is "0400" or "0500")
         {
-            DeathCounter++;
+            deathCounter++;
             onContinue = true;
         }
 
-        DeathValue.Text = DeathCounter.ToString();
+        DeathValue.Text = deathCounter.ToString();
     }
 
     private void UpdateStatValues()
@@ -815,7 +792,7 @@ public partial class MainWindow
         GlideLevel.Text = glide.Level.ToString();
     }
 
-    private void TrackItem(string itemName, WorldGrid world)
+    private void TrackItem(string itemName, WorldGrid worldGrid)
     {
         Grid itemRow;
         try //try getting itemrow grid from dictionary
@@ -832,7 +809,7 @@ public partial class MainWindow
         //track to the wrong place in the case of mismatched seeds/hints
         if (itemRow.FindName(itemName) is Item { IsVisible: true } item)
         {
-            world.Add_Item(item);
+            worldGrid.Add_Item(item);
             App.Logger?.Record(item.Name + " tracked");
         }
     }
@@ -891,7 +868,6 @@ public partial class MainWindow
     }
 
     private void UpdateWorldProgress(
-        World world,
         bool usingSave,
         Tuple<string, int, int, int, int, int> saveTuple
     )
@@ -2028,11 +2004,7 @@ public partial class MainWindow
         TrackQuantities();
     }
 
-    private void GetBoss(
-        World world,
-        bool usingSave,
-        Tuple<string, int, int, int, int, int> saveTuple
-    )
+    private void GetBoss(bool usingSave, Tuple<string, int, int, int, int, int> saveTuple)
     {
         //temp values
         var boss = "None";
@@ -2545,7 +2517,7 @@ public partial class MainWindow
         Data.BossEventLog.Add(eventTuple);
     }
 
-    private void HighlightWorld(World world)
+    private void HighlightWorld()
     {
         if (WorldHighlightOption.IsChecked == false)
             return;
@@ -2661,15 +2633,15 @@ public partial class MainWindow
         if (customProgFound && customToggled)
             prog = "Cus-";
 
-        if (ValorM.Opacity == 1)
+        if (Math.Abs(ValorM.Opacity - 1) < 0.0001)
             found++;
-        if (WisdomM.Opacity == 1)
+        if (Math.Abs(WisdomM.Opacity - 1) < 0.0001)
             found++;
-        if (LimitM.Opacity == 1)
+        if (Math.Abs(LimitM.Opacity - 1) < 0.0001)
             found++;
-        if (MasterM.Opacity == 1)
+        if (Math.Abs(MasterM.Opacity - 1) < 0.0001)
             found++;
-        if (FinalM.Opacity == 1)
+        if (Math.Abs(FinalM.Opacity - 1) < 0.0001)
             found++;
 
         var drives = found switch

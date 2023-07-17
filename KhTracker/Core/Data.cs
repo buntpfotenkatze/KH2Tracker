@@ -45,7 +45,6 @@ public class Data
     public BitmapImage AdConnect;
     public BitmapImage AdPc;
     public BitmapImage AdPCred;
-    public BitmapImage AdPs2;
     public BitmapImage AdCross;
 
     //for points hints

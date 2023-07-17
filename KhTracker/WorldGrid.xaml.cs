@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -38,9 +39,6 @@ public partial class WorldGrid
     private static bool _proofOfPeaceObtained;
     private static int _numProofsObtained;
 
-    //A single spot to have referenced for the opacity of the ghost checks idk where to put this
-    public static double UniversalOpacity = 0.5;
-
     public WorldGrid()
     {
         InitializeComponent();
@@ -48,7 +46,6 @@ public partial class WorldGrid
 
     public void Handle_WorldGrid(Item button, bool add)
     {
-        var data = MainWindow.Data;
         var addRemove = 1;
 
         if (add)
@@ -56,17 +53,6 @@ public partial class WorldGrid
             //Default should be children count so that items are
             //always added to the end if no ghosts are found
             var firstGhost = Children.Count;
-
-            //search for ghost items
-            foreach (Item child in Children)
-            {
-                if (child.Name.StartsWith("Ghost_"))
-                {
-                    //when one is found get the index of it
-                    firstGhost = Children.IndexOf(child);
-                    break;
-                }
-            }
 
             //add the item
             try
@@ -98,7 +84,6 @@ public partial class WorldGrid
         var outerGrid = (Parent as Grid)!.Parent as Grid;
         var row = (int)Parent.GetValue(Grid.RowProperty);
         outerGrid!.RowDefinitions[row].Height = new GridLength(length, GridUnitType.Star);
-        var worldName = Name[..^4];
 
         //visit lock check first
         if (window.VisitLockOption.IsChecked)
@@ -149,6 +134,17 @@ public partial class WorldGrid
         }
     }
 
+    private void Item_Drop(object sender, DragEventArgs e)
+    {
+        if (e.Data.GetDataPresent(typeof(Item)))
+        {
+            var item = e.Data.GetData(typeof(Item)) as Item;
+
+            if (ReportHandler())
+                Add_Item(item);
+        }
+    }
+
     public void Add_Item(Item item)
     {
         //remove item from itempool
@@ -194,12 +190,8 @@ public partial class WorldGrid
         item.MouseDown += item.Item_Return;
     }
 
-    public void UpdateMulti(Item item, bool add)
+    private void UpdateMulti(Item item, bool add)
     {
-        //do nothing for ghost items
-        if (item.Name.StartsWith("Ghost_"))
-            return;
-
         var addRemove = 1;
         if (!add)
             addRemove = -1;
@@ -251,13 +243,13 @@ public partial class WorldGrid
                 window.FireCount.Text = (3 - RealFire).ToString();
                 if (RealFire == 3)
                 {
-                    window.FireCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.FireCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.FireCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.FireCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.FireCount.Fill = (LinearGradientBrush)FindResource("Color_Fire");
-                    window.FireCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.FireCount.Fill = (LinearGradientBrush)FindResource("ColorFire");
+                    window.FireCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "Blizzard":
@@ -265,13 +257,13 @@ public partial class WorldGrid
                 window.BlizzardCount.Text = (3 - RealBlizzard).ToString();
                 if (RealBlizzard == 3)
                 {
-                    window.BlizzardCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.BlizzardCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.BlizzardCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.BlizzardCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.BlizzardCount.Fill = (LinearGradientBrush)FindResource("Color_Blizzard");
-                    window.BlizzardCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.BlizzardCount.Fill = (LinearGradientBrush)FindResource("ColorBlizzard");
+                    window.BlizzardCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "Thunder":
@@ -279,13 +271,13 @@ public partial class WorldGrid
                 window.ThunderCount.Text = (3 - RealThunder).ToString();
                 if (RealThunder == 3)
                 {
-                    window.ThunderCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.ThunderCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.ThunderCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.ThunderCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.ThunderCount.Fill = (LinearGradientBrush)FindResource("Color_Thunder");
-                    window.ThunderCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.ThunderCount.Fill = (LinearGradientBrush)FindResource("ColorThunder");
+                    window.ThunderCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "Cure":
@@ -293,13 +285,13 @@ public partial class WorldGrid
                 window.CureCount.Text = (3 - RealCure).ToString();
                 if (RealCure == 3)
                 {
-                    window.CureCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.CureCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.CureCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.CureCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.CureCount.Fill = (LinearGradientBrush)FindResource("Color_Cure");
-                    window.CureCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.CureCount.Fill = (LinearGradientBrush)FindResource("ColorCure");
+                    window.CureCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "Magnet":
@@ -307,13 +299,13 @@ public partial class WorldGrid
                 window.MagnetCount.Text = (3 - RealMagnet).ToString();
                 if (RealMagnet == 3)
                 {
-                    window.MagnetCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.MagnetCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.MagnetCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.MagnetCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.MagnetCount.Fill = (LinearGradientBrush)FindResource("Color_Magnet");
-                    window.MagnetCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.MagnetCount.Fill = (LinearGradientBrush)FindResource("ColorMagnet");
+                    window.MagnetCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "Reflect":
@@ -321,13 +313,13 @@ public partial class WorldGrid
                 window.ReflectCount.Text = (3 - RealReflect).ToString();
                 if (RealReflect == 3)
                 {
-                    window.ReflectCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.ReflectCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.ReflectCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.ReflectCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.ReflectCount.Fill = (LinearGradientBrush)FindResource("Color_Reflect");
-                    window.ReflectCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.ReflectCount.Fill = (LinearGradientBrush)FindResource("ColorReflect");
+                    window.ReflectCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "TornPage":
@@ -335,13 +327,13 @@ public partial class WorldGrid
                 window.PageCount.Text = (5 - RealPages).ToString();
                 if (RealPages == 5)
                 {
-                    window.PageCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.PageCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.PageCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.PageCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.PageCount.Fill = (LinearGradientBrush)FindResource("Color_Page");
-                    window.PageCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.PageCount.Fill = (LinearGradientBrush)FindResource("ColorPage");
+                    window.PageCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             case "MunnyPouch":
@@ -349,13 +341,13 @@ public partial class WorldGrid
                 window.MunnyCount.Text = (2 - RealPouches).ToString();
                 if (RealPouches == 2)
                 {
-                    window.MunnyCount.Fill = (SolidColorBrush)FindResource("Color_Black");
-                    window.MunnyCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
+                    window.MunnyCount.Fill = (SolidColorBrush)FindResource("ColorBlack");
+                    window.MunnyCount.Stroke = (SolidColorBrush)FindResource("ColorTrans");
                 }
                 else
                 {
-                    window.MunnyCount.Fill = (LinearGradientBrush)FindResource("Color_Pouch");
-                    window.MunnyCount.Stroke = (SolidColorBrush)FindResource("Color_Black");
+                    window.MunnyCount.Fill = (LinearGradientBrush)FindResource("ColorPouch");
+                    window.MunnyCount.Stroke = (SolidColorBrush)FindResource("ColorBlack");
                 }
                 return;
             default:
@@ -363,40 +355,11 @@ public partial class WorldGrid
         }
     }
 
+    private static bool ReportHandler() => true;
+
     ///
     /// world value handling
     ///
-
-    //public void Updatenumbers_spoil(WorldData worldData)
-    //{
-    //    if (worldData.complete || worldData.containsGhost == false)
-    //        return;
-    //
-    //    if (worldData.value != null)
-    //    {
-    //        int WorldNumber = -1;
-    //
-    //        if (worldData.value.Text != "?")
-    //            WorldNumber = int.Parse(worldData.hint.Text);
-    //
-    //        MainW.SetWorldNumber(worldData.hint, WorldNumber, "G");
-    //    }
-    //    else
-    //        return;
-    //}
-
-    private int TableReturn(string nameButton)
-    {
-        var data = MainWindow.Data;
-        var type = Codes.FindItemType(nameButton);
-        if (type != "Unknown")
-        {
-            return nameButton.StartsWith("Ghost_") ? 0 : data.PointsDatanew[type];
-        }
-        return 0;
-
-        //else if (MainWindow.data.PointsDatanew.Keys.Contains(type))
-    }
 
     private void Handle_Shadows(Item item, bool add)
     {
@@ -405,7 +368,6 @@ public partial class WorldGrid
             Codes.FindItemType(item.Name) == "magic"
             || Codes.FindItemType(item.Name) == "page"
             || item.Name.StartsWith("Munny")
-            || item.Name.StartsWith("Ghost_")
         )
         {
             return;
@@ -432,8 +394,13 @@ public partial class WorldGrid
     private void SetVisitLock(string itemName, int addRemove)
     {
         var data = MainWindow.Data;
-        //reminder: 1 = locked | 0 = unlocked
-        //reminder for TT: 10 = 3rd visit locked | 1 = 2nd visit locked | 11 = both locked | 0 = both unlocked
+        // reminder: 1 >= locked | 0 = unlocked
+
+        if (int.TryParse(itemName.Last().ToString(), out _))
+        {
+            itemName = itemName[..^1];
+        }
+
         switch (itemName)
         {
             case "AuronWep":
@@ -461,13 +428,19 @@ public partial class WorldGrid
                 data.WorldsData["SpaceParanoids"].VisitLocks -= addRemove;
                 break;
             case "IceCream":
-                data.WorldsData["TwilightTown"].VisitLocks -= (addRemove * 10);
-                break;
-            case "Picture":
                 data.WorldsData["TwilightTown"].VisitLocks -= addRemove;
                 break;
             case "MembershipCard":
                 data.WorldsData["HollowBastion"].VisitLocks -= addRemove;
+                break;
+            case "NaminesSketches":
+                data.WorldsData["SimulatedTwilightTown"].VisitLocks -= addRemove;
+                break;
+            case "DisneyCastleKey":
+                data.WorldsData["DisneyCastle"].VisitLocks -= addRemove;
+                break;
+            case "WayToTheDawn":
+                data.WorldsData["TWTNW"].VisitLocks -= addRemove;
                 break;
             default:
                 return;

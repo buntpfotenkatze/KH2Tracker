@@ -37,7 +37,6 @@ public partial class MainWindow
         Data.AdPCred = new BitmapImage(
             new Uri("Images/System/config/pc_detected.png", UriKind.Relative)
         );
-        Data.AdPs2 = new BitmapImage(new Uri("Images/System/config/pcsx2.png", UriKind.Relative));
         Data.AdCross = new BitmapImage(new Uri("Images/System/cross.png", UriKind.Relative));
 
         //check for custom stat and weapon icons
@@ -69,19 +68,6 @@ public partial class MainWindow
         //helps determine what item images need replacing with custom image loading
         cusItemCheck = new Dictionary<Item, (string Key, ContentControl Shadow, string Path)>
         {
-            { Report1, ("Cus-Report1", SReport1, "CustomImages/Checks/ansem_report01.png") },
-            { Report2, ("Cus-Report2", SReport2, "CustomImages/Checks/ansem_report02.png") },
-            { Report3, ("Cus-Report3", SReport3, "CustomImages/Checks/ansem_report03.png") },
-            { Report4, ("Cus-Report4", SReport4, "CustomImages/Checks/ansem_report04.png") },
-            { Report5, ("Cus-Report5", SReport5, "CustomImages/Checks/ansem_report05.png") },
-            { Report6, ("Cus-Report6", SReport6, "CustomImages/Checks/ansem_report06.png") },
-            { Report7, ("Cus-Report7", SReport7, "CustomImages/Checks/ansem_report07.png") },
-            { Report8, ("Cus-Report8", SReport8, "CustomImages/Checks/ansem_report08.png") },
-            { Report9, ("Cus-Report9", SReport9, "CustomImages/Checks/ansem_report09.png") },
-            { Report10, ("Cus-Report10", SReport10, "CustomImages/Checks/ansem_report10.png") },
-            { Report11, ("Cus-Report11", SReport11, "CustomImages/Checks/ansem_report11.png") },
-            { Report12, ("Cus-Report12", SReport12, "CustomImages/Checks/ansem_report12.png") },
-            { Report13, ("Cus-Report13", SReport13, "CustomImages/Checks/ansem_report13.png") },
             { Fire1, ("Cus-Fire1", SFire, "CustomImages/Checks/magic_fire.png") },
             { Fire2, ("Cus-Fire2", null, "CustomImages/Checks/magic_fire.png") },
             { Fire3, ("Cus-Fire3", null, "CustomImages/Checks/magic_fire.png") },
@@ -135,41 +121,78 @@ public partial class MainWindow
                 SecondChance,
                 ("Cus-SecondChance", SSecondChance, "CustomImages/Checks/second_chance.png")
             },
-            { MulanWep, ("Cus-MulanWep", SMulanWep, "CustomImages/Checks/lock_AncestorSword.png") },
             {
-                AuronWep,
-                ("Cus-AuronWep", SAuronWep, "CustomImages/Checks/lock_BattlefieldsofWar.png")
+                MulanWep1,
+                ("Cus-MulanWep1", SMulanWep, "CustomImages/Checks/lock_AncestorSword.png")
             },
-            { BeastWep, ("Cus-BeastWep", SBeastWep, "CustomImages/Checks/lock_BeastClaw.png") },
-            { JackWep, ("Cus-JackWep", SJackWep, "CustomImages/Checks/lock_BoneFist.png") },
-            { IceCream, ("Cus-IceCream", SIceCream, "CustomImages/Checks/lock_IceCream.png") },
-            { TronWep, ("Cus-TronWep", STronWep, "CustomImages/Checks/lock_IdentityDisk.png") },
-            { Picture, ("Cus-Picture", SPicture, "CustomImages/Checks/lock_Picture.png") },
+            { MulanWep2, ("Cus-MulanWep2", null, "CustomImages/Checks/lock_AncestorSword.png") },
             {
-                MembershipCard,
+                AuronWep1,
+                ("Cus-AuronWep2", SAuronWep, "CustomImages/Checks/lock_BattlefieldsofWar.png")
+            },
+            {
+                AuronWep2,
+                ("Cus-AuronWep2", null, "CustomImages/Checks/lock_BattlefieldsofWar.png")
+            },
+            { BeastWep1, ("Cus-BeastWep1", SBeastWep, "CustomImages/Checks/lock_BeastClaw.png") },
+            { BeastWep2, ("Cus-BeastWep2", null, "CustomImages/Checks/lock_BeastClaw.png") },
+            { JackWep1, ("Cus-JackWep1", SJackWep, "CustomImages/Checks/lock_BoneFist.png") },
+            { JackWep2, ("Cus-JackWep2", null, "CustomImages/Checks/lock_BoneFist.png") },
+            { IceCream1, ("Cus-IceCream1", SIceCream, "CustomImages/Checks/lock_IceCream.png") },
+            { IceCream2, ("Cus-IceCream2", null, "CustomImages/Checks/lock_IceCream.png") },
+            { IceCream3, ("Cus-IceCream3", null, "CustomImages/Checks/lock_IceCream.png") },
+            { TronWep1, ("Cus-TronWep1", STronWep, "CustomImages/Checks/lock_IdentityDisk.png") },
+            { TronWep2, ("Cus-TronWep2", null, "CustomImages/Checks/lock_IdentityDisk.png") },
+            {
+                NaminesSketches,
                 (
-                    "Cus-MembershipCard",
+                    "Cus-NaminesSketches",
+                    SNaminesSketches,
+                    "CustomImages/Checks/lock_NaminesSketches.png"
+                )
+            },
+            {
+                DisneyCastleKey1,
+                (
+                    "Cus-DisneyCastleKey1",
+                    SDisneyCastleKey,
+                    "CustomImages/Checks/lock_DisneyCastleKey.png"
+                )
+            },
+            {
+                DisneyCastleKey2,
+                ("Cus-DisneyCastleKey2", null, "CustomImages/Checks/lock_DisneyCastleKey.png")
+            },
+            {
+                WayToTheDawn,
+                ("Cus-WayToTheDawn", SWayToTheDawn, "CustomImages/Checks/lock_WayToTheDawn.png")
+            },
+            {
+                MembershipCard1,
+                (
+                    "Cus-MembershipCard1",
                     SMembershipCard,
                     "CustomImages/Checks/lock_membershipcard.png"
                 )
             },
-            { SimbaWep, ("Cus-SimbaWep", SSimbaWep, "CustomImages/Checks/lock_ProudFang.png") },
             {
-                AladdinWep,
-                ("Cus-AladdinWep", SAladdinWep, "CustomImages/Checks/lock_Scimitar.png")
+                MembershipCard2,
+                ("Cus-MembershipCard2", null, "CustomImages/Checks/lock_membershipcard.png")
+            },
+            { SimbaWep1, ("Cus-SimbaWep1", SSimbaWep, "CustomImages/Checks/lock_ProudFang.png") },
+            { SimbaWep2, ("Cus-SimbaWep2", null, "CustomImages/Checks/lock_ProudFang.png") },
+            {
+                AladdinWep1,
+                ("Cus-AladdinWep1", SAladdinWep, "CustomImages/Checks/lock_Scimitar.png")
+            },
+            { AladdinWep2, ("Cus-AladdinWep2", null, "CustomImages/Checks/lock_Scimitar.png") },
+            {
+                SparrowWep1,
+                ("Cus-SparrowWep1", SSparrowWep, "CustomImages/Checks/lock_SkillCrossbones.png")
             },
             {
-                SparrowWep,
-                ("Cus-SparrowWep", SSparrowWep, "CustomImages/Checks/lock_SkillCrossbones.png")
-            },
-            { HadesCup, ("Cus-HadesCup", SHadesCup, "CustomImages/Checks/aux_hades_cup.png") },
-            {
-                OlympusStone,
-                ("Cus-OlympusStone", SOlympusStone, "CustomImages/Checks/aux_olympus_stone.png")
-            },
-            {
-                UnknownDisk,
-                ("Cus-UnknownDisk", SUnknownDisk, "CustomImages/Checks/aux_UnknownDisk.png")
+                SparrowWep2,
+                ("Cus-SparrowWep2", null, "CustomImages/Checks/lock_SkillCrossbones.png")
             },
             {
                 MunnyPouch1,
@@ -354,82 +377,143 @@ public partial class MainWindow
         if (Directory.Exists("CustomImages/Worlds/Locks/"))
         {
             if (File.Exists("CustomImages/Worlds/Locks/HB.png"))
-                HollowBastionLock.Source = new BitmapImage(
+                HollowBastionLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/HB.png",
                         UriKind.Absolute
                     )
                 );
+            HollowBastionLock2.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/HB.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/OC.png"))
-                OlympusColiseumLock.Source = new BitmapImage(
+                OlympusColiseumLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/OC.png",
                         UriKind.Absolute
                     )
                 );
+            OlympusColiseumLock2.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/OC.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/LD.png"))
-                LandofDragonsLock.Source = new BitmapImage(
+                LandofDragonsLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/LD.png",
                         UriKind.Absolute
                     )
                 );
+            LandofDragonsLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/LD.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/PL.png"))
-                PrideLandsLock.Source = new BitmapImage(
+                PrideLandsLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/PL.png",
                         UriKind.Absolute
                     )
                 );
+            PrideLandsLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/PL.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/HT.png"))
-                HalloweenTownLock.Source = new BitmapImage(
+                HalloweenTownLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/HT.png",
                         UriKind.Absolute
                     )
                 );
+            HalloweenTownLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/HT.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/SP.png"))
-                SpaceParanoidsLock.Source = new BitmapImage(
+                SpaceParanoidsLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/SP.png",
                         UriKind.Absolute
                     )
                 );
+            SpaceParanoidsLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/SP.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/BC.png"))
-                BeastsCastleLock.Source = new BitmapImage(
+                BeastsCastleLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/BC.png",
                         UriKind.Absolute
                     )
                 );
+            BeastsCastleLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/BC.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/AG.png"))
-                AgrabahLock.Source = new BitmapImage(
+                AgrabahLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/AG.png",
                         UriKind.Absolute
                     )
                 );
+            AgrabahLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/AG.png", UriKind.Absolute)
+            );
             if (File.Exists("CustomImages/Worlds/Locks/PR.png"))
-                PortRoyalLock.Source = new BitmapImage(
+                PortRoyalLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/PR.png",
                         UriKind.Absolute
                     )
                 );
+            PortRoyalLock1.Source = new BitmapImage(
+                new Uri("pack://application:,,,/CustomImages/Worlds/Locks/PR.png", UriKind.Absolute)
+            );
+            if (File.Exists("CustomImages/Worlds/Locks/TT2.png"))
+            {
+                SimulatedTwilightTownLock.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
+                        UriKind.Absolute
+                    )
+                );
+                DisneyCastleLock1.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
+                        UriKind.Absolute
+                    )
+                );
+                DisneyCastleLock2.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
+                        UriKind.Absolute
+                    )
+                );
+                TwtnwLock.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
+                        UriKind.Absolute
+                    )
+                );
+            }
             if (File.Exists("CustomImages/Worlds/Locks/TT3.png"))
+            {
                 TwilightTownLock1.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/TT3.png",
                         UriKind.Absolute
                     )
                 );
-            if (File.Exists("CustomImages/Worlds/Locks/TT2.png"))
                 TwilightTownLock2.Source = new BitmapImage(
                     new Uri(
-                        "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT3.png",
                         UriKind.Absolute
                     )
                 );
+                TwilightTownLock3.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT3.png",
+                        UriKind.Absolute
+                    )
+                );
+            }
         }
 
         //world cross

@@ -270,7 +270,9 @@ public partial class MainWindow
             SJackWep.Visibility = Visibility.Visible;
             SIceCream.Visibility = Visibility.Visible;
             STronWep.Visibility = Visibility.Visible;
-            SPicture.Visibility = Visibility.Visible;
+            SNaminesSketches.Visibility = Visibility.Visible;
+            SDisneyCastleKey.Visibility = Visibility.Visible;
+            SWayToTheDawn.Visibility = Visibility.Visible;
             SMembershipCard.Visibility = Visibility.Visible;
             SSimbaWep.Visibility = Visibility.Visible;
             SAladdinWep.Visibility = Visibility.Visible;
@@ -298,7 +300,9 @@ public partial class MainWindow
             SJackWep.Visibility = Visibility.Collapsed;
             SIceCream.Visibility = Visibility.Collapsed;
             STronWep.Visibility = Visibility.Collapsed;
-            SPicture.Visibility = Visibility.Collapsed;
+            SNaminesSketches.Visibility = Visibility.Collapsed;
+            SDisneyCastleKey.Visibility = Visibility.Collapsed;
+            SWayToTheDawn.Visibility = Visibility.Collapsed;
             SMembershipCard.Visibility = Visibility.Collapsed;
             SSimbaWep.Visibility = Visibility.Collapsed;
             SAladdinWep.Visibility = Visibility.Collapsed;
@@ -322,16 +326,19 @@ public partial class MainWindow
         }
 
         //set lock values
-        Data.WorldsData["TwilightTown"].VisitLocks = value * 11;
-        Data.WorldsData["HollowBastion"].VisitLocks = value;
-        Data.WorldsData["BeastsCastle"].VisitLocks = value;
-        Data.WorldsData["OlympusColiseum"].VisitLocks = value;
-        Data.WorldsData["Agrabah"].VisitLocks = value;
-        Data.WorldsData["LandofDragons"].VisitLocks = value;
-        Data.WorldsData["PrideLands"].VisitLocks = value;
-        Data.WorldsData["HalloweenTown"].VisitLocks = value;
-        Data.WorldsData["PortRoyal"].VisitLocks = value;
-        Data.WorldsData["SpaceParanoids"].VisitLocks = value;
+        Data.WorldsData["TwilightTown"].VisitLocks = value * 3;
+        Data.WorldsData["HollowBastion"].VisitLocks = value * 2;
+        Data.WorldsData["BeastsCastle"].VisitLocks = value * 2;
+        Data.WorldsData["OlympusColiseum"].VisitLocks = value * 2;
+        Data.WorldsData["Agrabah"].VisitLocks = value * 2;
+        Data.WorldsData["LandofDragons"].VisitLocks = value * 2;
+        Data.WorldsData["PrideLands"].VisitLocks = value * 2;
+        Data.WorldsData["HalloweenTown"].VisitLocks = value * 2;
+        Data.WorldsData["PortRoyal"].VisitLocks = value * 2;
+        Data.WorldsData["SpaceParanoids"].VisitLocks = value * 2;
+        Data.WorldsData["SimulatedTwilightTown"].VisitLocks = value;
+        Data.WorldsData["DisneyCastle"].VisitLocks = value * 2;
+        Data.WorldsData["TWTNW"].VisitLocks = value;
 
         foreach (var visitLock in Data.VisitLocks)
         {
@@ -403,15 +410,11 @@ public partial class MainWindow
             MunnyNum.Width = new GridLength(0, GridUnitType.Star);
             MunnyImg.Width = new GridLength(0, GridUnitType.Star);
 
-            if (VisitLockOption.IsChecked)
-                VisitsRow.Height = new GridLength(1, GridUnitType.Star);
-            else
-                VisitsRow.Height = new GridLength(0, GridUnitType.Star);
+            VisitsRow.Height = VisitLockOption.IsChecked
+                ? new GridLength(1, GridUnitType.Star)
+                : new GridLength(0, GridUnitType.Star);
         }
 
-        HandleItemToggle(toggle, HadesCup, false);
-        HandleItemToggle(toggle, OlympusStone, false);
-        HandleItemToggle(toggle, UnknownDisk, false);
         HandleItemToggle(toggle, MunnyPouch1, false);
         HandleItemToggle(toggle, MunnyPouch2, false);
     }

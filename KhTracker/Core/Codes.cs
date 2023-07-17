@@ -333,75 +333,6 @@ public class Codes
             { "MunnyPouch", "other" },
             { "MunnyPouch1", "other" },
             { "MunnyPouch2", "other" },
-            //ghost versions
-            { "Ghost_Report1", "report" },
-            { "Ghost_Report2", "report" },
-            { "Ghost_Report3", "report" },
-            { "Ghost_Report4", "report" },
-            { "Ghost_Report5", "report" },
-            { "Ghost_Report6", "report" },
-            { "Ghost_Report7", "report" },
-            { "Ghost_Report8", "report" },
-            { "Ghost_Report9", "report" },
-            { "Ghost_Report10", "report" },
-            { "Ghost_Report11", "report" },
-            { "Ghost_Report12", "report" },
-            { "Ghost_Report13", "report" },
-            { "Ghost_Fire1", "magic" },
-            { "Ghost_Fire2", "magic" },
-            { "Ghost_Fire3", "magic" },
-            { "Ghost_Blizzard1", "magic" },
-            { "Ghost_Blizzard2", "magic" },
-            { "Ghost_Blizzard3", "magic" },
-            { "Ghost_Thunder1", "magic" },
-            { "Ghost_Thunder2", "magic" },
-            { "Ghost_Thunder3", "magic" },
-            { "Ghost_Cure1", "magic" },
-            { "Ghost_Cure2", "magic" },
-            { "Ghost_Cure3", "magic" },
-            { "Ghost_Reflect1", "magic" },
-            { "Ghost_Reflect2", "magic" },
-            { "Ghost_Reflect3", "magic" },
-            { "Ghost_Magnet1", "magic" },
-            { "Ghost_Magnet2", "magic" },
-            { "Ghost_Magnet3", "magic" },
-            { "Ghost_Valor", "form" },
-            { "Ghost_Wisdom", "form" },
-            { "Ghost_Limit", "form" },
-            { "Ghost_Master", "form" },
-            { "Ghost_Final", "form" },
-            { "Ghost_OnceMore", "ability" },
-            { "Ghost_SecondChance", "ability" },
-            { "Ghost_TornPage1", "page" },
-            { "Ghost_TornPage2", "page" },
-            { "Ghost_TornPage3", "page" },
-            { "Ghost_TornPage4", "page" },
-            { "Ghost_TornPage5", "page" },
-            { "Ghost_Baseball", "summon" },
-            { "Ghost_Lamp", "summon" },
-            { "Ghost_Ukulele", "summon" },
-            { "Ghost_Feather", "summon" },
-            { "Ghost_Connection", "proof" },
-            { "Ghost_Nonexistence", "proof" },
-            { "Ghost_Peace", "proof" },
-            { "Ghost_PromiseCharm", "proof" },
-            { "Ghost_AuronWep", "visit" },
-            { "Ghost_MulanWep", "visit" },
-            { "Ghost_BeastWep", "visit" },
-            { "Ghost_JackWep", "visit" },
-            { "Ghost_SimbaWep", "visit" },
-            { "Ghost_SparrowWep", "visit" },
-            { "Ghost_AladdinWep", "visit" },
-            { "Ghost_TronWep", "visit" },
-            { "Ghost_MembershipCard", "visit" },
-            { "Ghost_IceCream", "visit" },
-            { "Ghost_Picture", "visit" },
-            { "Ghost_Anti", "form" },
-            { "Ghost_HadesCup", "other" },
-            { "Ghost_OlympusStone", "other" },
-            { "Ghost_UnknownDisk", "other" },
-            { "Ghost_MunnyPouch1", "other" },
-            { "Ghost_MunnyPouch2", "other" },
             //seedgen names
             { "Fire Element", "magic" },
             { "Blizzard Element", "magic" },
@@ -1133,8 +1064,8 @@ public class Codes
         "11CE062A",
         "11CE0642",
         "11CE064E",
-        "11CE0B0A"
-    }; // data roxas
+        "11CE0B0A" // data roxas
+    };
 
     private readonly string[] twilightTown =
     {
@@ -1188,8 +1119,8 @@ public class Codes
         "11CE0966",
         "11CE09AE",
         "11CE0A0E",
-        "11CE0ACE"
-    }; //data axel
+        "11CE0ACE" //data axel
+    };
 
     private readonly string[] hollowBastion =
     {
@@ -1253,8 +1184,8 @@ public class Codes
         "11CE05BE",
         "11CE05CA",
         "11CE05D6",
-        "11CE0AB6"
-    }; //data demyx
+        "11CE0AB6" //data demyx
+    };
 
     private readonly string[] landOfDragons =
     {
@@ -1286,8 +1217,8 @@ public class Codes
         "11CE06C6",
         "11CE06DE",
         "11CE06EA",
-        "11CE0AE6"
-    }; //data xigbar
+        "11CE0AE6" //data xigbar
+    };
 
     private readonly string[] beastsCastle =
     {
@@ -1319,8 +1250,8 @@ public class Codes
         "11CE0852",
         "11CE085E",
         "11CE09C6",
-        "11CE0AC2"
-    }; //data xaldin
+        "11CE0AC2" //data xaldin
+    };
 
     private readonly string[] olympusColiseum =
     {
@@ -1365,8 +1296,8 @@ public class Codes
         "11CE095A",
         "11CE0996", //hades cup
         "11CE0A56", //AS zexion
-        "11CE0A92"
-    }; //data zexion
+        "11CE0A92" //data zexion
+    };
 
     private readonly string[] disneyCastle =
     {
@@ -1395,8 +1326,8 @@ public class Codes
         "11CE0732",
         "11CE0762",
         "11CE0A6E", //AS marluxia
-        "11CE0AAA"
-    }; //data marluxia
+        "11CE0AAA" //data marluxia
+    };
 
     private readonly string[] portRoyal =
     {
@@ -1430,8 +1361,8 @@ public class Codes
         "11CE086A",
         "11CE0876",
         "11CE09DE",
-        "11CE0AFE"
-    }; //data luxord
+        "11CE0AFE" //data luxord
+    };
 
     private readonly string[] agrabah =
     {
@@ -1468,8 +1399,8 @@ public class Codes
         "11CE079E",
         "11CE08B2",
         "11CE0A4A", //AS lexaeus
-        "11CE0A86"
-    }; //data lexaeus
+        "11CE0A86" //data lexaeus
+    };
 
     private readonly string[] halloweenTown =
     {
@@ -1493,8 +1424,8 @@ public class Codes
         "11CE08CA",
         "11CE08D6",
         "11CE0A3E", //AS vexen
-        "11CE0A7A"
-    }; //data vexen
+        "11CE0A7A" //data vexen
+    };
 
     private readonly string[] prideLands =
     {
@@ -1526,8 +1457,8 @@ public class Codes
         "21D10C18",
         "11CE07B6",
         "11CE07C2",
-        "11CE0AF2"
-    }; //data saix
+        "11CE0AF2" //data saix
+    };
 
     private readonly string[] atlantica = { "11CE0846", "11CE08E2", "11CE08EE", "11CE08FA" };
 
@@ -1580,8 +1511,8 @@ public class Codes
         "21D10C78",
         "11CE0816",
         "11CE0A62", //AS larxene
-        "11CE0A9E"
-    }; //data larxene
+        "11CE0A9E" //data larxene
+    };
 
     private readonly string[] theWorldThatNeverWas =
     {
@@ -1615,8 +1546,8 @@ public class Codes
         "11CE0A1A",
         "11CE0A26",
         "11CE0A32",
-        "11CE0ADA"
-    }; //data xemnas
+        "11CE0ADA" //data xemnas
+    };
 
     private readonly string[] forms =
     {

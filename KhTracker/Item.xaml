@@ -1,12 +1,12 @@
 ﻿<ContentControl x:Class="KhTracker.Item"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:KhTracker"
-             mc:Ignorable="d" Content="{DynamicResource Min-AnsemReport01}" Background="Transparent" PreviewGiveFeedback="Item_PreviewGiveFeedback">
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                mc:Ignorable="d" Content="{DynamicResource Min-AnsemReport01}" Background="Transparent"
+                PreviewGiveFeedback="Item_PreviewGiveFeedback">
     <!--MouseDown="Item_MouseDown" MouseUp="Item_MouseUp"-->
-    
+
     <ContentControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
