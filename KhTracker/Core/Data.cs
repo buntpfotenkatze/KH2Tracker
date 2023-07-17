@@ -21,14 +21,6 @@ public class Data
     public string[] SeedHashVisual = null;
     public readonly bool ShouldResetHash = true;
     public bool SeedHashLoaded = false;
-    public bool SpoilerWorldCompletion = false;
-    public bool SpoilerReportMode = false;
-    public string OpenKhHintText = "None";
-    public string OpenKhBossText = "None";
-    public string[] HintFileText = new string[3];
-    public bool LegacyJsmartee = false;
-    public bool LegacyShan = false;
-    public string[] ShanHintFileText = null;
     public bool SaveFileLoaded = false;
     public bool SeedLoaded = false;
     public int LastVersion = 0;
@@ -96,7 +88,6 @@ public class Data
         };
     public static readonly Dictionary<string, List<string>> WorldItems = new();
     public readonly List<string> TrackedReports = new();
-    public readonly List<string> SpoilerRevealTypes = new();
 
     //for boss rando points
     public bool BossRandoFound = false;
@@ -186,44 +177,27 @@ public class Data
 
 public class WorldData
 {
-    public bool Hinted; //currently hinted? (for hinted hint logic)
-    public bool HintedHint; //currently hinted hint?
-
-    //Progression JsmarteeHints
-    public bool HintedProgression;
-    public bool Complete; //are all checks found?
     public int Progress; //current world progression
-    public bool ContainsGhost; //contains ghost item?
     public int VisitLocks; //visit lock progress
 
-    public List<string> CheckCount = new();
-
-    public Grid Top;
-    public Button World;
-    public ContentControl Progression;
-    public OutlinedTextBlock Value;
-    public WorldGrid WorldGrid;
+    public readonly Grid Top;
+    public readonly ContentControl Progression;
+    public readonly OutlinedTextBlock Value;
+    public readonly WorldGrid WorldGrid;
 
     public WorldData(
         Grid top,
-        Button world,
         ContentControl progression,
         OutlinedTextBlock value,
         WorldGrid itemgrid,
-        bool hinted,
         int visitLock
     )
     {
-        this.Top = top;
-        this.World = world;
-        this.Progression = progression;
-        this.Value = value;
+        Top = top;
+        Progression = progression;
+        Value = value;
         WorldGrid = itemgrid;
-        this.Hinted = hinted;
-        HintedHint = false;
-        Complete = false;
         Progress = 0;
-        ContainsGhost = false;
         VisitLocks = visitLock;
     }
 }

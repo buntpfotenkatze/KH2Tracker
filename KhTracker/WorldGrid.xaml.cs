@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -26,26 +25,6 @@ public partial class WorldGrid
     public static int RealMagnet;
     public static int RealPages;
     public static int RealPouches;
-
-    //public static int localLevelCount = 0;
-    public static int GhostFire = 0;
-    public static int GhostBlizzard = 0;
-    public static int GhostThunder = 0;
-    public static int GhostCure = 0;
-    public static int GhostReflect = 0;
-    public static int GhostMagnet = 0;
-    public static int GhostPages = 0;
-    public static int GhostPouches = 0;
-
-    //amount of obtained ghost magic/pages
-    public static int GhostFireObtained = 0;
-    public static int GhostBlizzardObtained = 0;
-    public static int GhostThunderObtained = 0;
-    public static int GhostCureObtained = 0;
-    public static int GhostReflectObtained = 0;
-    public static int GhostMagnetObtained = 0;
-    public static int GhostPagesObtained = 0;
-    public static int GhostPouchesObtained = 0;
 
     //track other types of collections
     public static int ProofCount;
@@ -448,129 +427,7 @@ public partial class WorldGrid
         if (shadow == null)
             return;
 
-        if (add)
-        {
-            shadow.Opacity = 1.0;
-        }
-        else
-        {
-            shadow.Opacity = 0.0;
-        }
-    }
-
-    private void SpoilerWorldReveal(string worldname, string report)
-    {
-        var data = MainWindow.Data;
-        //check if report was tracked before in this session to avoid tracking
-        //multiple ghosts for removing and placing the same report back
-        if (data.TrackedReports.Contains(report))
-            return;
-        else
-            data.TrackedReports.Add(report);
-
-        //create temp list of what a world should have
-        var worldItems = data.WorldsData[worldname].CheckCount;
-        char[] numbers = { '1', '2', '3', '4', '5' };
-
-        //Get list of items we should track. we don't want to place more ghosts than is needed
-        //(ex. a world has 2 blizzards and we already have 1 tracked there)
-        var worldGrid = data.WorldsData[worldname].WorldGrid;
-        foreach (Item item in worldGrid.Children)
-        {
-            //just skip if item is a ghost. checkCount should never contain ghosts anyway
-            if (item.Name.StartsWith("Ghost_"))
-                continue;
-
-            //do not trim numbers if report
-            if (item.Name.Contains("Report") && worldItems.Contains(item.Name))
-                worldItems.Remove(item.Name);
-            else if (worldItems.Contains(item.Name.TrimEnd(numbers)))
-            {
-                worldItems.Remove(item.Name.TrimEnd(numbers));
-            }
-        }
-
-        //start tracking what's left in the temp list
-        foreach (var itemname in worldItems)
-        {
-            //don't track item types not set in reveal list
-            if (!data.SpoilerRevealTypes.Contains(Codes.FindItemType(itemname)))
-            {
-                continue;
-            }
-
-            //this shouldn't ever happen, but return without doing anything else if the ghost values for magic/pages are higher than expected
-            switch (itemname)
-            {
-                case "Fire":
-                    if (GhostFire >= 3)
-                    {
-                        return;
-                    }
-                    break;
-                case "Blizzard":
-                    if (GhostBlizzard >= 3)
-                    {
-                        return;
-                    }
-                    break;
-                case "Thunder":
-                    if (GhostThunder >= 3)
-                    {
-                        return;
-                    }
-                    break;
-                case "Cure":
-                    if (GhostCure >= 3)
-                    {
-                        return;
-                    }
-                    break;
-                case "Magnet":
-                    if (GhostMagnet >= 3)
-                    {
-                        return;
-                    }
-                    break;
-                case "Reflect":
-                    if (GhostReflect >= 3)
-                    {
-                        return;
-                    }
-                    break;
-                case "TornPage":
-                    if (GhostPages >= 5)
-                    {
-                        return;
-                    }
-                    break;
-                case "MunnyPouch":
-                    if (GhostPouches >= 2)
-                    {
-                        return;
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
-    private void SetWorldGhost(string worldName)
-    {
-        var data = MainWindow.Data;
-        foreach (Item child in Children)
-        {
-            if (data.GhostItems.Values.Contains(child))
-            {
-                data.WorldsData[worldName].ContainsGhost = true;
-                return;
-            }
-            else
-            {
-                data.WorldsData[worldName].ContainsGhost = false;
-            }
-        }
+        shadow.Opacity = add ? 1.0 : 0.0;
     }
 
     private void SetVisitLock(string itemName, int addRemove)

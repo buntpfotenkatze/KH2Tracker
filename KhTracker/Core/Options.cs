@@ -147,18 +147,12 @@ public partial class MainWindow
             Version = Title,
             SeedHash = Data.SeedHashVisual,
             Settings = settingInfo,
-            SeedHints = Data.OpenKhHintText,
-            BossHints = Data.OpenKhBossText,
             RandomSeed = Data.ConvertedSeedHash,
             Worlds = worldvalueInfo,
             Counters = counterInfo,
             ForcedFinal = Data.ForcedFinal,
             Events = Data.EventLog,
             BossEvents = Data.BossEventLog,
-            LegacyJsmartee = Data.LegacyJsmartee,
-            LegacyJHints = Data.HintFileText,
-            LegacyShan = Data.LegacyShan,
-            LegacySHints = Data.ShanHintFileText
         };
 
         var saveFinal = JsonSerializer.Serialize(saveInfo);
@@ -274,43 +268,6 @@ public partial class MainWindow
             ////other
             //settingInfo[29] = GhostItemOption.IsChecked;
             //settingInfo[30] = GhostMathOption.IsChecked;
-        }
-
-        //check if enemy rando data exists
-        if (savefile.ContainsKey("BossHints"))
-        {
-            if (savefile["BossHints"].ToString() != "None")
-            {
-                Data.BossRandoFound = true;
-                Data.OpenKhBossText = savefile["BossHints"].ToString();
-
-                var enemyText = Encoding.UTF8.GetString(
-                    Convert.FromBase64String(Data.OpenKhBossText)
-                );
-                try
-                {
-                    var enemyObject = JsonSerializer.Deserialize<Dictionary<string, object>>(
-                        enemyText
-                    );
-                    var bosses = JsonSerializer.Deserialize<List<Dictionary<string, object>>>(
-                        enemyObject["BOSSES"].ToString()
-                    );
-
-                    foreach (var bosspair in bosses)
-                    {
-                        var bossOrig = bosspair["original"].ToString();
-                        var bossRepl = bosspair["new"].ToString();
-
-                        Data.BossList.Add(bossOrig, bossRepl);
-                    }
-                }
-                catch
-                {
-                    Data.BossRandoFound = false;
-                    Data.OpenKhBossText = "None";
-                    App.Logger?.Record("error while trying to parse bosses from save.");
-                }
-            }
         }
 
         //use random seed from save
@@ -1735,9 +1692,6 @@ public partial class MainWindow
         HintTextEnd.Text = "";
         Data.Mode = Mode.None;
         Collected = 0;
-        Data.SpoilerRevealTypes.Clear();
-        Data.SpoilerReportMode = false;
-        Data.SpoilerWorldCompletion = false;
         Data.UsedPages = 0;
         CollectedValue.Text = "0";
         Data.ForcedFinal = false;
@@ -1749,12 +1703,6 @@ public partial class MainWindow
         Data.SeedgenVersion = "";
         Data.AltFinalTracking = false;
         Data.EventLog.Clear();
-        Data.OpenKhHintText = "None";
-        Data.OpenKhBossText = "None";
-        Data.LegacyJsmartee = false;
-        Data.HintFileText = null;
-        Data.LegacyShan = false;
-        Data.ShanHintFileText = null;
         Data.HintsLoaded = false;
         Data.SeedLoaded = false;
         Data.SaveFileLoaded = false;
@@ -1910,8 +1858,6 @@ public partial class MainWindow
 
         foreach (var key in Data.WorldsData.Keys.ToList())
         {
-            Data.WorldsData[key].Complete = false;
-            Data.WorldsData[key].CheckCount.Clear();
             Data.WorldsData[key].Progress = 0;
 
             //world cross reset
@@ -2027,23 +1973,6 @@ public partial class MainWindow
         PageCount.Text = "5";
         MunnyCount.Text = "2";
 
-        WorldGrid.GhostFire = 0;
-        WorldGrid.GhostBlizzard = 0;
-        WorldGrid.GhostThunder = 0;
-        WorldGrid.GhostCure = 0;
-        WorldGrid.GhostReflect = 0;
-        WorldGrid.GhostMagnet = 0;
-        WorldGrid.GhostPages = 0;
-        WorldGrid.GhostPouches = 0;
-        WorldGrid.GhostFireObtained = 0;
-        WorldGrid.GhostBlizzardObtained = 0;
-        WorldGrid.GhostThunderObtained = 0;
-        WorldGrid.GhostCureObtained = 0;
-        WorldGrid.GhostReflectObtained = 0;
-        WorldGrid.GhostMagnetObtained = 0;
-        WorldGrid.GhostPagesObtained = 0;
-        WorldGrid.GhostPouchesObtained = 0;
-
         Ghost_FireCount.Visibility = Visibility.Hidden;
         Ghost_BlizzardCount.Visibility = Visibility.Hidden;
         Ghost_ThunderCount.Visibility = Visibility.Hidden;
@@ -2110,29 +2039,6 @@ public partial class MainWindow
         Setting_Transport.Width = new GridLength(0, GridUnitType.Star);
         Setting_Spacer.Width = new GridLength(10, GridUnitType.Star);
 
-        //reset pathhints edits
-        foreach (var key in Data.WorldsData.Keys.ToList())
-        {
-            Data.WorldsData[key].Top.ColumnDefinitions[1].Width = new GridLength(
-                0,
-                GridUnitType.Star
-            );
-
-            var pathgrid = Data.WorldsData[key].Top.FindName(key + "Path") as Grid;
-            pathgrid.Visibility = Visibility.Hidden;
-            foreach (Image child in pathgrid.Children)
-            {
-                if (
-                    child.Name.Contains(key + "Path_Non")
-                    && child.Source.ToString().Contains("cross.png")
-                ) //reset non icon to default image
-                    child.Source = new BitmapImage(
-                        new Uri("Images/Checks/Simple/proof_of_nonexistence.png", UriKind.Relative)
-                    );
-                child.Visibility = Visibility.Hidden;
-            }
-        }
-
         TornPagesToggle(true);
         VisitLockToggle(VisitLockOption.IsChecked);
 
@@ -2191,10 +2097,11 @@ public partial class MainWindow
                 caption = "Hints Load Confirmation";
             }
 
-            var buttons = MessageForm.MessageBoxButtons.OKCancel;
-            MessageForm.DialogResult result;
-
-            result = MessageForm.MessageBox.Show(message, caption, buttons);
+            var result = MessageForm.MessageBox.Show(
+                message,
+                caption,
+                MessageForm.MessageBoxButtons.OKCancel
+            );
             if (result == MessageForm.DialogResult.Cancel)
             {
                 return false;

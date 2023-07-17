@@ -72,21 +72,19 @@ public partial class MainWindow
 
         Data.WorldsData.Add(
             "SorasHeart",
-            new WorldData(SorasHeartTop, SorasHeart, null, SorasHeartHint, SorasHeartGrid, false, 0)
+            new WorldData(SorasHeartTop, null, SorasHeartHint, SorasHeartGrid, 0)
         );
         Data.WorldsData.Add(
             "DriveForms",
-            new WorldData(DriveFormsTop, DriveForms, null, DriveFormsHint, DriveFormsGrid, false, 0)
+            new WorldData(DriveFormsTop, null, DriveFormsHint, DriveFormsGrid, 0)
         );
         Data.WorldsData.Add(
             "SimulatedTwilightTown",
             new WorldData(
                 SimulatedTwilightTownTop,
-                SimulatedTwilightTown,
                 SimulatedTwilightTownProgression,
                 SimulatedTwilightTownHint,
                 SimulatedTwilightTownGrid,
-                false,
                 0
             )
         );
@@ -94,11 +92,9 @@ public partial class MainWindow
             "TwilightTown",
             new WorldData(
                 TwilightTownTop,
-                TwilightTown,
                 TwilightTownProgression,
                 TwilightTownHint,
                 TwilightTownGrid,
-                false,
                 0
             )
         );
@@ -106,11 +102,9 @@ public partial class MainWindow
             "HollowBastion",
             new WorldData(
                 HollowBastionTop,
-                HollowBastion,
                 HollowBastionProgression,
                 HollowBastionHint,
                 HollowBastionGrid,
-                false,
                 0
             )
         );
@@ -118,11 +112,9 @@ public partial class MainWindow
             "BeastsCastle",
             new WorldData(
                 BeastsCastleTop,
-                BeastsCastle,
                 BeastsCastleProgression,
                 BeastsCastleHint,
                 BeastsCastleGrid,
-                false,
                 0
             )
         );
@@ -130,35 +122,23 @@ public partial class MainWindow
             "OlympusColiseum",
             new WorldData(
                 OlympusColiseumTop,
-                OlympusColiseum,
                 OlympusColiseumProgression,
                 OlympusColiseumHint,
                 OlympusColiseumGrid,
-                false,
                 0
             )
         );
         Data.WorldsData.Add(
             "Agrabah",
-            new WorldData(
-                AgrabahTop,
-                Agrabah,
-                AgrabahProgression,
-                AgrabahHint,
-                AgrabahGrid,
-                false,
-                0
-            )
+            new WorldData(AgrabahTop, AgrabahProgression, AgrabahHint, AgrabahGrid, 0)
         );
         Data.WorldsData.Add(
             "LandofDragons",
             new WorldData(
                 LandofDragonsTop,
-                LandofDragons,
                 LandofDragonsProgression,
                 LandofDragonsHint,
                 LandofDragonsGrid,
-                false,
                 0
             )
         );
@@ -166,35 +146,23 @@ public partial class MainWindow
             "HundredAcreWood",
             new WorldData(
                 HundredAcreWoodTop,
-                HundredAcreWood,
                 HundredAcreWoodProgression,
                 HundredAcreWoodHint,
                 HundredAcreWoodGrid,
-                false,
                 0
             )
         );
         Data.WorldsData.Add(
             "PrideLands",
-            new WorldData(
-                PrideLandsTop,
-                PrideLands,
-                PrideLandsProgression,
-                PrideLandsHint,
-                PrideLandsGrid,
-                false,
-                0
-            )
+            new WorldData(PrideLandsTop, PrideLandsProgression, PrideLandsHint, PrideLandsGrid, 0)
         );
         Data.WorldsData.Add(
             "DisneyCastle",
             new WorldData(
                 DisneyCastleTop,
-                DisneyCastle,
                 DisneyCastleProgression,
                 DisneyCastleHint,
                 DisneyCastleGrid,
-                false,
                 0
             )
         );
@@ -202,61 +170,38 @@ public partial class MainWindow
             "HalloweenTown",
             new WorldData(
                 HalloweenTownTop,
-                HalloweenTown,
                 HalloweenTownProgression,
                 HalloweenTownHint,
                 HalloweenTownGrid,
-                false,
                 0
             )
         );
         Data.WorldsData.Add(
             "PortRoyal",
-            new WorldData(
-                PortRoyalTop,
-                PortRoyal,
-                PortRoyalProgression,
-                PortRoyalHint,
-                PortRoyalGrid,
-                false,
-                0
-            )
+            new WorldData(PortRoyalTop, PortRoyalProgression, PortRoyalHint, PortRoyalGrid, 0)
         );
         Data.WorldsData.Add(
             "SpaceParanoids",
             new WorldData(
                 SpaceParanoidsTop,
-                SpaceParanoids,
                 SpaceParanoidsProgression,
                 SpaceParanoidsHint,
                 SpaceParanoidsGrid,
-                false,
                 0
             )
         );
         Data.WorldsData.Add(
             "TWTNW",
-            new WorldData(TWTNWTop, TWTNW, TWTNWProgression, TWTNWHint, TWTNWGrid, false, 0)
+            new WorldData(TWTNWTop, TWTNWProgression, TWTNWHint, TWTNWGrid, 0)
         );
-        Data.WorldsData.Add(
-            "GoA",
-            new WorldData(GoATop, GoA, GoAProgression, GoAHint, GoAGrid, true, 0)
-        );
+        Data.WorldsData.Add("GoA", new WorldData(GoATop, GoAProgression, GoAHint, GoAGrid, 0));
         Data.WorldsData.Add(
             "Atlantica",
-            new WorldData(
-                AtlanticaTop,
-                Atlantica,
-                AtlanticaProgression,
-                AtlanticaHint,
-                AtlanticaGrid,
-                false,
-                0
-            )
+            new WorldData(AtlanticaTop, AtlanticaProgression, AtlanticaHint, AtlanticaGrid, 0)
         );
         Data.WorldsData.Add(
             "PuzzSynth",
-            new WorldData(PuzzSynthTop, PuzzSynth, null, PuzzSynthHint, PuzzSynthGrid, false, 0)
+            new WorldData(PuzzSynthTop, null, PuzzSynthHint, PuzzSynthGrid, 0)
         );
 
         Data.ProgressKeys.Add(
@@ -1184,11 +1129,7 @@ public partial class MainWindow
 
     public void SetWorldValue(OutlinedTextBlock worldValue, int value)
     {
-        var location = worldValue.Name.Substring(0, worldValue.Name.Length - 4);
         var color = (SolidColorBrush)FindResource("DefaultWhite"); //default
-
-        if (Data.WorldsData[location].ContainsGhost) //turn green if it conains ghost item
-            color = (SolidColorBrush)FindResource("GhostHint");
 
         if (worldValue.Name.Contains("GoA"))
         {
@@ -1198,12 +1139,6 @@ public partial class MainWindow
             return;
         }
 
-        if (Data.WorldsData[location].Complete) //turn blue if it's marked as hinted hint or complete
-            color = (SolidColorBrush)FindResource("HintedHint");
-
-        if (Data.WorldsData[location].HintedHint) //turn blue if it's marked as hinted hint or complete
-            color = (SolidColorBrush)FindResource("ClassicYellow");
-
         worldValue.Fill = color;
 
         worldValue.Text = value == -999999 ? "?" : value.ToString();
@@ -1211,8 +1146,6 @@ public partial class MainWindow
 
     public void SetCollected(bool add)
     {
-        //AddProgressionPoints(1);
-
         if (add)
             ++Collected;
         else
