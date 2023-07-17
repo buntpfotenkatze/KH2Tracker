@@ -192,7 +192,7 @@ public partial class MainWindow
         );
         Data.WorldsData.Add(
             "TWTNW",
-            new WorldData(TWTNWTop, TWTNWProgression, TWTNWHint, TWTNWGrid, 0)
+            new WorldData(TwtnwTop, TwtnwProgression, TwtnwHint, TwtnwGrid, 0)
         );
         Data.WorldsData.Add("GoA", new WorldData(GoATop, GoAProgression, GoAHint, GoAGrid, 0));
         Data.WorldsData.Add(
@@ -924,7 +924,7 @@ public partial class MainWindow
                         ].Top.Children.OfType<Rectangle>()
                     )
                     {
-                        if (box.Opacity != 0.9 && !box.Name.EndsWith("SelWG"))
+                        if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
                             box.Fill = (SolidColorBrush)FindResource("DefaultRec");
 
                         if (box.Name.EndsWith("SelWG") && !WorldHighlightOption.IsChecked)
@@ -940,7 +940,7 @@ public partial class MainWindow
                         ].Top.Children.OfType<Rectangle>()
                     )
                     {
-                        if (box.Opacity != 0.9 && !box.Name.EndsWith("SelWG"))
+                        if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
                             box.Fill = (SolidColorBrush)FindResource("DefaultRec");
 
                         if (box.Name.EndsWith("SelWG") && !WorldHighlightOption.IsChecked)
@@ -954,7 +954,7 @@ public partial class MainWindow
                         var box in Data.WorldsData[button!.Name].Top.Children.OfType<Rectangle>()
                     ) //set currently selected world colors
                     {
-                        if (box.Opacity != 0.9 && !box.Name.EndsWith("SelWG"))
+                        if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
                             box.Fill = (SolidColorBrush)FindResource("SelectedRec");
 
                         if (box.Name.EndsWith("SelWG") && !WorldHighlightOption.IsChecked)
@@ -1176,23 +1176,23 @@ public partial class MainWindow
                     switch (Data.WorldsData["TwilightTown"].VisitLocks)
                     {
                         case 0:
-                            TwilightTownLock_1.Visibility = Visibility.Collapsed;
-                            TwilightTownLock_2.Visibility = Visibility.Collapsed;
+                            TwilightTownLock1.Visibility = Visibility.Collapsed;
+                            TwilightTownLock2.Visibility = Visibility.Collapsed;
                             TwilightTown.Opacity = 1;
                             break;
                         case 1:
-                            TwilightTownLock_1.Visibility = Visibility.Visible;
-                            TwilightTownLock_2.Visibility = Visibility.Collapsed;
+                            TwilightTownLock1.Visibility = Visibility.Visible;
+                            TwilightTownLock2.Visibility = Visibility.Collapsed;
                             TwilightTown.Opacity = 0.45;
                             break;
                         case 10:
-                            TwilightTownLock_1.Visibility = Visibility.Collapsed;
-                            TwilightTownLock_2.Visibility = Visibility.Visible;
+                            TwilightTownLock1.Visibility = Visibility.Collapsed;
+                            TwilightTownLock2.Visibility = Visibility.Visible;
                             TwilightTown.Opacity = 0.45;
                             break;
                         default:
-                            TwilightTownLock_1.Visibility = Visibility.Visible;
-                            TwilightTownLock_2.Visibility = Visibility.Visible;
+                            TwilightTownLock1.Visibility = Visibility.Visible;
+                            TwilightTownLock2.Visibility = Visibility.Visible;
                             TwilightTown.Opacity = 0.45;
                             break;
                     }

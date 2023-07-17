@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KhTracker"
-        xmlns:Custom="https://unknown6656.com/wpfpslib" xmlns:GrayscaleEffect="clr-namespace:GrayscaleEffect;assembly=GrayscaleEffect" xmlns:Custom1="http://usercode.de/wpf.imageeffects" x:Class="KhTracker.MainWindow"
+        xmlns:fx="http://usercode.de/wpf.imageeffects" x:Class="KhTracker.MainWindow"
         mc:Ignorable="d"
         ResizeMode="CanResize"
         KeyDown="Window_KeyDown"
@@ -185,7 +185,7 @@
                             <Button Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name ="SorasHeart" PreviewMouseDown="OnMouseDown" MouseWheel="OnMouseWheel" 
                                     Template="{StaticResource DefaultButton}" FocusVisualStyle="{x:Null}" Content="{DynamicResource Min-SoraHeartImage}"/>
                             <!-- cross icon -->
-                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SorasHeartCross" Source="Images/System/crossworld.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SorasHeartCross" Source="Images/System/crossworld.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
@@ -193,7 +193,7 @@
                                 </Image.RenderTransform>
                             </Image>
                             <!-- question mark -->
-                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SorasHeartQuestion" Source="Images/System/question.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
+                            <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SorasHeartQuestion" Source="Images/System/question.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
@@ -206,10 +206,10 @@
                                                          StrokeThickness="7" Fill="#FFEFECE9" Text="?" Margin="0,-5,0,2"/>
                             </Viewbox>
                             <!-- progression -->
-                            <Image Name="SorasHeartWeapon" Panel.ZIndex="1" IsHitTestVisible="False" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                            <Image Name="SorasHeartWeapon" Panel.ZIndex="1" IsHitTestVisible="False" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
                         </Grid>
                         <!-- path hints icons -->
-                        <Grid x:Name="SorasHeartPath" Grid.Column="1">
+                        <Grid x:Name="SorasHeartPath" Grid.Row="0" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.18*"/>
                                 <RowDefinition />
@@ -217,17 +217,17 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="SorasHeartPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="SorasHeartPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="SorasHeartPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="SorasHeartPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="SorasHeartPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="SorasHeartPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
-                        <local:WorldGrid x:Name="SorasHeartGrid" Grid.Column="2"/>
+                        <local:WorldGrid x:Name="SorasHeartGrid" Grid.Row="0" Grid.Column="2"/>
                         <!-- fancy colors -->
-                        <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
+                        <Rectangle Grid.Row="0" Grid.Column="0" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
+                        <Rectangle Grid.Row="0" Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="SorasHeartSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="SorasHeartSelWg" Grid.Row="0" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Simulated Twilight Town -->
@@ -257,7 +257,7 @@
                             <!-- main icon -->
                             <Button Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name ="SimulatedTwilightTown" Background="Transparent" PreviewMouseDown="OnMouseDown" MouseWheel="OnMouseWheel" Template="{StaticResource DefaultButton}" FocusVisualStyle="{x:Null}" Content="{DynamicResource Min-SimulatedImage}"/>
                             <!-- cross icon -->
-                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SimulatedTwilightTownCross" Source="Images/System/crossworld.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
+                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SimulatedTwilightTownCross" Source="Images/System/crossworld.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
@@ -265,7 +265,7 @@
                                 </Image.RenderTransform>
                             </Image>
                             <!-- question mark -->
-                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SimulatedTwilightTownQuestion" Source="Images/System/question.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
+                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="SimulatedTwilightTownQuestion" Source="Images/System/question.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
@@ -278,15 +278,16 @@
                                                          StrokeThickness="7" Fill="#FFEFECE9" Text="?" Margin="0,-5,0,2"/>
                             </Viewbox>
                             <!-- progression -->
-                            <ContentControl Content="{StaticResource Min-Axel1}" x:Name="SimulatedTwilightTownProgression" Panel.ZIndex="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Right" MaxHeight="55"/>
+                            <ContentControl Content="{StaticResource Min-Axel1}" x:Name="SimulatedTwilightTownProgression" Panel.ZIndex="1" Grid.Row="0" Grid.Column="1"
+                                            Grid.ColumnSpan="3" HorizontalAlignment="Right" MaxHeight="55"/>
                         </Grid>
                         <!-- item grid -->
-                        <local:WorldGrid x:Name="SimulatedTwilightTownGrid" Grid.Column="2"/>
+                        <local:WorldGrid x:Name="SimulatedTwilightTownGrid" Grid.Row="0" Grid.Column="2"/>
                         <!-- fancy spacer colors -->
-                        <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
+                        <Rectangle Grid.Row="0" Grid.Column="0" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
+                        <Rectangle Grid.Row="0" Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="SimulatedTwilightTownSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="SimulatedTwilightTownSelWg" Grid.Row="0" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Hollow Bastion -->
@@ -359,9 +360,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="HollowBastionPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="HollowBastionPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="HollowBastionPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="HollowBastionPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="HollowBastionPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="HollowBastionPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="HollowBastionGrid" Grid.Column="2"/>
@@ -369,7 +370,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="HollowBastionSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="HollowBastionSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Beasts Castle -->
@@ -439,9 +440,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="BeastsCastlePath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="BeastsCastlePath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="BeastsCastlePath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="BeastsCastlePathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="BeastsCastlePathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="BeastsCastlePathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="BeastsCastleGrid" Grid.Column="2"/>
@@ -449,7 +450,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="BeastsCastleSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="BeastsCastleSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Disney Castle -->
@@ -511,9 +512,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="DisneyCastlePath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="DisneyCastlePath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="DisneyCastlePath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="DisneyCastlePathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="DisneyCastlePathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="DisneyCastlePathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="DisneyCastleGrid" Grid.Column="2"/>
@@ -521,7 +522,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="DisneyCastleSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="DisneyCastleSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Agrabah -->
@@ -591,9 +592,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="AgrabahPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="AgrabahPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="AgrabahPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="AgrabahPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="AgrabahPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="AgrabahPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="AgrabahGrid" Grid.Column="2"/>
@@ -601,7 +602,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="AgrabahSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="AgrabahSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Pride Lands -->
@@ -671,9 +672,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="PrideLandsPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="PrideLandsPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="PrideLandsPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="PrideLandsPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="PrideLandsPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="PrideLandsPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="PrideLandsGrid" Grid.Column="2"/>
@@ -681,7 +682,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="PrideLandsSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="PrideLandsSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- 100 Acre Wood -->
@@ -743,9 +744,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="HundredAcreWoodPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="HundredAcreWoodPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="HundredAcreWoodPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="HundredAcreWoodPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="HundredAcreWoodPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="HundredAcreWoodPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="HundredAcreWoodGrid" Grid.Column="2"/>
@@ -753,7 +754,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="HundredAcreWoodSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="HundredAcreWoodSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- GoA -->
@@ -815,9 +816,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="GoAPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="GoAPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="GoAPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="GoAPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="GoAPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="GoAPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="GoAGrid" Grid.Column="2"/>
@@ -825,7 +826,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="GoASelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="GoASelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                 </Grid>
@@ -904,9 +905,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="DriveFormsPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="DriveFormsPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="DriveFormsPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="DriveFormsPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="DriveFormsPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="DriveFormsPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="DriveFormsGrid" Grid.Column="2"/>
@@ -914,7 +915,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Fill="#FF454545" Grid.Column="1" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="DriveFormsSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="DriveFormsSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Twilight Town -->
@@ -960,14 +961,14 @@
                                 </Image.RenderTransform>
                             </Image>
                             <!-- lock icons -->
-                            <Image x:Name="TwilightTownLock_1" Source="Images/Worlds/Locks/TT2.png" Grid.RowSpan="2" Grid.ColumnSpan="3" Panel.ZIndex="1" RenderTransformOrigin="0,0.5" IsHitTestVisible="False">
+                            <Image x:Name="TwilightTownLock1" Source="Images/Worlds/Locks/TT2.png" Grid.RowSpan="2" Grid.ColumnSpan="3" Panel.ZIndex="1" RenderTransformOrigin="0,0.5" IsHitTestVisible="False">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
                                     </TransformGroup>
                                 </Image.RenderTransform>
                             </Image>
-                            <Image x:Name="TwilightTownLock_2" Source="Images/Worlds/Locks/TT3.png" Grid.RowSpan="2" Grid.ColumnSpan="3" Panel.ZIndex="1" RenderTransformOrigin="1,0.5" IsHitTestVisible="False">
+                            <Image x:Name="TwilightTownLock2" Source="Images/Worlds/Locks/TT3.png" Grid.RowSpan="2" Grid.ColumnSpan="3" Panel.ZIndex="1" RenderTransformOrigin="1,0.5" IsHitTestVisible="False">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="0.5" ScaleY="0.5"/>
@@ -991,9 +992,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="TwilightTownPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="TwilightTownPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="TwilightTownPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="TwilightTownPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="TwilightTownPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="TwilightTownPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="TwilightTownGrid" Grid.Column="2"/>
@@ -1001,7 +1002,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="TwilightTownSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="TwilightTownSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Land of Dragons -->
@@ -1071,9 +1072,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="LandofDragonsPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="LandofDragonsPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="LandofDragonsPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="LandofDragonsPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="LandofDragonsPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="LandofDragonsPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="LandofDragonsGrid" Grid.Column="2"/>
@@ -1081,7 +1082,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="LandofDragonsSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="LandofDragonsSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Olympus Coliseum -->
@@ -1151,9 +1152,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="OlympusColiseumPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="OlympusColiseumPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="OlympusColiseumPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="OlympusColiseumPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="OlympusColiseumPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="OlympusColiseumPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="OlympusColiseumGrid" Grid.Column="2"/>
@@ -1161,7 +1162,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="OlympusColiseumSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="OlympusColiseumSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Port Royal -->
@@ -1231,9 +1232,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="PortRoyalPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="PortRoyalPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="PortRoyalPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="PortRoyalPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="PortRoyalPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="PortRoyalPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="PortRoyalGrid" Grid.Column="2"/>
@@ -1241,7 +1242,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="PortRoyalSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="PortRoyalSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Halloween Town -->
@@ -1311,9 +1312,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="HalloweenTownPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="HalloweenTownPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="HalloweenTownPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="HalloweenTownPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="HalloweenTownPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="HalloweenTownPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="HalloweenTownGrid" Grid.Column="2"/>
@@ -1321,7 +1322,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="HalloweenTownSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="HalloweenTownSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Space Paranoids -->
@@ -1391,9 +1392,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="SpaceParanoidsPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="SpaceParanoidsPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="SpaceParanoidsPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="SpaceParanoidsPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="SpaceParanoidsPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="SpaceParanoidsPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="SpaceParanoidsGrid" Grid.Column="2"/>
@@ -1401,11 +1402,11 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="SpaceParanoidsSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="SpaceParanoidsSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- TWTNW-->
-                    <Grid x:Name="TWTNWTop" Grid.Row="7">
+                    <Grid x:Name="TwtnwTop" Grid.Row="7">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="0.04*"/>
@@ -1429,9 +1430,9 @@
                                 <ColumnDefinition Width="0.5*"/>
                             </Grid.ColumnDefinitions>
                             <!-- main icon -->
-                            <Button Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name ="TWTNW" Background="Transparent" PreviewMouseDown="OnMouseDown" MouseWheel="OnMouseWheel" Template="{StaticResource DefaultButton}" FocusVisualStyle="{x:Null}" Content="{DynamicResource Min-TWTNWImage}"/>
+                            <Button Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name ="Twtnw" Background="Transparent" PreviewMouseDown="OnMouseDown" MouseWheel="OnMouseWheel" Template="{StaticResource DefaultButton}" FocusVisualStyle="{x:Null}" Content="{DynamicResource Min-TWTNWImage}"/>
                             <!-- cross icon -->
-                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="TWTNWCross" Source="Images/System/crossworld.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
+                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="TwtnwCross" Source="Images/System/crossworld.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
@@ -1439,7 +1440,7 @@
                                 </Image.RenderTransform>
                             </Image>
                             <!-- question mark -->
-                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="TWTNWQuestion" Source="Images/System/question.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
+                            <Image Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="TwtnwQuestion" Source="Images/System/question.png" Visibility="Collapsed" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5" Opacity="0.9" Panel.ZIndex="2">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="1.2" ScaleY="1.2"/>
@@ -1448,14 +1449,14 @@
                             </Image>
                             <!-- world value -->
                             <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Panel.ZIndex="3" Margin="0,2,5,0" HorizontalAlignment="Right" MaxHeight="25">
-                                <local:OutlinedTextBlock x:Name="TWTNWHint" FontFamily="{StaticResource Gummi}" FontSize="25pt" 
+                                <local:OutlinedTextBlock x:Name="TwtnwHint" FontFamily="{StaticResource Gummi}" FontSize="25pt" 
                                                          StrokeThickness="7" Fill="#FFEFECE9" Text="?" Margin="0,-5,0,2"/>
                             </Viewbox>
                             <!-- progression -->
-                            <ContentControl x:Name="TWTNWProgression" Panel.ZIndex="1" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
+                            <ContentControl x:Name="TwtnwProgression" Panel.ZIndex="1" Grid.Column="2" Grid.ColumnSpan="2" HorizontalAlignment="Left"/>
                         </Grid>
                         <!-- path hints icons -->
-                        <Grid x:Name="TWTNWPath" Grid.Column="1">
+                        <Grid x:Name="TwtnwPath" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.18*"/>
                                 <RowDefinition />
@@ -1463,17 +1464,17 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="TWTNWPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="TWTNWPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="TWTNWPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="TwtnwPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="TwtnwPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="TwtnwPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
-                        <local:WorldGrid x:Name="TWTNWGrid" Grid.Column="2"/>
+                        <local:WorldGrid x:Name="TwtnwGrid" Grid.Column="2"/>
                         <!-- fancy spacer colors -->
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="TWTNWSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="TwtnwSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Atlantica -->
@@ -1535,9 +1536,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="AtlanticaPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="AtlanticaPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="AtlanticaPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="AtlanticaPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="AtlanticaPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="AtlanticaPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="AtlanticaGrid" Grid.Column="2"/>
@@ -1545,7 +1546,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="AtlanticaSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="AtlanticaSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
                     <!-- Puzzle/Synth -->
@@ -1605,9 +1606,9 @@
                                 <RowDefinition/>
                                 <RowDefinition Height="0.18*"/>
                             </Grid.RowDefinitions>
-                            <Image x:Name="PuzzSynthPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="PuzzSynthPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="PuzzSynthPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
+                            <Image x:Name="PuzzSynthPathCon" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
+                            <Image x:Name="PuzzSynthPathNon" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
+                            <Image x:Name="PuzzSynthPathPea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="PuzzSynthGrid" Grid.Column="2"/>
@@ -1615,7 +1616,7 @@
                         <Rectangle Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                         <Rectangle Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9"/>
                         <Rectangle Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
-                        <Rectangle Name="PuzzSynthSelWG" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
+                        <Rectangle Name="PuzzSynthSelWg" Grid.Column="2" Fill="#3F505080" Panel.ZIndex="-1" Visibility="Collapsed"/>
                     </Grid>
 
 
@@ -1922,9 +1923,9 @@
                     <Grid Grid.Column="11" x:Name="ProgressionCollectionGrid" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0*"/>
-                            <ColumnDefinition Name="PPCount" Width="1.15*"/>
-                            <ColumnDefinition Name="PPSep" Width="0.3*"/>
-                            <ColumnDefinition Name="PPTotal" Width="1*"/>
+                            <ColumnDefinition Name="PpCount" Width="1.15*"/>
+                            <ColumnDefinition Name="PpSep" Width="0.3*"/>
+                            <ColumnDefinition Name="PpTotal" Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.15*"/>
@@ -2225,69 +2226,69 @@
                     <ContentControl x:Name="Attempts13" Content="{DynamicResource Fail0}" Grid.Column="12" Panel.ZIndex="1"/>
 
                     <!-- silhouettes -->
-                    <ContentControl x:Name="S_Report1" Content="{DynamicResource Min-Report1}"      Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport1" Content="{DynamicResource Min-Report1}"      Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report2" Content="{DynamicResource Min-Report2}"      Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport2" Content="{DynamicResource Min-Report2}"      Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report3" Content="{DynamicResource Min-Report3}"      Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport3" Content="{DynamicResource Min-Report3}"      Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report4" Content="{DynamicResource Min-Report4}"      Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport4" Content="{DynamicResource Min-Report4}"      Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report5" Content="{DynamicResource Min-Report5}"      Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport5" Content="{DynamicResource Min-Report5}"      Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report6" Content="{DynamicResource Min-Report6}"      Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport6" Content="{DynamicResource Min-Report6}"      Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report7" Content="{DynamicResource Min-Report7}"      Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport7" Content="{DynamicResource Min-Report7}"      Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report8" Content="{DynamicResource Min-Report8}"      Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport8" Content="{DynamicResource Min-Report8}"      Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report9" Content="{DynamicResource Min-Report9}"      Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport9" Content="{DynamicResource Min-Report9}"      Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report10" Content="{DynamicResource Min-Report10}"    Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport10" Content="{DynamicResource Min-Report10}"    Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report11" Content="{DynamicResource Min-Report11}"    Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport11" Content="{DynamicResource Min-Report11}"    Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report12" Content="{DynamicResource Min-Report12}"    Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport12" Content="{DynamicResource Min-Report12}"    Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Report13" Content="{DynamicResource Min-Report13}"    Grid.Column="12" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReport13" Content="{DynamicResource Min-Report13}"    Grid.Column="12" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
                 </Grid>
@@ -2437,168 +2438,46 @@
 
 
                     <!-- silhouettes -->
-                    <ContentControl x:Name="S_Fire" Content="{DynamicResource Min-Fire1}"                   Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SFire" Content="{DynamicResource Min-Fire1}"                   Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Blizzard" Content="{DynamicResource Min-Blizzard1}"           Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SBlizzard" Content="{DynamicResource Min-Blizzard1}"           Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Thunder" Content="{DynamicResource Min-Thunder1}"             Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SThunder" Content="{DynamicResource Min-Thunder1}"             Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Cure" Content="{DynamicResource Min-Cure1}"                   Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SCure" Content="{DynamicResource Min-Cure1}"                   Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Reflect" Content="{DynamicResource Min-Reflect1}"             Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SReflect" Content="{DynamicResource Min-Reflect1}"             Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Magnet" Content="{DynamicResource Min-Magnet1}"               Grid.Column="16" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SMagnet" Content="{DynamicResource Min-Magnet1}"               Grid.Column="16" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_TornPage" Content="{DynamicResource Min-TornPage1}"           Grid.Column="19" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="STornPage" Content="{DynamicResource Min-TornPage1}"           Grid.Column="19" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_MunnyPouch" Content="{DynamicResource Min-MunnyPouch1}"        Grid.Column="22" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SMunnyPouch" Content="{DynamicResource Min-MunnyPouch1}"        Grid.Column="22" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-
-                    <!-- Ghost Nums -->
-                    <Grid Grid.Column="0" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_FireCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="3" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="3" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_BlizzardCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="3" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="6" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_ThunderCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="3" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="9" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_CureCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="3" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="12" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_ReflectCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="3" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="15" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_MagnetCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="3" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="18" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_PageCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="5" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
-                    <Grid Grid.Column="21" Grid.ColumnSpan="2">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Viewbox Grid.Column="1">
-                            <local:OutlinedTextBlock Visibility="Hidden" x:Name="Ghost_MunnyCount" FontFamily="{StaticResource Gummi}" TextAlignment="Center" 
-                                                 FontSize="20pt" AllowDrop="False" IsHitTestVisible="False" StrokeThickness="5" Text="2" Fill="#FF097B00" Stroke="#FFFFECEC"/>
-                        </Viewbox>
-                    </Grid>
                 </Grid>
 
                 <!-- Row 3 (forms/summons/proofs) -->
@@ -2641,86 +2520,86 @@
                     <local:Item x:Name="PromiseCharm" Content="{DynamicResource Min-PromiseCharm}"  Grid.Column="15"/>
 
                     <!-- silhouettes -->
-                    <ContentControl x:Name="S_Valor" Content="{DynamicResource Min-Valor}"      Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SValor" Content="{DynamicResource Min-Valor}"      Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Wisdom" Content="{DynamicResource Min-Wisdom}"    Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SWisdom" Content="{DynamicResource Min-Wisdom}"    Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Limit" Content="{DynamicResource Min-Limit}"      Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SLimit" Content="{DynamicResource Min-Limit}"      Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Master" Content="{DynamicResource Min-Master}"    Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SMaster" Content="{DynamicResource Min-Master}"    Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Final" Content="{DynamicResource Min-Final}"      Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SFinal" Content="{DynamicResource Min-Final}"      Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Anti" Content="{DynamicResource Min-Anti}"        Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SAnti" Content="{DynamicResource Min-Anti}"        Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Baseball" Content="{DynamicResource Min-Baseball}"    Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SBaseball" Content="{DynamicResource Min-Baseball}"    Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Lamp" Content="{DynamicResource Min-Lamp}"            Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SLamp" Content="{DynamicResource Min-Lamp}"            Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Ukulele" Content="{DynamicResource Min-Ukulele}"      Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SUkulele" Content="{DynamicResource Min-Ukulele}"      Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Feather" Content="{DynamicResource Min-Feather}"      Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SFeather" Content="{DynamicResource Min-Feather}"      Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
-                        </ContentControl.Effect>
-                    </ContentControl>
-
-                    <ContentControl x:Name="S_OnceMore" Content="{DynamicResource Min-OnceMore}"            Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
-                        <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
-                        </ContentControl.Effect>
-                    </ContentControl>
-                    <ContentControl x:Name="S_SecondChance" Content="{DynamicResource Min-SecondChance}"    Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
-                        <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
 
-                    <ContentControl x:Name="S_Connection" Content="{DynamicResource Min-Connection}"        Grid.Column="12" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SOnceMore" Content="{DynamicResource Min-OnceMore}"            Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Nonexistence" Content="{DynamicResource Min-Nonexistence}"    Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SSecondChance" Content="{DynamicResource Min-SecondChance}"    Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Peace" Content="{DynamicResource Min-Peace}"                  Grid.Column="14" Panel.ZIndex="-2" Opacity="1">
+
+                    <ContentControl x:Name="SConnection" Content="{DynamicResource Min-Connection}"        Grid.Column="12" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_PromiseCharm" Content="{DynamicResource Min-PromiseCharm}"    Grid.Column="15" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SNonexistence" Content="{DynamicResource Min-Nonexistence}"    Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
+                        </ContentControl.Effect>
+                    </ContentControl>
+                    <ContentControl x:Name="SPeace" Content="{DynamicResource Min-Peace}"                  Grid.Column="14" Panel.ZIndex="-2" Opacity="1">
+                        <ContentControl.Effect>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
+                        </ContentControl.Effect>
+                    </ContentControl>
+                    <ContentControl x:Name="SPromiseCharm" Content="{DynamicResource Min-PromiseCharm}"    Grid.Column="15" Panel.ZIndex="-2" Opacity="1">
+                        <ContentControl.Effect>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
 
@@ -2767,205 +2646,133 @@
                     <local:Item x:Name="UnknownDisk"    Content="{DynamicResource Min-UnknownDisk}"       Grid.Column="13"/>
 
                     <!-- silhouettes -->
-                    <ContentControl x:Name="S_BeastWep" Content="{DynamicResource Min-BeastWep}"        Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SBeastWep" Content="{DynamicResource Min-BeastWep}"        Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_JackWep" Content="{DynamicResource Min-JackWep}"          Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SJackWep" Content="{DynamicResource Min-JackWep}"          Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_SimbaWep" Content="{DynamicResource Min-SimbaWep}"        Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SSimbaWep" Content="{DynamicResource Min-SimbaWep}"        Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_AuronWep" Content="{DynamicResource Min-AuronWep}"        Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SAuronWep" Content="{DynamicResource Min-AuronWep}"        Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_MulanWep" Content="{DynamicResource Min-MulanWep}"        Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SMulanWep" Content="{DynamicResource Min-MulanWep}"        Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_SparrowWep" Content="{DynamicResource Min-SparrowWep}"    Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SSparrowWep" Content="{DynamicResource Min-SparrowWep}"    Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_AladdinWep" Content="{DynamicResource Min-AladdinWep}"    Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SAladdinWep" Content="{DynamicResource Min-AladdinWep}"    Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_TronWep" Content="{DynamicResource Min-TronWep}"          Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="STronWep" Content="{DynamicResource Min-TronWep}"          Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_MembershipCard" Content="{DynamicResource Min-MembershipCard}"    Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SMembershipCard" Content="{DynamicResource Min-MembershipCard}"    Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_Picture" Content="{DynamicResource Min-Picture}"                  Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SPicture" Content="{DynamicResource Min-Picture}"                  Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_IceCream" Content="{DynamicResource Min-IceCream}"                Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SIceCream" Content="{DynamicResource Min-IceCream}"                Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_HadesCup" Content="{DynamicResource Min-HadesCup}"                Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SHadesCup" Content="{DynamicResource Min-HadesCup}"                Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_OlympusStone" Content="{DynamicResource Min-OlympusStone}"        Grid.Column="12" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SOlympusStone" Content="{DynamicResource Min-OlympusStone}"        Grid.Column="12" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
-                    <ContentControl x:Name="S_UnknownDisk" Content="{DynamicResource Min-UnknownDisk}"          Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
+                    <ContentControl x:Name="SUnknownDisk" Content="{DynamicResource Min-UnknownDisk}"          Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </ContentControl.Effect>
                     </ContentControl>
 
                     <!-- alt silhouettes -->
                     <Image x:Name="Cross01" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="0" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross02" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="1" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross03" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="2" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross04" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="3" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross05" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="4" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross06" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="5" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross07" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="6" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross08" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="7" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross09" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="8" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross10" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="9" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
                     <Image x:Name="Cross11" Source="Images/System/cross.png" Visibility="Collapsed" Grid.Column="10" Panel.ZIndex="-2" Opacity="1">
                         <Image.Effect>
-                            <Custom1:BrightnessContrastEffect Brightness="-1"/>
+                            <fx:BrightnessContrastEffect Brightness="-1"/>
                         </Image.Effect>
                     </Image>
-                </Grid>
-
-                <!-- Ghost Items -->
-                <Grid Grid.Row="5" Grid.Column="1">
-                    <local:Item x:Name="Ghost_Report1" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report2" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report3" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report4" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report5" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report6" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report7" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report8" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report9" 			Content="{DynamicResource Min-Report}"  	     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report10" 		Content="{DynamicResource Min-Report}"	         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report11" 		Content="{DynamicResource Min-Report}"	         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report12" 		Content="{DynamicResource Min-Report}"	         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Report13" 		Content="{DynamicResource Min-Report}"	         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Fire1"        	Content="{DynamicResource Min-Fire1}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Fire2"        	Content="{DynamicResource Min-Fire2}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Fire3"        	Content="{DynamicResource Min-Fire3}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Blizzard1"    	Content="{DynamicResource Min-Blizzard1}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Blizzard2"    	Content="{DynamicResource Min-Blizzard2}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Blizzard3"    	Content="{DynamicResource Min-Blizzard3}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Thunder1"     	Content="{DynamicResource Min-Thunder1}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Thunder2"     	Content="{DynamicResource Min-Thunder2}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Thunder3"     	Content="{DynamicResource Min-Thunder3}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Cure1"        	Content="{DynamicResource Min-Cure1}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Cure2"        	Content="{DynamicResource Min-Cure2}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Cure3"        	Content="{DynamicResource Min-Cure3}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_HadesCup"     	Content="{DynamicResource Min-HadesCup}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_OlympusStone" 	Content="{DynamicResource Min-OlympusStone}"     Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Reflect1" 		Content="{DynamicResource Min-Reflect1}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Reflect2" 		Content="{DynamicResource Min-Reflect2}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Reflect3" 		Content="{DynamicResource Min-Reflect3}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Magnet1" 			Content="{DynamicResource Min-Magnet1}"          Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Magnet2" 			Content="{DynamicResource Min-Magnet2}"          Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Magnet3" 			Content="{DynamicResource Min-Magnet3}"          Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Valor" 			Content="{DynamicResource Min-Valor}"           Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Wisdom" 			Content="{DynamicResource Min-Wisdom}"          Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Limit" 			Content="{DynamicResource Min-Limit}"           Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Master" 			Content="{DynamicResource Min-Master}"          Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Final" 			Content="{DynamicResource Min-Final}"           Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Anti" 			Content="{DynamicResource Min-Anti}"            Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_OnceMore" 		Content="{DynamicResource Min-OnceMore}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_SecondChance" 	Content="{DynamicResource Min-SecondChance}" 	Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_UnknownDisk" 		Content="{DynamicResource Min-UnknownDisk}"   	Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_TornPage1" 		Content="{DynamicResource Min-TornPage1}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_TornPage2" 		Content="{DynamicResource Min-TornPage2}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_TornPage3" 		Content="{DynamicResource Min-TornPage3}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_TornPage4" 		Content="{DynamicResource Min-TornPage4}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_TornPage5" 		Content="{DynamicResource Min-TornPage5}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Baseball" 		Content="{DynamicResource Min-Baseball}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Lamp" 			Content="{DynamicResource Min-Lamp}"           Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Ukulele" 			Content="{DynamicResource Min-Ukulele}"          Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Feather" 			Content="{DynamicResource Min-Feather}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Connection" 		Content="{DynamicResource Min-Connection}"		Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Nonexistence" 	Content="{DynamicResource Min-Nonexistence}"		Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Peace" 			Content="{DynamicResource Min-Peace}"		Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_PromiseCharm" 	Content="{DynamicResource Min-PromiseCharm}"	Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_BeastWep" 	    Content="{DynamicResource Min-BeastWep}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_JackWep" 	        Content="{DynamicResource Min-JackWep}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_SimbaWep" 	    Content="{DynamicResource Min-SimbaWep}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_AuronWep" 	    Content="{DynamicResource Min-AuronWep}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_MulanWep" 	    Content="{DynamicResource Min-MulanWep}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_SparrowWep"       Content="{DynamicResource Min-SparrowWep}"      Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_AladdinWep"       Content="{DynamicResource Min-AladdinWep}"      Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_TronWep" 	        Content="{DynamicResource Min-TronWep}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_MembershipCard" 	Content="{DynamicResource Min-MembershipCard}"  Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_Picture" 	        Content="{DynamicResource Min-Picture}"         Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_IceCream" 	    Content="{DynamicResource Min-IceCream}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_MunnyPouch1" 	    Content="{DynamicResource Min-MunnyPouch1}"        Opacity="0.5"/>
-                    <local:Item x:Name="Ghost_MunnyPouch2" 	    Content="{DynamicResource Min-MunnyPouch2}"        Opacity="0.5"/>
                 </Grid>
             </Grid>
 
@@ -2998,22 +2805,22 @@
                 <!-- Setting Icons -->
                 <Grid Grid.Row="1" Grid.Column="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Name="Setting_Level_01" Width="1.5*"/>
-                        <ColumnDefinition Name="Setting_Level_50" Width="0*"/>
-                        <ColumnDefinition Name="Setting_Level_99" Width="0*"/>
-                        <ColumnDefinition Name="Setting_BetterSTT" Width="1.1*"/>
-                        <ColumnDefinition Name="Setting_Absent" Width="0*"/>
-                        <ColumnDefinition Name="Setting_Absent_Split" Width="1.1*"/>
-                        <ColumnDefinition Name="Setting_Datas" Width="1*"/>
-                        <ColumnDefinition Name="Setting_Sephiroth" Width="1*"/>
-                        <ColumnDefinition Name="Setting_Terra" Width="1*"/>
-                        <ColumnDefinition Name="Setting_Cups" Width="1*"/>
-                        <ColumnDefinition Name="Setting_HadesCup" Width="1*"/>
-                        <ColumnDefinition Name="Setting_Cavern" Width="1*"/>
-                        <ColumnDefinition Name="Setting_Transport" Width="1*"/>
+                        <ColumnDefinition Name="SettingLevel01" Width="1.5*"/>
+                        <ColumnDefinition Name="SettingLevel50" Width="0*"/>
+                        <ColumnDefinition Name="SettingLevel99" Width="0*"/>
+                        <ColumnDefinition Name="SettingBetterStt" Width="1.1*"/>
+                        <ColumnDefinition Name="SettingAbsent" Width="0*"/>
+                        <ColumnDefinition Name="SettingAbsentSplit" Width="1.1*"/>
+                        <ColumnDefinition Name="SettingDatas" Width="1*"/>
+                        <ColumnDefinition Name="SettingSephiroth" Width="1*"/>
+                        <ColumnDefinition Name="SettingTerra" Width="1*"/>
+                        <ColumnDefinition Name="SettingCups" Width="1*"/>
+                        <ColumnDefinition Name="SettingHadesCup" Width="1*"/>
+                        <ColumnDefinition Name="SettingCavern" Width="1*"/>
+                        <ColumnDefinition Name="SettingTransport" Width="1*"/>
 
                         <!-- +1.0 for each setting off (level1/50/99 counted together as 1 is any of them are on) -->
-                        <ColumnDefinition Name ="Setting_Spacer" Width="0*"/>
+                        <ColumnDefinition Name ="SettingSpacer" Width="0*"/>
 
                         <ColumnDefinition Width="1.25*"/>
                         <ColumnDefinition Width="0.25*"/>
@@ -3065,9 +2872,9 @@
                 <Image Grid.Row="1" x:Name="Connect2" Source="Images/System/config/searching.png" Grid.Column="3" Margin="0,3" Visibility="Collapsed"/>
 
                 <!-- fancy spacer colors -->
-                <Rectangle Grid.Row="1" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
+                <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Fill="#D81E1E1E" Panel.ZIndex="-1"/>
                 <Rectangle Grid.Row="1" Grid.Column="2" Fill="Black" Panel.ZIndex="-1"/>
-                <Rectangle Grid.ColumnSpan="4" Fill="Black" Panel.ZIndex="-1"/>
+                <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Fill="Black" Panel.ZIndex="-1"/>
                 <Rectangle Grid.Row="1" Grid.Column="3" Fill="#D8282828" Panel.ZIndex="-1"/>
                 <!--Rectangle Margin="-6,0,44,0" Grid.Column="3" Fill="#ff000000" Panel.ZIndex="2"/-->
             </Grid>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Win32;
@@ -124,11 +123,11 @@ public partial class MainWindow
             };
             worldvalueInfo.Add(worldKey, testingthing);
         }
-        ;
+
         #endregion
 
         #region Counters
-        var counterInfo = new int[8] { 1, 1, 1, 1, 1, 1, 0, 0 };
+        var counterInfo = new[] { 1, 1, 1, 1, 1, 1, 0, 0 };
         counterInfo[0] = Data.DriveLevels[0];
         counterInfo[1] = Data.DriveLevels[1];
         counterInfo[2] = Data.DriveLevels[2];
@@ -150,7 +149,7 @@ public partial class MainWindow
             RandomSeed = Data.ConvertedSeedHash,
             Worlds = worldvalueInfo,
             Counters = counterInfo,
-            ForcedFinal = Data.ForcedFinal,
+            Data.ForcedFinal,
             Events = Data.EventLog,
             BossEvents = Data.BossEventLog,
         };
@@ -231,7 +230,7 @@ public partial class MainWindow
         //Check Settings
         if (savefile.TryGetValue("Settings", out var value))
         {
-            var setting = JsonSerializer.Deserialize<bool[]>(value.ToString());
+            var setting = JsonSerializer.Deserialize<bool[]>(value.ToString()!);
             //Display toggles
             TornPagesToggle(setting[1]);
             PromiseCharmToggle(setting[2]);
@@ -275,7 +274,9 @@ public partial class MainWindow
         {
             if (savefile["RandomSeed"] != null)
             {
-                var seednumber = JsonSerializer.Deserialize<int>(savefile["RandomSeed"].ToString());
+                var seednumber = JsonSerializer.Deserialize<int>(
+                    savefile["RandomSeed"].ToString()!
+                );
                 Data.ConvertedSeedHash = seednumber;
             }
         }
@@ -283,7 +284,7 @@ public partial class MainWindow
         //forced final check (unsure if this will actually help with it not mistracking)
         if (savefile.TryGetValue("ForcedFinal", out var forcedFinal))
         {
-            var forced = forcedFinal.ToString().ToLower();
+            var forced = forcedFinal.ToString()?.ToLower();
             Data.ForcedFinal = forced == "true";
         }
 
@@ -291,12 +292,12 @@ public partial class MainWindow
         if (savefile.TryGetValue("Worlds", out var worldsData))
         {
             var worlds = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(
-                worldsData.ToString()
+                worldsData.ToString()!
             );
             foreach (var worldDict in worlds)
             {
                 var itemlist = JsonSerializer.Deserialize<List<string>>(
-                    worldDict.Value["Items"].ToString()
+                    worldDict.Value["Items"].ToString()!
                 );
                 foreach (var item in itemlist)
                 {
@@ -312,7 +313,7 @@ public partial class MainWindow
         {
             var eventlist = JsonSerializer.Deserialize<
                 List<Tuple<string, int, int, int, int, int>>
-            >(events.ToString());
+            >(events.ToString()!);
             foreach (var e in eventlist)
             {
                 UpdateWorldProgress(null, true, e);
@@ -324,7 +325,7 @@ public partial class MainWindow
         {
             var bossEventlist = JsonSerializer.Deserialize<
                 List<Tuple<string, int, int, int, int, int>>
-            >(savefile["BossEvents"].ToString());
+            >(savefile["BossEvents"].ToString()!);
             foreach (var bossEvent in bossEventlist)
             {
                 GetBoss(null, true, bossEvent);
@@ -339,7 +340,7 @@ public partial class MainWindow
                 try
                 {
                     var hash = JsonSerializer.Deserialize<string[]>(
-                        savefile["SeedHash"].ToString()
+                        savefile["SeedHash"].ToString()!
                     );
                     Data.SeedHashVisual = hash;
 
@@ -1360,11 +1361,11 @@ public partial class MainWindow
 
         if (settings.KingdomHearts2.SuperBosses)
         {
-            Setting_Absent.Width = new GridLength(1, GridUnitType.Star);
-            Setting_Sephiroth.Width = new GridLength(1, GridUnitType.Star);
-            Setting_Terra.Width = new GridLength(1, GridUnitType.Star);
-            Setting_Datas.Width = new GridLength(1, GridUnitType.Star);
-            Setting_Transport.Width = new GridLength(1, GridUnitType.Star);
+            SettingAbsent.Width = new GridLength(1, GridUnitType.Star);
+            SettingSephiroth.Width = new GridLength(1, GridUnitType.Star);
+            SettingTerra.Width = new GridLength(1, GridUnitType.Star);
+            SettingDatas.Width = new GridLength(1, GridUnitType.Star);
+            SettingTransport.Width = new GridLength(1, GridUnitType.Star);
         }
 
         switch (settings.KingdomHearts2.Cups)
@@ -1372,11 +1373,11 @@ public partial class MainWindow
             case "no_cups":
                 break;
             case "cups":
-                Setting_Cups.Width = new GridLength(1, GridUnitType.Star);
+                SettingCups.Width = new GridLength(1, GridUnitType.Star);
                 break;
             case "cups_and_hades_paradox":
-                Setting_Cups.Width = new GridLength(1, GridUnitType.Star);
-                Setting_HadesCup.Width = new GridLength(1, GridUnitType.Star);
+                SettingCups.Width = new GridLength(1, GridUnitType.Star);
+                SettingHadesCup.Width = new GridLength(1, GridUnitType.Star);
                 break;
         }
 
@@ -1637,21 +1638,6 @@ public partial class MainWindow
         }
     }
 
-    //Turns the zip seed icon hash to a numerical based seed
-    private void HashToSeed(string[] hash)
-    {
-        var icon1 = Codes.HashInt[hash[0]];
-        var icon2 = Codes.HashInt[hash[1]];
-        var icon3 = Codes.HashInt[hash[2]];
-        var icon4 = Codes.HashInt[hash[3]];
-        var icon5 = Codes.HashInt[hash[4]];
-        var icon6 = Codes.HashInt[hash[5]];
-        var icon7 = Codes.HashInt[hash[6]];
-
-        var seedHash = (icon1 + icon2) * (icon3 + icon4) * (icon5 + icon6) - icon7;
-        Data.ConvertedSeedHash = seedHash;
-    }
-
     private void OnReset(object sender, RoutedEventArgs e)
     {
         if (_aTimer != null)
@@ -1725,7 +1711,7 @@ public partial class MainWindow
                 ].Top.Children.OfType<Rectangle>()
             )
             {
-                if (box.Opacity != 0.9 && !box.Name.EndsWith("SelWG"))
+                if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
                     box.Fill = (SolidColorBrush)FindResource("DefaultRec");
 
                 if (box.Name.EndsWith("SelWG") && !WorldHighlightOption.IsChecked)
@@ -1785,7 +1771,7 @@ public partial class MainWindow
                 var box in Data.WorldsData[Data.Selected.Name].Top.Children.OfType<Rectangle>()
             )
             {
-                if (box.Opacity != 0.9 && !box.Name.EndsWith("SelWG"))
+                if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
                     box.Fill = (SolidColorBrush)FindResource("DefaultRec");
 
                 if (box.Name.EndsWith("SelWG"))
@@ -1973,15 +1959,6 @@ public partial class MainWindow
         PageCount.Text = "5";
         MunnyCount.Text = "2";
 
-        Ghost_FireCount.Visibility = Visibility.Hidden;
-        Ghost_BlizzardCount.Visibility = Visibility.Hidden;
-        Ghost_ThunderCount.Visibility = Visibility.Hidden;
-        Ghost_CureCount.Visibility = Visibility.Hidden;
-        Ghost_ReflectCount.Visibility = Visibility.Hidden;
-        Ghost_MagnetCount.Visibility = Visibility.Hidden;
-        Ghost_PageCount.Visibility = Visibility.Hidden;
-        Ghost_MunnyCount.Visibility = Visibility.Hidden;
-
         FireCount.Fill = (SolidColorBrush)FindResource("Color_Black");
         FireCount.Stroke = (SolidColorBrush)FindResource("Color_Trans");
         FireCount.Fill = (LinearGradientBrush)FindResource("Color_Fire");
@@ -2024,20 +2001,20 @@ public partial class MainWindow
 
         //reset settings row
         SettingsText.Text = "";
-        Setting_BetterSTT.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Level_01.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Level_50.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Level_99.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Absent.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Absent_Split.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Datas.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Sephiroth.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Terra.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Cups.Width = new GridLength(0, GridUnitType.Star);
-        Setting_HadesCup.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Cavern.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Transport.Width = new GridLength(0, GridUnitType.Star);
-        Setting_Spacer.Width = new GridLength(10, GridUnitType.Star);
+        SettingBetterStt.Width = new GridLength(0, GridUnitType.Star);
+        SettingLevel01.Width = new GridLength(0, GridUnitType.Star);
+        SettingLevel50.Width = new GridLength(0, GridUnitType.Star);
+        SettingLevel99.Width = new GridLength(0, GridUnitType.Star);
+        SettingAbsent.Width = new GridLength(0, GridUnitType.Star);
+        SettingAbsentSplit.Width = new GridLength(0, GridUnitType.Star);
+        SettingDatas.Width = new GridLength(0, GridUnitType.Star);
+        SettingSephiroth.Width = new GridLength(0, GridUnitType.Star);
+        SettingTerra.Width = new GridLength(0, GridUnitType.Star);
+        SettingCups.Width = new GridLength(0, GridUnitType.Star);
+        SettingHadesCup.Width = new GridLength(0, GridUnitType.Star);
+        SettingCavern.Width = new GridLength(0, GridUnitType.Star);
+        SettingTransport.Width = new GridLength(0, GridUnitType.Star);
+        SettingSpacer.Width = new GridLength(10, GridUnitType.Star);
 
         TornPagesToggle(true);
         VisitLockToggle(VisitLockOption.IsChecked);
@@ -2058,8 +2035,8 @@ public partial class MainWindow
         NextLevelDisplay();
 
         //reset progression visuals
-        PPCount.Width = new GridLength(1.15, GridUnitType.Star);
-        PPSep.Width = new GridLength(0.3, GridUnitType.Star);
+        PpCount.Width = new GridLength(1.15, GridUnitType.Star);
+        PpSep.Width = new GridLength(0.3, GridUnitType.Star);
 
         if (Data.WasTracking && sender != null)
             InitTracker();
@@ -2165,8 +2142,8 @@ public partial class MainWindow
         var modifiers = lines[0].ToLower();
         if (modifiers.IndexOf('+') > 0)
         {
-            mod1 = modifiers.Substring(0, modifiers.IndexOf('+'));
-            modifiers = modifiers.Substring(modifiers.IndexOf('+') + 1);
+            mod1 = modifiers[..modifiers.IndexOf('+')];
+            modifiers = modifiers[(modifiers.IndexOf('+') + 1)..];
             modsUsed++;
         }
         else
@@ -2175,8 +2152,8 @@ public partial class MainWindow
         }
         if (modifiers.IndexOf('+') > 0)
         {
-            mod2 = modifiers.Substring(0, modifiers.IndexOf('+'));
-            modifiers = modifiers.Substring(modifiers.IndexOf('+') + 1);
+            mod2 = modifiers[..modifiers.IndexOf('+')];
+            modifiers = modifiers[(modifiers.IndexOf('+') + 1)..];
             modsUsed++;
         }
         else
@@ -2205,7 +2182,7 @@ public partial class MainWindow
         //if no modifiers, only 1 key
         if (key == "")
         {
-            Enum.TryParse(mod1, out _key);
+            _ = Enum.TryParse(mod1, out _key);
             Data.StartAutoTracker1 = new GlobalHotkey(ModifierKeys.None, _key, StartHotkey);
             HotkeysManager.AddHotkey(Data.StartAutoTracker1);
             return;
@@ -2213,11 +2190,11 @@ public partial class MainWindow
 
         //check for modifiers, however many
         if (mod1 != "")
-            Enum.TryParse(mod1, out _mod1);
+            _ = Enum.TryParse(mod1, out _mod1);
         if (mod2 != "")
-            Enum.TryParse(mod2, out _mod2);
+            _ = Enum.TryParse(mod2, out _mod2);
         if (mod3 != "")
-            Enum.TryParse(mod3, out _mod3);
+            _ = Enum.TryParse(mod3, out _mod3);
 
         switch (modsUsed)
         {
@@ -2227,7 +2204,7 @@ public partial class MainWindow
                 Console.WriteLine($@"idk = {mod1} {mod2} {mod3} {key}");
                 if (key is "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "0")
                 {
-                    Enum.TryParse(ConvertKeyNumber(key, true), out _key);
+                    _ = Enum.TryParse(ConvertKeyNumber(key, true), out _key);
                     Data.StartAutoTracker1 = new GlobalHotkey(
                         (_mod1 | _mod2 | _mod3),
                         _key,
@@ -2235,7 +2212,7 @@ public partial class MainWindow
                     );
                     HotkeysManager.AddHotkey(Data.StartAutoTracker1);
 
-                    Enum.TryParse(ConvertKeyNumber(key, false), out _key);
+                    _ = Enum.TryParse(ConvertKeyNumber(key, false), out _key);
                     Data.StartAutoTracker2 = new GlobalHotkey(
                         (_mod1 | _mod2 | _mod3),
                         _key,
@@ -2244,7 +2221,7 @@ public partial class MainWindow
                     HotkeysManager.AddHotkey(Data.StartAutoTracker2);
                     return;
                 }
-                Enum.TryParse(key, out _key);
+                _ = Enum.TryParse(key, out _key);
                 Data.StartAutoTracker1 = new GlobalHotkey(
                     (_mod1 | _mod2 | _mod3),
                     _key,
@@ -2258,16 +2235,16 @@ public partial class MainWindow
                 Console.WriteLine($@"idk = {mod1} {mod2} {key}");
                 if (key is "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "0")
                 {
-                    Enum.TryParse(ConvertKeyNumber(key, true), out _key);
+                    _ = Enum.TryParse(ConvertKeyNumber(key, true), out _key);
                     Data.StartAutoTracker1 = new GlobalHotkey((_mod1 | _mod2), _key, StartHotkey);
                     HotkeysManager.AddHotkey(Data.StartAutoTracker1);
 
-                    Enum.TryParse(ConvertKeyNumber(key, false), out _key);
+                    _ = Enum.TryParse(ConvertKeyNumber(key, false), out _key);
                     Data.StartAutoTracker2 = new GlobalHotkey((_mod1 | _mod2), _key, StartHotkey);
                     HotkeysManager.AddHotkey(Data.StartAutoTracker2);
                     return;
                 }
-                Enum.TryParse(key, out _key);
+                _ = Enum.TryParse(key, out _key);
                 Data.StartAutoTracker1 = new GlobalHotkey((_mod1 | _mod2), _key, StartHotkey);
                 HotkeysManager.AddHotkey(Data.StartAutoTracker1);
                 return;
@@ -2277,16 +2254,16 @@ public partial class MainWindow
                 Console.WriteLine(@$"idk = {mod1} {key}");
                 if (key is "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "0")
                 {
-                    Enum.TryParse(ConvertKeyNumber(key, true), out _key);
+                    _ = Enum.TryParse(ConvertKeyNumber(key, true), out _key);
                     Data.StartAutoTracker1 = new GlobalHotkey(_mod1, _key, StartHotkey);
                     HotkeysManager.AddHotkey(Data.StartAutoTracker1);
 
-                    Enum.TryParse(ConvertKeyNumber(key, false), out _key);
+                    _ = Enum.TryParse(ConvertKeyNumber(key, false), out _key);
                     Data.StartAutoTracker2 = new GlobalHotkey(_mod1, _key, StartHotkey);
                     HotkeysManager.AddHotkey(Data.StartAutoTracker2);
                     return;
                 }
-                Enum.TryParse(ConvertKey(key), out _key);
+                _ = Enum.TryParse(ConvertKey(key), out _key);
                 Data.StartAutoTracker1 = new GlobalHotkey(_mod1, _key, StartHotkey);
                 HotkeysManager.AddHotkey(Data.StartAutoTracker1);
                 return;
@@ -2299,9 +2276,9 @@ public partial class MainWindow
         if (word.Length <= 0)
             return "";
 
-        var firstLetter1 = word.Substring(0, 1);
+        var firstLetter1 = word[..1];
         var firstLetter2 = firstLetter1.ToUpper();
-        var rest = word.Substring(1);
+        var rest = word[1..];
 
         return firstLetter2 + rest;
     }

@@ -945,7 +945,7 @@ public partial class MainWindow
         var prog = "Min-"; //Default
         if (oldToggled)
             prog = "Old-";
-        if (CustomProgFound && customToggled)
+        if (customProgFound && customToggled)
             prog = "Cus-";
 
         //progression defaults
@@ -1941,8 +1941,8 @@ public partial class MainWindow
             // remove magic and torn page count for comparison with item codes and readd to track specific ui copies
             if (check.GetType() == typeof(Magic) || check.GetType() == typeof(TornPage))
             {
-                count = check.Name.Substring(check.Name.Length - 1);
-                check.Name = check.Name.Substring(0, check.Name.Length - 1);
+                count = check.Name[^1..];
+                check.Name = check.Name[..^1];
             }
 
             if (levelRewards.Exists(x => x == check.Name))
@@ -2658,7 +2658,7 @@ public partial class MainWindow
         var prog = "Min-"; //Default
         if (oldToggled)
             prog = "Old-";
-        if (CustomProgFound && customToggled)
+        if (customProgFound && customToggled)
             prog = "Cus-";
 
         if (ValorM.Opacity == 1)

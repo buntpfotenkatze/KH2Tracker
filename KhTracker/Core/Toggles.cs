@@ -64,7 +64,7 @@ public partial class MainWindow
                         var box in Data.WorldsData[button.Name].Top.Children.OfType<Rectangle>()
                     )
                     {
-                        if (box.Opacity != 0.9 && !box.Name.EndsWith("SelWG"))
+                        if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
                             box.Fill = (SolidColorBrush)FindResource("DefaultRec");
 
                         if (box.Name.EndsWith("SelWG"))
@@ -264,17 +264,17 @@ public partial class MainWindow
         {
             value = 1;
 
-            S_MulanWep.Visibility = Visibility.Visible;
-            S_AuronWep.Visibility = Visibility.Visible;
-            S_BeastWep.Visibility = Visibility.Visible;
-            S_JackWep.Visibility = Visibility.Visible;
-            S_IceCream.Visibility = Visibility.Visible;
-            S_TronWep.Visibility = Visibility.Visible;
-            S_Picture.Visibility = Visibility.Visible;
-            S_MembershipCard.Visibility = Visibility.Visible;
-            S_SimbaWep.Visibility = Visibility.Visible;
-            S_AladdinWep.Visibility = Visibility.Visible;
-            S_SparrowWep.Visibility = Visibility.Visible;
+            SMulanWep.Visibility = Visibility.Visible;
+            SAuronWep.Visibility = Visibility.Visible;
+            SBeastWep.Visibility = Visibility.Visible;
+            SJackWep.Visibility = Visibility.Visible;
+            SIceCream.Visibility = Visibility.Visible;
+            STronWep.Visibility = Visibility.Visible;
+            SPicture.Visibility = Visibility.Visible;
+            SMembershipCard.Visibility = Visibility.Visible;
+            SSimbaWep.Visibility = Visibility.Visible;
+            SAladdinWep.Visibility = Visibility.Visible;
+            SSparrowWep.Visibility = Visibility.Visible;
 
             Cross01.Visibility = Visibility.Collapsed;
             Cross02.Visibility = Visibility.Collapsed;
@@ -292,17 +292,17 @@ public partial class MainWindow
         }
         else
         {
-            S_MulanWep.Visibility = Visibility.Collapsed;
-            S_AuronWep.Visibility = Visibility.Collapsed;
-            S_BeastWep.Visibility = Visibility.Collapsed;
-            S_JackWep.Visibility = Visibility.Collapsed;
-            S_IceCream.Visibility = Visibility.Collapsed;
-            S_TronWep.Visibility = Visibility.Collapsed;
-            S_Picture.Visibility = Visibility.Collapsed;
-            S_MembershipCard.Visibility = Visibility.Collapsed;
-            S_SimbaWep.Visibility = Visibility.Collapsed;
-            S_AladdinWep.Visibility = Visibility.Collapsed;
-            S_SparrowWep.Visibility = Visibility.Collapsed;
+            SMulanWep.Visibility = Visibility.Collapsed;
+            SAuronWep.Visibility = Visibility.Collapsed;
+            SBeastWep.Visibility = Visibility.Collapsed;
+            SJackWep.Visibility = Visibility.Collapsed;
+            SIceCream.Visibility = Visibility.Collapsed;
+            STronWep.Visibility = Visibility.Collapsed;
+            SPicture.Visibility = Visibility.Collapsed;
+            SMembershipCard.Visibility = Visibility.Collapsed;
+            SSimbaWep.Visibility = Visibility.Collapsed;
+            SAladdinWep.Visibility = Visibility.Collapsed;
+            SSparrowWep.Visibility = Visibility.Collapsed;
 
             Cross01.Visibility = Visibility.Visible;
             Cross02.Visibility = Visibility.Visible;
@@ -728,8 +728,8 @@ public partial class MainWindow
         Grid.SetRow(PrideLandsTop, 4);
         WorldsRight.Children.Add(SpaceParanoidsTop);
         Grid.SetRow(SpaceParanoidsTop, 5);
-        WorldsRight.Children.Add(TWTNWTop);
-        Grid.SetRow(TWTNWTop, 6);
+        WorldsRight.Children.Add(TwtnwTop);
+        Grid.SetRow(TwtnwTop, 6);
         WorldsRight.Children.Add(HundredAcreWoodTop);
         Grid.SetRow(HundredAcreWoodTop, 7);
         WorldsRight.Children.Add(AtlanticaTop);
@@ -815,8 +815,8 @@ public partial class MainWindow
         Grid.SetRow(DisneyCastleTop, 5);
         WorldsRight.Children.Add(PortRoyalTop);
         Grid.SetRow(PortRoyalTop, 6);
-        WorldsRight.Children.Add(TWTNWTop);
-        Grid.SetRow(TWTNWTop, 7);
+        WorldsRight.Children.Add(TwtnwTop);
+        Grid.SetRow(TwtnwTop, 7);
         WorldsRight.Children.Add(AtlanticaTop);
         Grid.SetRow(AtlanticaTop, 8);
         WorldsRight.Children.Add(PuzzSynthTop);
@@ -1004,7 +1004,7 @@ public partial class MainWindow
         var prog = "Min-"; //Default
         if (oldToggled)
             prog = "Old-";
-        if (CustomProgFound && customToggled)
+        if (customProgFound && customToggled)
             prog = "Cus-";
 
         foreach (var worldName in Data.WorldsData.Keys.ToList())
@@ -1203,7 +1203,7 @@ public partial class MainWindow
     {
         Properties.Settings.Default.TWTNW = toggle;
         TwtnwOption.IsChecked = toggle;
-        HandleWorldToggle(toggle, TWTNW, TWTNWGrid);
+        HandleWorldToggle(toggle, Twtnw, TwtnwGrid);
     }
 
     private void HundredAcreWoodToggle(object sender, RoutedEventArgs e)

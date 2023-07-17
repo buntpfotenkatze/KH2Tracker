@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using GregsStack.InputSimulatorStandard;
 using GregsStack.InputSimulatorStandard.Native;
@@ -99,7 +98,7 @@ public partial class WorldGrid
         var outerGrid = (Parent as Grid)!.Parent as Grid;
         var row = (int)Parent.GetValue(Grid.RowProperty);
         outerGrid!.RowDefinitions[row].Height = new GridLength(length, GridUnitType.Star);
-        var worldName = Name.Substring(0, Name.Length - 4);
+        var worldName = Name[..^4];
 
         //visit lock check first
         if (window.VisitLockOption.IsChecked)
