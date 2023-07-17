@@ -1,204 +1,204 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
+﻿using System.ComponentModel;
+using System.Windows;
 
-namespace KhTracker
+namespace KhTracker;
+
+internal class Stats : INotifyPropertyChanged
 {
-    class Stats : INotifyPropertyChanged
+    //next level check stuff
+    // csharpier-ignore-start
+    private readonly int[] levelChecks1 = { 1, 1 };
+    private readonly int[] levelChecks50 = { 0, 2, 4, 7, 9, 10, 12, 14, 15, 17, 20, 23, 25, 28, 30, 32, 34, 36, 39, 41, 44, 46, 48, 50 };
+    private readonly int[] levelChecks99 = { 0, 7, 9, 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 39, 41, 44, 47, 49, 53, 59, 65, 73, 85, 99 };
+    private int[] currentCheckArray;
+    private int nextLevelCheck;
+    // csharpier-ignore-end
+
+    public readonly int[] PreviousLevels = new int[3];
+    private int level;
+    public int Level
     {
-        //next level check stuff
-        private int[] levelChecks1 = { 1, 1 };
-        private int[] levelChecks50 = { 0, 2, 4, 7, 9, 10, 12, 14, 15, 17, 20, 23, 25, 28, 30, 32, 34, 36, 39, 41, 44, 46, 48, 50 };
-        private int[] levelChecks99 = { 0, 7, 9, 12, 15, 17, 20, 23, 25, 28, 31, 33, 36, 39, 41, 44, 47, 49, 53, 59, 65, 73, 85, 99 };
-        private int[] currentCheckArray;
-        private int nextLevelCheck = 0;
-
-        public int[] previousLevels = new int[3];
-        private int level;
-        public int Level
+        get => level;
+        set
         {
-            get { return level; }
-            set
-            {
-                level = value;
-                OnPropertyChanged("Level");
-            }
+            level = value;
+            OnPropertyChanged("Level");
         }
-        private string weapon;
-        public string Weapon
+    }
+    private string weapon;
+    public string Weapon
+    {
+        get => weapon;
+        set
         {
-            get { return weapon; }
-            set
-            {
-                weapon = value;
-                OnPropertyChanged("Weapon");
-            }
+            weapon = value;
+            OnPropertyChanged("Weapon");
         }
-        private int strength;
-        public int Strength
+    }
+    private int strength;
+    public int Strength
+    {
+        get => strength;
+        set
         {
-            get { return strength; }
-            set
-            {
-                strength = value;
-                OnPropertyChanged("Strength");
-            }
+            strength = value;
+            OnPropertyChanged("Strength");
         }
-        private int magic;
-        public int Magic
+    }
+    private int magic;
+    public int Magic
+    {
+        get => magic;
+        set
         {
-            get { return magic; }
-            set
-            {
-                magic = value;
-                OnPropertyChanged("Magic");
-            }
+            magic = value;
+            OnPropertyChanged("Magic");
         }
-        private int defense;
-        public int Defense
+    }
+    private int defense;
+    public int Defense
+    {
+        get => defense;
+        set
         {
-            get { return defense; }
-            set
-            {
-                defense = value;
-                OnPropertyChanged("Defense");
-            }
+            defense = value;
+            OnPropertyChanged("Defense");
         }
-        private int bonuslevel;
-        public int BonusLevel
+    }
+    private int bonuslevel;
+    public int BonusLevel
+    {
+        get => bonuslevel;
+        set
         {
-            get { return bonuslevel; }
-            set
-            {
-                bonuslevel = value;
-                OnPropertyChanged("BonusLevel");
-            }
+            bonuslevel = value;
+            OnPropertyChanged("BonusLevel");
+        }
+    }
+
+    //show next level check
+    private readonly MainWindow window = (MainWindow)Application.Current.MainWindow;
+    private int levelCheck;
+    public int LevelCheck
+    {
+        get => levelCheck;
+        set
+        {
+            levelCheck = value;
+            window.NextLevelValue.Text = ">" + value;
+            OnPropertyChanged("LevelCheck");
+        }
+    }
+
+    public int Form;
+
+    private readonly int levelAddress;
+    private readonly int statsAddress;
+    private readonly int formAddress;
+    private readonly int bonusAddress;
+    private readonly int nextSlotNum;
+
+    private readonly int addressOffset;
+
+    private readonly MemoryReader memory;
+
+    public Stats(
+        MemoryReader mem,
+        int offset,
+        int lvlAddress,
+        int statsAddr,
+        int formAddr,
+        int bonusLvl,
+        int nextSlot
+    )
+    {
+        addressOffset = offset;
+        memory = mem;
+        levelAddress = lvlAddress;
+        statsAddress = statsAddr;
+        formAddress = formAddr;
+        bonusAddress = bonusLvl;
+        nextSlotNum = nextSlot;
+    }
+
+    // this is not working
+    public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+    public void OnPropertyChanged(string info)
+    {
+        var handler = PropertyChanged;
+        handler?.Invoke(this, new PropertyChangedEventArgs(info));
+    }
+
+    public void UpdateMemory(int correctSlot)
+    {
+        var levelData = memory.ReadMemory(levelAddress + addressOffset, 2);
+
+        Weapon = levelData[0] switch
+        {
+            0 when Weapon != "Sword" => "Sword",
+            1 when Weapon != "Shield" => "Shield",
+            2 when Weapon != "Staff" => "Staff",
+            _ => Weapon
+        };
+
+        PreviousLevels[0] = PreviousLevels[1];
+        PreviousLevels[1] = PreviousLevels[2];
+        PreviousLevels[2] = Level;
+
+        if (Level != levelData[1])
+            Level = levelData[1];
+
+        var statsData = memory.ReadMemory(
+            statsAddress - (nextSlotNum * correctSlot) + addressOffset,
+            5
+        );
+        if (Strength != statsData[0])
+            Strength = statsData[0];
+        if (Magic != statsData[2])
+            Magic = statsData[2];
+        if (Defense != statsData[4])
+            Defense = statsData[4];
+
+        var modelData = memory.ReadMemory(formAddress + addressOffset, 1);
+        Form = modelData[0];
+
+        var bonusData = memory.ReadMemory(bonusAddress + addressOffset, 1);
+        BonusLevel = bonusData[0];
+
+        //change levelreward number
+        if (level >= currentCheckArray[currentCheckArray.Length - 1])
+        {
+            LevelCheck = currentCheckArray[currentCheckArray.Length - 1];
+            return;
         }
 
-        //show next level check
-        MainWindow window = (MainWindow)App.Current.MainWindow;
-        private int levelCheck;
-        public int LevelCheck
+        if (Level >= currentCheckArray[nextLevelCheck])
         {
-            get { return levelCheck; }
-            set
-            {
-                levelCheck = value;
-                window.NextLevelValue.Text = ">" + value;
-                OnPropertyChanged("LevelCheck");
-            }
+            nextLevelCheck++;
+            LevelCheck = currentCheckArray[nextLevelCheck];
         }
+    }
 
-        public int form;
-
-        private int levelAddress;
-        private int statsAddress;
-        private int formAddress;
-        private int bonusAddress;
-        private int nextSlotNum;
-
-        public int ADDRESS_OFFSET;
-
-        MemoryReader memory;
-
-        public Stats(MemoryReader mem, int offset, int lvlAddress, int statsAddr, int formAddr, int bonusLvl, int nextSlot)
+    public void SetMaxLevelCheck(int lvl)
+    {
+        currentCheckArray = lvl switch
         {
-            ADDRESS_OFFSET = offset;
-            memory = mem;
-            levelAddress = lvlAddress;
-            statsAddress = statsAddr;
-            formAddress = formAddr;
-            bonusAddress = bonusLvl;
-            nextSlotNum = nextSlot;
-        }
+            50 => levelChecks50,
+            99 => levelChecks99,
+            _ => levelChecks1
+        };
+    }
 
-        // this is not working
-        public event PropertyChangedEventHandler PropertyChanged = delegate {};
-
-        public void OnPropertyChanged(string info)
+    public void SetNextLevelCheck(int lvl)
+    {
+        for (var i = 0; i < currentCheckArray.Length; i++)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
+            if (lvl < currentCheckArray[i])
             {
-                handler(this, new PropertyChangedEventArgs(info));
-            }
-        }
-
-        public void UpdateMemory(int correctSlot)
-        {
-            byte[] levelData = memory.ReadMemory(levelAddress + ADDRESS_OFFSET, 2);
-
-            if (levelData[0] == 0 && Weapon != "Sword")
-                Weapon = "Sword";
-            else if (levelData[0] == 1 && Weapon != "Shield")
-                Weapon = "Shield";
-            else if (levelData[0] == 2 && Weapon != "Staff")
-                Weapon = "Staff";
-
-            previousLevels[0] = previousLevels[1];
-            previousLevels[1] = previousLevels[2];
-            previousLevels[2] = Level;
-            
-            if (Level != levelData[1])
-                Level = levelData[1];
-
-            byte[] statsData = memory.ReadMemory(statsAddress - (nextSlotNum * correctSlot) + ADDRESS_OFFSET, 5);
-            if (Strength != statsData[0])
-                Strength = statsData[0];
-            if (Magic != statsData[2])
-                Magic = statsData[2];
-            if (Defense != statsData[4])
-                Defense = statsData[4];
-
-            byte[] modelData = memory.ReadMemory(formAddress + ADDRESS_OFFSET, 1);
-            form = modelData[0];
-
-            byte[] BonusData = memory.ReadMemory(bonusAddress + ADDRESS_OFFSET, 1);
-            BonusLevel = BonusData[0];
-
-            //change levelreward number
-            if (level >= currentCheckArray[currentCheckArray.Length - 1])
-            {
-                LevelCheck = currentCheckArray[currentCheckArray.Length - 1];
-                return;
-            }
-
-            if (Level >= currentCheckArray[nextLevelCheck])
-            {
-                nextLevelCheck++;
+                nextLevelCheck = i;
                 LevelCheck = currentCheckArray[nextLevelCheck];
-            }
-        }
-
-        public void SetMaxLevelCheck(int lvl)
-        {
-            switch(lvl)
-            {
-                case 50:
-                    currentCheckArray = levelChecks50;
-                    break;
-                case 99:
-                    currentCheckArray = levelChecks99;
-                    break;
-                default:
-                    currentCheckArray = levelChecks1;
-                    break;
-            }
-        }
-
-        public void SetNextLevelCheck(int lvl)
-        {
-            for (int i = 0; i < currentCheckArray.Length; i++)
-            {
-                if (lvl < currentCheckArray[i])
-                {
-                    nextLevelCheck = i;
-                    LevelCheck = currentCheckArray[nextLevelCheck];
-                    break;
-                }
+                break;
             }
         }
     }

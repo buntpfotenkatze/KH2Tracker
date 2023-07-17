@@ -1,40 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace KhTracker
+namespace KhTracker;
+
+public class Log
 {
-    public class Log
+    private readonly StreamWriter writer;
+
+    public Log(string path)
     {
-        string path;
-        StreamWriter writer;
+        writer = new StreamWriter(path);
+        writer.AutoFlush = true;
+    }
 
-        public Log(string Path)
-        {
-            path = Path;
+    public void Close()
+    {
+        writer.Close();
+    }
 
-            writer = new StreamWriter(path);
-            writer.AutoFlush = true;
-        }
+    public void Record(string text)
+    {
+        writer.WriteLine(text);
+    }
 
-        public void Close()
-        {
-            writer.Close();
-        }
-
-        public void Record(string text)
-        {
-            writer.WriteLine(text);
-        }
-
-        public void RecordWorld(string text)
-        {
-            writer.WriteLine("");
-            writer.WriteLine("Entered " + text);
-            writer.WriteLine("----------------------");
-        }
+    public void RecordWorld(string text)
+    {
+        writer.WriteLine("");
+        writer.WriteLine("Entered " + text);
+        writer.WriteLine("----------------------");
     }
 }

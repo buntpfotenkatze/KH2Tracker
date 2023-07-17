@@ -1,63 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿namespace KhTracker;
 
-
-namespace KhTracker
+internal class Magic : ImportantCheck
 {
-    class Magic : ImportantCheck
+    private int level;
+    public int Level
     {
-        private int sttAddress;
-        //private bool useSTTAddress;
-
-        private int level;
-        public int Level
+        get => level;
+        set
         {
-            get { return level; }
-            set
-            {
-                level = value;
-                OnPropertyChanged("Level");
-            }
+            level = value;
+            OnPropertyChanged("Level");
         }
-        public Magic(MemoryReader mem, int address, int sttAddr, int offset, string name) : base(mem, address, offset, name)
+    }
+
+    public Magic(MemoryReader mem, int address, int offset, string name)
+        : base(mem, address, offset, name) { }
+
+    public override byte[] UpdateMemory()
+    {
+        var data = base.UpdateMemory();
+
+        //data = base.UpdateMemory();
+        if (Obtained == false && data[0] > 0)
         {
-            sttAddress = sttAddr;
-        }
-
-        public override byte[] UpdateMemory()
-        {
-            byte[] data;
-
-            //if (useSTTAddress)
-            //    data = memory.ReadMemory(sttAddress + ADDRESS_OFFSET, Bytes);
-            //else
-            data = base.UpdateMemory();
-
-            //data = base.UpdateMemory();
-
-            if (Obtained == false && data[0] > 0)
-            {
-                Obtained = true;
-                //App.logger.Record(Name + " obtained");
-            }
-
-            if (Level < data[0])
-            {
-                Level = data[0];
-                if (App.logger != null)
-                    App.logger.Record(Name + " level " + Level.ToString() + " obtained");
-            }
-
-            return null;
+            Obtained = true;
+            //App.logger.Record(Name + " obtained");
         }
 
-        //public void UseSTTAddress(bool toggle)
-        //{
-        //    useSTTAddress = toggle;
-        //}
+        if (Level < data[0])
+        {
+            Level = data[0];
+            if (App.Logger != null)
+                App.Logger.Record(Name + " level " + Level + " obtained");
+        }
+
+        return null;
     }
 }

@@ -30,16 +30,12 @@
             </Menu.ItemsPanel>
             <MenuItem Header="Options" Focusable="False">
                 <MenuItem Header="Load Hints...">
-                    <MenuItem Header="Load JSmartee Hints (*.hints)" 	Click="LoadHints"/>
-                    <MenuItem Header="Load Shan Hints (*.pnach)" 		Click="ParseSeed"/>
-                    <MenuItem Header="Load KH2Randomizer Seed (*.zip)" 	Click="OpenKHSeed"/>
+                    <MenuItem Header="Load Archipelago Settings (.yaml)" Click="LoadArchipelagoSettings"/>
                 </MenuItem>
                 <Separator/>
                 <MenuItem Header="Start Auto-Tracking" Click="InitTracker" x:Name="TrackToggle"/>
                 <MenuItem Header="Enable Auto-Connect/Reconnect" Click="AutoConnectToggle" x:Name="AutoConnectOption" IsCheckable="True" IsChecked="False" 
                           ToolTip="Automatically search and connect to the game on tracker start-up or if game closes."/>
-                <!--MenuItem Header="Start PCSX2 Tracking" 	    Click="InitPCSX2Tracker" x:Name="TrackPCSX2Toggle"/>
-                <MenuItem Header="Start PC Port Tracking" 	    Click="InitPCTracker"    x:Name="TrackPCToggle"/-->
                 <Separator/>
                 <MenuItem Header="Save Current Progress" Click="SaveProgress"/>
                 <MenuItem Header="Load Tracker Progress" Click="LoadProgress"/>
@@ -55,7 +51,6 @@
                 <MenuItem Header="Show Disconnect Message" Click="DisconnectToggle" x:Name="Disconnect" IsCheckable="True" IsChecked="True"/>
             </MenuItem>
             <MenuItem Header="Display Toggles" Focusable="False">
-                <MenuItem Header="Ansem Reports" 			 Click="ReportsToggle"		x:Name="ReportsOption"      IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Torn Pages" 			     Click="TornPagesToggle"	x:Name="TornPagesOption"    IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Promise Charm"			 Click="PromiseCharmToggle" x:Name="PromiseCharmOption" IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Once More / Second Chance" Click="AbilitiesToggle" 	x:Name="AbilitiesOption"    IsCheckable="True" IsChecked="True"/>
@@ -64,16 +59,10 @@
                 <MenuItem Header="Extra Important Checks" 	 Click="ExtraChecksToggle"	x:Name="ExtraChecksOption"  IsCheckable="True" IsChecked="True"/>
                 <Separator/>
                 <MenuItem Header="Show Seed Hash"			    Click="SeedHashToggle"		x:Name="SeedHashOption"			IsCheckable="True" IsChecked="True"/>
-                <!--MenuItem Header="Show Seed Settings"			Click="SeedSettingsToggle"	x:Name="SeedSettingsOption"	    IsCheckable="True" IsChecked="True"/-->
                 <MenuItem Header="Show World Progression Icons" Click="WorldProgressToggle"	 x:Name="WorldProgressOption"	IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Show Form and Growth Levels" 	Click="FormsGrowthToggle"    x:Name="FormsGrowthOption"		IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Show Death Counter" 	 		Click="DeathCounterToggle"   x:Name="DeathCounterOption"    IsCheckable="True" IsChecked="False"/>
                 <MenuItem Header="Highlight Current World"      Click="WorldHighlightToggle" x:Name="WorldHighlightOption"  IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="Highlight Hinted World (Progression Hints)" Click="WorldHintHighlightToggle" x:Name="WorldHintHighlightOption"  IsCheckable="True" IsChecked="False"/>
-                <Separator/>
-                <MenuItem Header="Track Ghost Items" 	                Click="GhostItemToggle"		  x:Name="GhostItemOption"	IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="Ghost Item Auto-Math (Points Hints)"  Click="GhostMathToggle" 	  x:Name="GhostMathOption"	IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="Show Check Count (Points/Score Mode)" Click="ShowCheckCountToggle"  x:Name="CheckCountOption"	IsCheckable="True" IsChecked="False"/>
                 <Separator/>
                 <MenuItem Header="Show Next Level Check Display" Click="NextLevelCheckToggle" x:Name="NextLevelCheckOption" IsCheckable="True" IsChecked="False"/>
                 <MenuItem Header="Level 1 Checks"                Click="SoraLevel01Toggle"    x:Name="SoraLevel01Option"    IsCheckable="True" IsChecked="False"/>
@@ -123,7 +112,7 @@
                 <MenuItem Header="Port Royal" 					Click="PortRoyalToggle" 		x:Name="PortRoyalOption"		IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Halloween Town" 				Click="HalloweenTownToggle" 	x:Name="HalloweenTownOption"	IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Space Paranoids" 				Click="SpaceParanoidsToggle" 	x:Name="SpaceParanoidsOption" 	IsCheckable="True" IsChecked="True"/>
-                <MenuItem Header="The World that Never Was" 	Click="TWTNWToggle" 			x:Name="TWTNWOption"			IsCheckable="True" IsChecked="True"/>
+                <MenuItem Header="The World that Never Was" 	Click="TwtnwToggle" 			x:Name="TwtnwOption"			IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="100 Acre Wood" 				Click="HundredAcreWoodToggle" 	x:Name="HundredAcreWoodOption" 	IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Atlantica" 					Click="AtlanticaToggle" 		x:Name="AtlanticaOption"		IsCheckable="True" IsChecked="True"/>
                 <MenuItem Header="Synthesis" 					Click="SynthToggle" 			x:Name="SynthOption"			IsCheckable="True" IsChecked="True"/>
@@ -290,19 +279,6 @@
                             </Viewbox>
                             <!-- progression -->
                             <ContentControl Content="{StaticResource Min-Axel1}" x:Name="SimulatedTwilightTownProgression" Panel.ZIndex="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Right" MaxHeight="55"/>
-                        </Grid>
-                        <!-- path hints icons -->
-                        <Grid x:Name="SimulatedTwilightTownPath" Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.18*"/>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition/>
-                                <RowDefinition Height="0.18*"/>
-                            </Grid.RowDefinitions>
-                            <Image x:Name="SimulatedTwilightTownPath_Con" Source="Images/System/proof_connection.png"      Visibility="Visible" Grid.Row="1" VerticalAlignment="Bottom"/>
-                            <Image x:Name="SimulatedTwilightTownPath_Non" Source="Images/System/proof_nonexistence.png"    Visibility="Visible" Grid.Row="2"/>
-                            <Image x:Name="SimulatedTwilightTownPath_Pea" Source="Images/System/proof_peace.png"     Visibility="Visible" Grid.Row="3" VerticalAlignment="Top"/>
                         </Grid>
                         <!-- item grid -->
                         <local:WorldGrid x:Name="SimulatedTwilightTownGrid" Grid.Column="2"/>

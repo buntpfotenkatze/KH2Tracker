@@ -1,35 +1,43 @@
 ﻿using System;
 using System.Windows;
 
-namespace KhTracker
+namespace KhTracker;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App : Application
+    public static Log Logger;
+
+    private App()
     {
-        public static Log logger;
-
-        App()
+        Dispatcher.UnhandledException += OnDispatcherUnhandledException;
+        try
         {
-            this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
-            try
-            {
-                logger = new Log(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\KhTracker\\log.txt");
-            }
-            catch
-            { };
+            Logger = new Log(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
+                    + "\\KhTracker\\log.txt"
+            );
         }
+        catch { }
+    }
 
-        private void App_Exit(object sender, ExitEventArgs e)
-        {
-            if (App.logger != null)
-                logger.Close();
-        }
+    private void App_Exit(object sender, ExitEventArgs e)
+    {
+        Logger?.Close();
+    }
 
-        void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
-        {
-            (MainWindow as MainWindow).Save("KhTrackerAutoSaves\\" + "Tracker-CrashBackup_" + DateTime.Now.ToString("yy-MM-dd_H-m") + ".tsv");
-        }
+    private void OnDispatcherUnhandledException(
+        object sender,
+        System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e
+    )
+    {
+        (MainWindow as MainWindow)!.Save(
+            "KhTrackerAutoSaves\\"
+                + "Tracker-CrashBackup_"
+                + DateTime.Now.ToString("yy-MM-dd_H-m")
+                + ".tsv"
+        );
     }
 }

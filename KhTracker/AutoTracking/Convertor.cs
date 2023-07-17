@@ -1,141 +1,104 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Globalization;
-using System.Windows.Media.Imaging;
+using System.Windows.Data;
 
-namespace KhTracker
+namespace KhTracker;
+
+public class HideZeroConverter : IValueConverter
 {
-    public class HideZeroConverter : IValueConverter
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((int)value == 0)
-            {
-                return " ";
-            }
-            else
-            {
-                return value;
-            }
-        }
+        return value as int? == 0 ? " " : value;
+    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        return value as string == " " ? 0 : value;
+    }
+}
+
+public class ObtainedConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value as bool? == true)
         {
-            if ((string)value == " ")
-            {
-                return 0;
-            }
-            else
-            {
-                return value;
-            }
+            return 1;
+        }
+        else
+        {
+            return 0.45;
         }
     }
 
-    public class ObtainedConverter : IValueConverter
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        return value as int? == 1;
+    }
+}
+
+public class WeaponConverter : IValueConverter
+{
+    private const string CusPath = "pack://application:,,,/CustomImages/System/stats/";
+    private string enabledPath1 = "Images/System/stats/"; //sword
+    private string enabledPath2 = "Images/System/stats/"; //shield
+    private string enabledPath3 = "Images/System/stats/"; //staff
+    private readonly bool cusMode = Properties.Settings.Default.CustomIcons;
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        //get the correct path
         {
-            if ((bool)value == true)
+            if (cusMode)
             {
-                return 1;
-            }
-            else
-            {
-                return 0.45;
+                if (MainWindow.CustomSwordFound)
+                    enabledPath1 = CusPath;
+                if (MainWindow.CustomShieldFound)
+                    enabledPath2 = CusPath;
+                if (MainWindow.CustomStaffFound)
+                    enabledPath3 = CusPath;
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        return (string)value switch
         {
-            if ((int)value == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+            "Sword" => enabledPath1 + "sword.png",
+            "Shield" => enabledPath2 + "shield.png",
+            "Staff" => enabledPath3 + "staff.png",
+            _ => null
+        };
     }
 
-    public class WeaponConverter : IValueConverter
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        private string CusPath = "pack://application:,,,/CustomImages/System/stats/";
-        private string EnabledPath1 = "Images/System/stats/"; //sword
-        private string EnabledPath2 = "Images/System/stats/"; //shield
-        private string EnabledPath3 = "Images/System/stats/"; //staff
-        private bool CusMode = Properties.Settings.Default.CustomIcons;
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        //get the correct path
         {
-            //get the correct path
+            if (cusMode)
             {
-                if (CusMode)
-                {
-                    if (MainWindow.CustomSwordFound)
-                        EnabledPath1 = CusPath;
-                    if (MainWindow.CustomShieldFound)
-                        EnabledPath2 = CusPath;
-                    if (MainWindow.CustomStaffFound)
-                        EnabledPath3 = CusPath;
-                }
-            }
-
-            if ((string)value == "Sword")
-            {
-                return EnabledPath1 + "sword.png";
-            }
-            else if ((string)value == "Shield")
-            {
-                return EnabledPath2 + "shield.png";
-            }
-            else if ((string)value == "Staff")
-            {
-                return EnabledPath3 + "staff.png";
-            }
-            else
-            {
-                return null;
+                if (MainWindow.CustomSwordFound)
+                    enabledPath1 = CusPath;
+                if (MainWindow.CustomShieldFound)
+                    enabledPath2 = CusPath;
+                if (MainWindow.CustomStaffFound)
+                    enabledPath3 = CusPath;
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        if ((string)value == enabledPath1 + "sword.png")
         {
-            //get the correct path
-            {
-                if (CusMode)
-                {
-                    if (MainWindow.CustomSwordFound)
-                        EnabledPath1 = CusPath;
-                    if (MainWindow.CustomShieldFound)
-                        EnabledPath2 = CusPath;
-                    if (MainWindow.CustomStaffFound)
-                        EnabledPath3 = CusPath;
-                }
-            }
-
-            if ((string)value == EnabledPath1 + "sword.png")
-            {
-                return "Sword";
-            }
-            else if ((string)value == EnabledPath2 + "shield.png")
-            {
-                return "Shield";
-            }
-            else if ((string)value == EnabledPath3 + "staff.png")
-            {
-                return "Staff";
-            }
-            else
-            {
-                return "";
-            }
+            return "Sword";
+        }
+        else if ((string)value == enabledPath2 + "shield.png")
+        {
+            return "Shield";
+        }
+        else if ((string)value == enabledPath3 + "staff.png")
+        {
+            return "Staff";
+        }
+        else
+        {
+            return "";
         }
     }
-
 }

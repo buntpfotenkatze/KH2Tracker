@@ -1,163 +1,177 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace KhTracker
+namespace KhTracker;
+
+internal class World
 {
-    class World
+    private readonly Dictionary<int, string> worldCodes;
+
+    public string PreviousWorldName;
+    private string world;
+    public string WorldName
     {
-        private Dictionary<int, string> worldCodes;
-
-        public string previousworldName;
-        private string world;
-        public string worldName
+        get => world;
+        private set
         {
-            get { return world; }
-            set
-            {
-                if (world != value)
-                {
-                    world = value;
-                    App.logger?.RecordWorld(value);
-                }
-            }
+            if (world == value)
+                return;
+            world = value;
+            App.Logger?.RecordWorld(value);
         }
-        public int worldNum;
-        private int worldAddress;
-        private int eventCompleteAddress;
-        private int SttAddress;
+    }
+    public int WorldNum;
+    private readonly int worldAddress;
+    private readonly int eventCompleteAddress;
+    private readonly int sttAddress;
 
-        public int roomNumber;
-        public int eventID1;
-        public int eventID2;
-        public int eventID3;
-        public int eventComplete;
-        public int inStt;
-        public int cupRound;
+    public int RoomNumber;
+    public int EventId1;
+    public int EventId2;
+    public int EventId3;
+    public int EventComplete;
+    private int inStt;
+    public int CupRound;
 
-        public int ADDRESS_OFFSET;
+    private readonly int addressOffset;
 
-        MemoryReader memory;
+    private readonly MemoryReader memory;
 
-        public World(MemoryReader mem, int offset, int address, int completeAddress, int sttAddress)
+    public World(MemoryReader mem, int offset, int address, int completeAddress, int sttAddress)
+    {
+        addressOffset = offset;
+        memory = mem;
+        worldAddress = address;
+        eventCompleteAddress = completeAddress;
+        this.sttAddress = sttAddress;
+
+        worldCodes = new Dictionary<int, string>
         {
-            ADDRESS_OFFSET = offset;
-            memory = mem;
-            worldAddress = address;
-            eventCompleteAddress = completeAddress;
-            SttAddress = sttAddress;
+            { 01, "GoA" }, // Title Demo
+            { 02, "TwilightTown" },
+            { 03, "DestinyIsland" },
+            { 04, "HollowBastion" },
+            { 05, "BeastsCastle" },
+            { 06, "OlympusColiseum" },
+            { 07, "Agrabah" },
+            { 08, "LandofDragons" },
+            { 09, "HundredAcreWood" },
+            { 10, "PrideLands" },
+            { 11, "Atlantica" },
+            { 12, "DisneyCastle" },
+            { 13, "DisneyCastle" }, // Timeless River
+            { 14, "HalloweenTown" },
+            { 16, "PortRoyal" },
+            { 17, "SpaceParanoids" },
+            { 18, "TWTNW" },
+            { 255, "GoA" }
+        };
+    }
 
-            worldCodes = new Dictionary<int, string>
-            {
-                { 01, "GoA" }, // Title Demo
-                { 02, "TwilightTown" },
-                { 03, "DestinyIsland" },
-                { 04, "HollowBastion" },
-                { 05, "BeastsCastle" },
-                { 06, "OlympusColiseum" },
-                { 07, "Agrabah" },
-                { 08, "LandofDragons" },
-                { 09, "HundredAcreWood" },
-                { 10, "PrideLands" },
-                { 11, "Atlantica" },
-                { 12, "DisneyCastle" },
-                { 13, "DisneyCastle" }, // Timeless River
-                { 14, "HalloweenTown" },
-                { 16, "PortRoyal" },
-                { 17, "SpaceParanoids" },
-                { 18, "TWTNW" },
-                { 255, "GoA" }
-            };
-        }
+    public void UpdateMemory()
+    {
+        PreviousWorldName = WorldName;
 
-        public void UpdateMemory()
+        //this shouldn't happen, but use unknown as the world in case it ever does
+        WorldName ??= "Unknown";
+
+        var worldData = memory.ReadMemory(worldAddress + addressOffset, 9);
+        WorldNum = worldData[0];
+        RoomNumber = worldData[1];
+        EventId1 = worldData[4];
+        EventId2 = worldData[6];
+        EventId3 = worldData[8];
+        CupRound = worldData[2];
+
+        var eventData = memory.ReadMemory(eventCompleteAddress + addressOffset, 1);
+        EventComplete = eventData[0];
+
+        var sttData = memory.ReadMemory(sttAddress + addressOffset, 1);
+        inStt = sttData[0];
+
+        var tempWorld = worldCodes.TryGetValue(WorldNum, out var worldCode) ? worldCode : "";
+
+        switch (tempWorld)
         {
-            previousworldName = worldName;
-
-            //this shouldn't happen, but use unknown as the world in case it ever does
-            if (worldName == null)
-                worldName = "Unknown";
-
-            byte[] worldData = memory.ReadMemory(worldAddress + ADDRESS_OFFSET, 9);
-            worldNum = worldData[0];
-            roomNumber = worldData[1];
-            eventID1 = worldData[4];
-            eventID2 = worldData[6];
-            eventID3 = worldData[8];
-            cupRound = worldData[2];
-
-            byte[] eventData = memory.ReadMemory(eventCompleteAddress + ADDRESS_OFFSET, 1);
-            eventComplete = eventData[0];
-
-            byte[] sttData = memory.ReadMemory(SttAddress + ADDRESS_OFFSET, 1);
-            inStt = sttData[0];
-
-
-            string tempWorld;
-            if (worldCodes.ContainsKey(worldNum))
-            {
-                tempWorld = worldCodes[worldNum];
-            }
-            else
-            {
-                tempWorld = "";
-            }
-            
             // Handle AS fights
-            if (tempWorld == "HollowBastion")
-            {
-                if (roomNumber == 26)
-                    worldName = "GoA";
-                else if (roomNumber == 32)
-                    worldName = "HalloweenTown"; // Vexen
-                else if (roomNumber == 33 && (eventID3 == 122 || eventID1 == 123 || eventID1 == 142     // AS Lexaeus
-                                            || eventID3 == 132 || eventID1 == 133 || eventID1 == 147))  // Data Lexaeus
-                    worldName = "Agrabah"; // Lexaeus
-                else if (roomNumber == 33 && (eventID3 == 128 || eventID1 == 129 || eventID1 == 143     // AS Larxene
-                                            || eventID3 == 138 || eventID1 == 139 || eventID1 == 148))  // Data Larxene
-                    worldName = "SpaceParanoids"; // Larxene
-                else if (roomNumber == 34)
-                    worldName = "OlympusColiseum"; // Zexion
-                else if (roomNumber == 38)
-                    worldName = "DisneyCastle"; // Marluxia
-                else
-                    worldName = "HollowBastion";
-            }
+            case "HollowBastion" when RoomNumber == 26:
+                WorldName = "GoA";
+                break;
+            case "HollowBastion" when RoomNumber == 32:
+                WorldName = "HalloweenTown"; // Vexen
+                break;
+            // Data Lexaeus
+            case "HollowBastion"
+                when RoomNumber == 33
+                    && (
+                        EventId3 == 122
+                        || EventId1 == 123
+                        || EventId1 == 142 // AS Lexaeus
+                        || EventId3 == 132
+                        || EventId1 == 133
+                        || EventId1 == 147
+                    ):
+                WorldName = "Agrabah"; // Lexaeus
+                break;
+            // Data Larxene
+            case "HollowBastion"
+                when RoomNumber == 33
+                    && (
+                        EventId3 == 128
+                        || EventId1 == 129
+                        || EventId1 == 143 // AS Larxene
+                        || EventId3 == 138
+                        || EventId1 == 139
+                        || EventId1 == 148
+                    ):
+                WorldName = "SpaceParanoids"; // Larxene
+                break;
+            case "HollowBastion" when RoomNumber == 34:
+                WorldName = "OlympusColiseum"; // Zexion
+                break;
+            case "HollowBastion" when RoomNumber == 38:
+                WorldName = "DisneyCastle"; // Marluxia
+                break;
+            case "HollowBastion":
+                WorldName = "HollowBastion";
+                break;
             // Handle STT
-            else if (tempWorld == "TwilightTown")
-            {
-                if (inStt == 13)
-                    worldName = "SimulatedTwilightTown";
-                else if ((roomNumber == 32 && eventID1 == 1) || (roomNumber == 1 && eventID1 == 52))
-                    worldName = "GoA"; // Crit bonuses
-                else
-                    worldName = "TwilightTown";
-            }
+            case "TwilightTown" when inStt == 13:
+                WorldName = "SimulatedTwilightTown";
+                break;
+            case "TwilightTown"
+                when (RoomNumber == 32 && EventId1 == 1) || (RoomNumber == 1 && EventId1 == 52):
+                WorldName = "GoA"; // Crit bonuses
+                break;
+            case "TwilightTown":
+                WorldName = "TwilightTown";
+                break;
             // Handle Data fights
-            else if (tempWorld == "TWTNW")
+            case "TWTNW" when RoomNumber == 10 && (EventId1 == 108):
+                WorldName = "LandofDragons"; // Xigbar
+                break;
+            case "TWTNW" when RoomNumber == 15 && (EventId1 == 110):
+                WorldName = "PrideLands"; // Saix
+                break;
+            case "TWTNW" when RoomNumber == 14 && (EventId1 == 112):
+                WorldName = "PortRoyal"; // Luxord
+                break;
+            case "TWTNW" when RoomNumber == 21 && (EventId1 == 114):
+                WorldName = "SimulatedTwilightTown"; // Roxas
+                break;
+            case "TWTNW":
+                WorldName = "TWTNW";
+                break;
+            default:
             {
-                if (roomNumber == 10 && (eventID1 == 108))
-                    worldName = "LandofDragons"; // Xigbar
-                else if (roomNumber == 15 && (eventID1 == 110))
-                    worldName = "PrideLands"; // Saix
-                else if (roomNumber == 14 && (eventID1 == 112))
-                    worldName = "PortRoyal"; // Luxord
-                else if (roomNumber == 21 && (eventID1 == 114))
-                    worldName = "SimulatedTwilightTown"; // Roxas
-                else
-                    worldName = "TWTNW";
-            }
-            else
-            {
-                if (worldName != tempWorld && tempWorld != "")
+                if (WorldName != tempWorld && tempWorld != "")
                 {
-                    worldName = tempWorld;
+                    WorldName = tempWorld;
                 }
-            }
 
-            //(App.Current.MainWindow as MainWindow).HintText.Content = worldName;
+                break;
+            }
         }
+
+        //(App.Current.MainWindow as MainWindow).HintText.Content = worldName;
     }
 }

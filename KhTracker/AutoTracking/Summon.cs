@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿using System.Collections;
 
-namespace KhTracker
+namespace KhTracker;
+
+internal class Summon : ImportantCheck
 {
-    class Summon : ImportantCheck
+    private readonly int byteNum;
+
+    public Summon(MemoryReader mem, int address, int offset, int byteNumber, string name)
+        : base(mem, address, offset, name)
     {
-        private int byteNum;
+        Bytes = 2;
+        byteNum = byteNumber;
+    }
 
-        public Summon(MemoryReader mem, int address, int offset, int byteNumber, string name) : base(mem, address, offset, name)
+    public override byte[] UpdateMemory()
+    {
+        var data = base.UpdateMemory();
+        var flag = new BitArray(data)[byteNum];
+        if (Obtained == false && flag)
         {
-            Bytes = 2;
-            byteNum = byteNumber;
+            Obtained = true;
+            //App.logger.Record(Name + " obtained");
         }
-
-        public override byte[] UpdateMemory()
-        {
-            byte[] data = base.UpdateMemory();
-            bool flag = new BitArray(data)[byteNum];
-            if (Obtained == false && flag == true)
-            {
-                Obtained = true;
-                //App.logger.Record(Name + " obtained");
-            }
-            return null;
-        }
+        return null;
     }
 }

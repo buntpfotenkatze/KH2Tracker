@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿using System.Collections;
 
-namespace KhTracker
+namespace KhTracker;
+
+internal class Proof : ImportantCheck
 {
-    class Proof : ImportantCheck
-    {
-        public Proof(MemoryReader mem, int address, int offset, string name) : base(mem, address, offset, name)
-        {
-        }
+    public Proof(MemoryReader mem, int address, int offset, string name)
+        : base(mem, address, offset, name) { }
 
-        public override byte[] UpdateMemory()
+    public override byte[] UpdateMemory()
+    {
+        var data = base.UpdateMemory();
+        var flag = new BitArray(data)[0];
+        if (Obtained == false && flag)
         {
-            byte[] data = base.UpdateMemory();
-            bool flag = new BitArray(data)[0];
-            if (Obtained == false && flag == true)
-            {
-                Obtained = true;
-                //App.logger.Record(Name + " obtained");
-            }
-            return null;
+            Obtained = true;
+            //App.logger.Record(Name + " obtained");
         }
+        return null;
     }
 }

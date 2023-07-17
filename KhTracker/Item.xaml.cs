@@ -1,238 +1,174 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Runtime.InteropServices;
-using System.Windows.Controls.Primitives;
 
-namespace KhTracker
+namespace KhTracker;
+
+/// <summary>
+/// Interaction logic for Draggable.xaml
+/// </summary>
+public partial class Item
 {
-    /// <summary>
-    /// Interaction logic for Draggable.xaml
-    /// </summary>
-    public partial class Item : ContentControl
+    private bool selected;
+    private readonly MainWindow mainW = (MainWindow)Application.Current.MainWindow;
+
+    public Item()
     {
-        bool selected = false;
-        MainWindow MainW = (MainWindow)App.Current.MainWindow;
+        InitializeComponent();
+    }
 
-        public Item()
+    //Adorner subclass specific to this control
+    private class ItemAdorner : Adorner
+    {
+        private readonly Rect renderRect;
+        private readonly ImageSource imageSource;
+        public readonly Point CenterOffset;
+
+        public ItemAdorner(Item adornedElement)
+            : base(adornedElement)
         {
-            InitializeComponent();
-        }
-        
-        //Adorner subclass specific to this control
-        private class ItemAdorner : Adorner
-        {
-            Rect renderRect;
-            ImageSource imageSource;
-            public Point CenterOffset;
-            public ItemAdorner(Item adornedElement) : base(adornedElement)
-            {
-                renderRect = new Rect(adornedElement.DesiredSize);
-                this.IsHitTestVisible = false;
-                imageSource = ((adornedElement).Content as Image).Source;
-                CenterOffset = new Point(-renderRect.Width / 2, -renderRect.Height / 2);
-            }
-            protected override void OnRender(DrawingContext drawingContext)
-            {
-                drawingContext.DrawImage(imageSource, renderRect);
-            }
+            renderRect = new Rect(adornedElement.DesiredSize);
+            IsHitTestVisible = false;
+            imageSource = (adornedElement.Content as Image)?.Source;
+            CenterOffset = new Point(-renderRect.Width / 2, -renderRect.Height / 2);
         }
 
-        //Struct to use in the GetCursorPos function
-        private struct PInPoint
+        protected override void OnRender(DrawingContext drawingContext)
         {
-            public int X;
-            public int Y;
-            public PInPoint(int x, int y)
-            {
-                X = x; Y = y;
-            }
-            public PInPoint(double x, double y)
-            {
-                X = (int)x; Y = (int)y;
-            }
-            public Point GetPoint(double xOffset = 0, double yOffet = 0)
-            {
-                return new Point(X + xOffset, Y + yOffet);
-            }
-            public Point GetPoint(Point offset)
-            {
-                return new Point(X + offset.X, Y + offset.Y);
-            }
+            drawingContext.DrawImage(imageSource, renderRect);
+        }
+    }
+
+    //Struct to use in the GetCursorPos function
+    private struct PInPoint
+    {
+        public readonly int X;
+        public readonly int Y;
+
+        public PInPoint(int x, int y)
+        {
+            X = x;
+            Y = y;
         }
 
-        [DllImport("user32.dll")]
-        static extern void GetCursorPos(ref PInPoint p);
-
-        private ItemAdorner myAdornment;
-        private PInPoint pointRef = new PInPoint();
-
-        public void Item_Click(object sender, RoutedEventArgs e)
+        public PInPoint(double x, double y)
         {
-            Data data = MainWindow.data;
-            if (data.selected != null && data.WorldsData[data.selected.Name].worldGrid.ReportHandler(this))
+            X = (int)x;
+            Y = (int)y;
+        }
+
+        public Point GetPoint(double xOffset = 0, double yOffet = 0)
+        {
+            return new Point(X + xOffset, Y + yOffet);
+        }
+
+        public Point GetPoint(Point offset)
+        {
+            return new Point(X + offset.X, Y + offset.Y);
+        }
+    }
+
+    [DllImport("user32.dll")]
+    private static extern void GetCursorPos(ref PInPoint p);
+
+    private ItemAdorner myAdornment;
+    private PInPoint pointRef;
+
+    public void Item_Click(object sender, RoutedEventArgs e)
+    {
+        var data = MainWindow.Data;
+        if (data.Selected != null)
+        {
+            data.WorldsData[data.Selected.Name].WorldGrid.Add_Item(this);
+        }
+    }
+
+    public void Item_MouseUp(object sender, MouseButtonEventArgs e)
+    {
+        if (selected)
+            Item_Click(sender, e);
+    }
+
+    public void Item_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        selected = true;
+    }
+
+    public void Item_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.LeftButton == MouseButtonState.Pressed)
+        {
+            var adLayer = AdornerLayer.GetAdornerLayer(this);
+            myAdornment = new ItemAdorner(this);
+            adLayer!.Add(myAdornment);
+            DragDrop.DoDragDrop(this, this, DragDropEffects.Copy);
+            adLayer.Remove(myAdornment);
+        }
+    }
+
+    private void Item_PreviewGiveFeedback(object sender, GiveFeedbackEventArgs e)
+    {
+        GetCursorPos(ref pointRef);
+        var relPos = PointFromScreen(pointRef.GetPoint(myAdornment.CenterOffset));
+        myAdornment.Arrange(new Rect(relPos, myAdornment.DesiredSize));
+
+        Mouse.SetCursor(Cursors.None);
+        e.Handled = true;
+    }
+
+    public void Item_Return(object sender, RoutedEventArgs e)
+    {
+        HandleItemReturn();
+    }
+
+    public void HandleItemReturn()
+    {
+        var data = MainWindow.Data;
+
+        if (Name.StartsWith("Ghost_"))
+        {
+            var ghostRow = VisualTreeHelper.GetChild(mainW.ItemPool, 4) as Grid; //ghost grid always at this position
+            if (Parent != ghostRow)
             {
-                data.WorldsData[data.selected.Name].worldGrid.Add_Item(this);
-            }
-        }
-
-        public void Item_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            if (selected)
-                Item_Click(sender, e);
-        }
-
-        public void Item_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            selected = true;
-        }
-
-        public void Item_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton == MouseButtonState.Pressed)
-            {
-                var adLayer = AdornerLayer.GetAdornerLayer(this);
-                myAdornment = new ItemAdorner(this);
-                adLayer.Add(myAdornment);
-                DragDrop.DoDragDrop(this, this, DragDropEffects.Copy);
-                adLayer.Remove(myAdornment);
-            }
-        }
- 
-        public void Report_Hover(object sender, RoutedEventArgs e)
-        {
-            Data data = MainWindow.data;
-
-            if (data.UsingProgressionHints && data.mode != Mode.PointsHints)
-                return;
-
-            int index = (int)GetValue(Grid.ColumnProperty);
-            var repStr1 = data.reportInformation[index].Item1;
-            var repStr2 = data.reportInformation[index].Item2;
-            var repInt = data.reportInformation[index].Item3;
-
-            switch (data.mode)
-            {
-                case Mode.PointsHints:
-                    MainW.SetHintText(Codes.GetHintTextName(repStr1), "has", Codes.FindShortName(Codes.GetHintTextName(repStr2)), true, false, true);
-                    break;
-                case Mode.PathHints:
-                    MainW.SetHintText(Codes.GetHintTextName(repStr1));
-                    break;
-                case Mode.SpoilerHints:
-                    if (repStr1 == "Empty")
-                    {
-                        MainW.SetHintText("This report looks too faded to read...");
-                    }
-                    else
-                    {
-                        if (repInt == -1)
-                        {
-                            MainW.SetHintText(Codes.GetHintTextName(repStr1), "has no Important Checks", "", true, false, false);
-                        }
-                        else if (repInt == -12345)
-                        {
-                            MainW.SetHintText(data.reportInformation[index].Item1, "", "", false, false, false);
-                        }
-                        else if (repInt == -999)
-                        {
-                            //nothing
-                        }
-                        else
-                        {
-                            MainW.SetHintText(Codes.GetHintTextName(repStr1), "has been revealed!", "", true, false, false);
-                        }
-                    }
-                    break;
-                default:
-                    if (repInt == -99)
-                    {
-                        //MainW.SetJokeText(repStr1);
-                    }
-                    else
-                    {
-                        MainW.SetHintText(Codes.GetHintTextName(repStr2), "has", repInt + " important checks", true, false, true);
-                    }
-                    break;
-            }
-        }
-
-        private void Item_PreviewGiveFeedback(object sender, GiveFeedbackEventArgs e)
-        {
-            GetCursorPos(ref pointRef);
-            Point relPos = this.PointFromScreen(pointRef.GetPoint(myAdornment.CenterOffset));
-            myAdornment.Arrange(new Rect(relPos, myAdornment.DesiredSize));
-
-            Mouse.SetCursor(Cursors.None);
-            e.Handled = true;
-        }
-
-        public void Item_Return(object sender, RoutedEventArgs e)
-        {
-            HandleItemReturn();
-        }
-
-        public void HandleItemReturn()
-        {
-            Data data = MainWindow.data;
-
-            if (this.Name.StartsWith("Ghost_"))
-            {
-                Grid GhostRow = VisualTreeHelper.GetChild(MainW.ItemPool, 4) as Grid; //ghost grid always at this position
-                if (Parent != GhostRow)
-                {
-                    WorldGrid parent = this.Parent as WorldGrid;
-                    ((WorldGrid)Parent).Handle_WorldGrid(this, false);
-
-                    GhostRow.Children.Add(this);
-                    parent.Children.Remove(this);
-                }
-                return;
-            }
-
-            //int index = data.Items.IndexOf(this);
-            //Grid ItemRow = data.ItemsGrid[index];
-            Grid ItemRow = data.Items[this.Name].Item2;
-
-            if (Parent != ItemRow)
-            {
-                WorldGrid parent = this.Parent as WorldGrid;
-
+                var parent = Parent as WorldGrid;
                 ((WorldGrid)Parent).Handle_WorldGrid(this, false);
 
-                ItemRow.Children.Add(this);
+                ghostRow!.Children.Add(this);
+                parent!.Children.Remove(this);
+            }
+            return;
+        }
 
-                MainW.SetCollected(false);
+        //int index = data.Items.IndexOf(this);
+        //Grid ItemRow = data.ItemsGrid[index];
+        var itemRow = data.Items[Name].Item2;
 
-                MouseDown -= Item_Return;
+        if (Parent != itemRow)
+        {
+            ((WorldGrid)Parent).Handle_WorldGrid(this, false);
 
-                if (data.dragDrop)
-                {
-                    MouseDoubleClick -= Item_Click;
-                    MouseDoubleClick += Item_Click;
-                    MouseMove -= Item_MouseMove;
-                    MouseMove += Item_MouseMove;
-                }
-                else
-                {
-                    MouseDown -= Item_MouseDown;
-                    MouseDown += Item_MouseDown;
-                    MouseUp -= Item_MouseUp;
-                    MouseUp += Item_MouseUp;
-                }
+            itemRow.Children.Add(this);
 
-                MouseEnter -= Report_Hover;
+            mainW.SetCollected(false);
+
+            MouseDown -= Item_Return;
+
+            if (data.DragDrop)
+            {
+                MouseDoubleClick -= Item_Click;
+                MouseDoubleClick += Item_Click;
+                MouseMove -= Item_MouseMove;
+                MouseMove += Item_MouseMove;
+            }
+            else
+            {
+                MouseDown -= Item_MouseDown;
+                MouseDown += Item_MouseDown;
+                MouseUp -= Item_MouseUp;
+                MouseUp += Item_MouseUp;
             }
         }
     }
