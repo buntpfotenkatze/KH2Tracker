@@ -12,7 +12,7 @@ internal class TornPage : ImportantCheck
         set
         {
             quantity = value;
-            OnPropertyChanged("Quantity");
+            OnPropertyChanged(nameof(Quantity));
         }
     }
 

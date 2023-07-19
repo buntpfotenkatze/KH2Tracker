@@ -1861,6 +1861,45 @@ public partial class MainWindow
         if (pages != null)
             pages.Quantity = 0;
 
+        visitItemAuronWepQuantity = 0;
+        visitItemMulanWepQuantity = 0;
+        visitItemBeastWepQuantity = 0;
+        visitItemJackWepQuantity = 0;
+        visitItemSimbaWepQuantity = 0;
+        visitItemSparrowWepQuantity = 0;
+        visitItemAladdinWepQuantity = 0;
+        visitItemTronWepQuantity = 0;
+        visitItemMembershipCardQuantity = 0;
+        visitItemIceCreamQuantity = 0;
+        visitItemDisneyCastleKeyQuantity = 0;
+
+        if (visitItemAuronWep != null)
+            visitItemAuronWep.Quantity = 0;
+        if (visitItemMulanWep != null)
+            visitItemMulanWep.Quantity = 0;
+        if (visitItemBeastWep != null)
+            visitItemBeastWep.Quantity = 0;
+        if (visitItemJackWep != null)
+            visitItemJackWep.Quantity = 0;
+        if (visitItemSimbaWep != null)
+            visitItemSimbaWep.Quantity = 0;
+        if (visitItemSparrowWep != null)
+            visitItemSparrowWep.Quantity = 0;
+        if (visitItemAladdinWep != null)
+            visitItemAladdinWep.Quantity = 0;
+        if (visitItemTronWep != null)
+            visitItemTronWep.Quantity = 0;
+        if (visitItemMembershipCard != null)
+            visitItemMembershipCard.Quantity = 0;
+        if (visitItemIceCream != null)
+            visitItemIceCream.Quantity = 0;
+        if (visitItemNaminesSketches != null)
+            visitItemNaminesSketches.Quantity = 0;
+        if (visitItemDisneyCastleKey != null)
+            visitItemDisneyCastleKey.Quantity = 0;
+        if (visitItemWayToTheDawn != null)
+            visitItemWayToTheDawn.Quantity = 0;
+
         if (highJump != null)
             highJump.Level = 0;
         if (quickRun != null)

@@ -51,7 +51,21 @@ public partial class MainWindow
     private Report reportItem;
     private Summon charmItem;
     private ImportantCheck proofItem;
-    private ImportantCheck visitItem;
+
+    private Visit visitItemAuronWep;
+    private Visit visitItemMulanWep;
+    private Visit visitItemBeastWep;
+    private Visit visitItemJackWep;
+    private Visit visitItemSimbaWep;
+    private Visit visitItemSparrowWep;
+    private Visit visitItemAladdinWep;
+    private Visit visitItemTronWep;
+    private Visit visitItemMembershipCard;
+    private Visit visitItemIceCream;
+    private Visit visitItemNaminesSketches;
+    private Visit visitItemDisneyCastleKey;
+    private Visit visitItemWayToTheDawn;
+
     private ImportantCheck extraItem;
 
     private TornPage pages;
@@ -70,6 +84,18 @@ public partial class MainWindow
     private int reflectLevel;
     private int magnetLevel;
     private int tornPageCount;
+
+    private int visitItemAuronWepQuantity;
+    private int visitItemMulanWepQuantity;
+    private int visitItemBeastWepQuantity;
+    private int visitItemJackWepQuantity;
+    private int visitItemSimbaWepQuantity;
+    private int visitItemSparrowWepQuantity;
+    private int visitItemAladdinWepQuantity;
+    private int visitItemTronWepQuantity;
+    private int visitItemMembershipCardQuantity;
+    private int visitItemIceCreamQuantity;
+    private int visitItemDisneyCastleKeyQuantity;
 
     private CheckEveryCheck checkEveryCheck;
 
@@ -471,33 +497,88 @@ public partial class MainWindow
             proofItem = new Proof(memory, save + 0x36B2, addressOffset, "Connection")
         );
 
+        var visitItemAuronWepCount = visitItemAuronWep?.Quantity ?? 0;
+        var visitItemMulanWepCount = visitItemMulanWep?.Quantity ?? 0;
+        var visitItemBeastWepCount = visitItemBeastWep?.Quantity ?? 0;
+        var visitItemJackWepCount = visitItemJackWep?.Quantity ?? 0;
+        var visitItemSimbaWepCount = visitItemSimbaWep?.Quantity ?? 0;
+        var visitItemSparrowWepCount = visitItemSparrowWep?.Quantity ?? 0;
+        var visitItemAladdinWepCount = visitItemAladdinWep?.Quantity ?? 0;
+        var visitItemTronWepCount = visitItemTronWep?.Quantity ?? 0;
+        var visitItemMembershipCarpCount = visitItemMembershipCard?.Quantity ?? 0;
+        var visitItemIceCreapCount = visitItemIceCream?.Quantity ?? 0;
+        var visitItemNaminesSketchepCount = visitItemNaminesSketches?.Quantity ?? 0;
+        var visitItemDisneyCastleKepCount = visitItemDisneyCastleKey?.Quantity ?? 0;
+        var visitItemWayToTheDawpCount = visitItemWayToTheDawn?.Quantity ?? 0;
+
         importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x35AE, addressOffset, "AuronWep")
+            visitItemAuronWep = new Visit(memory, save + 0x35AE, addressOffset, "AuronWep")
         );
         importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x35AF, addressOffset, "MulanWep")
+            visitItemMulanWep = new Visit(memory, save + 0x35AF, addressOffset, "MulanWep")
         );
         importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x35B3, addressOffset, "BeastWep")
-        );
-        importantChecks.Add(visitItem = new Visit(memory, save + 0x35B4, addressOffset, "JackWep"));
-        importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x35B5, addressOffset, "SimbaWep")
+            visitItemBeastWep = new Visit(memory, save + 0x35B3, addressOffset, "BeastWep")
         );
         importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x35B6, addressOffset, "SparrowWep")
+            visitItemJackWep = new Visit(memory, save + 0x35B4, addressOffset, "JackWep")
         );
         importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x35C0, addressOffset, "AladdinWep")
-        );
-        importantChecks.Add(visitItem = new Visit(memory, save + 0x35C2, addressOffset, "TronWep"));
-        importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x3643, addressOffset, "MembershipCard")
+            visitItemSimbaWep = new Visit(memory, save + 0x35B5, addressOffset, "SimbaWep")
         );
         importantChecks.Add(
-            visitItem = new Visit(memory, save + 0x3649, addressOffset, "IceCream")
+            visitItemSparrowWep = new Visit(memory, save + 0x35B6, addressOffset, "SparrowWep")
         );
-        importantChecks.Add(visitItem = new Visit(memory, save + 0x364A, addressOffset, "Picture"));
+        importantChecks.Add(
+            visitItemAladdinWep = new Visit(memory, save + 0x35C0, addressOffset, "AladdinWep")
+        );
+        importantChecks.Add(
+            visitItemTronWep = new Visit(memory, save + 0x35C2, addressOffset, "TronWep")
+        );
+        importantChecks.Add(
+            visitItemMembershipCard = new Visit(
+                memory,
+                save + 0x3643,
+                addressOffset,
+                "MembershipCard"
+            )
+        );
+        importantChecks.Add(
+            visitItemIceCream = new Visit(memory, save + 0x3649, addressOffset, "IceCream")
+        );
+        importantChecks.Add(
+            visitItemNaminesSketches = new Visit(
+                memory,
+                save + 0x364A,
+                addressOffset,
+                "NaminesSketches"
+            )
+        );
+        importantChecks.Add(
+            visitItemDisneyCastleKey = new Visit(
+                memory,
+                save + 0x365D,
+                addressOffset,
+                "DisneyCastleKey"
+            )
+        );
+        importantChecks.Add(
+            visitItemWayToTheDawn = new VisitWayToTheDawn(memory, save, addressOffset)
+        );
+
+        visitItemAuronWep.Quantity = visitItemAuronWepCount;
+        visitItemMulanWep.Quantity = visitItemMulanWepCount;
+        visitItemBeastWep.Quantity = visitItemBeastWepCount;
+        visitItemJackWep.Quantity = visitItemJackWepCount;
+        visitItemSimbaWep.Quantity = visitItemSimbaWepCount;
+        visitItemSparrowWep.Quantity = visitItemSparrowWepCount;
+        visitItemAladdinWep.Quantity = visitItemAladdinWepCount;
+        visitItemTronWep.Quantity = visitItemTronWepCount;
+        visitItemMembershipCard.Quantity = visitItemMembershipCarpCount;
+        visitItemIceCream.Quantity = visitItemIceCreapCount;
+        visitItemNaminesSketches.Quantity = visitItemNaminesSketchepCount;
+        visitItemDisneyCastleKey.Quantity = visitItemDisneyCastleKepCount;
+        visitItemWayToTheDawn.Quantity = visitItemWayToTheDawpCount;
 
         importantChecks.Add(
             extraItem = new Extra(memory, save + 0x3696, addressOffset, "HadesCup")
@@ -864,6 +945,94 @@ public partial class MainWindow
             var page = new TornPage(null, 0, 0, "TornPage" + tornPageCount);
             newChecks.Add(page);
             collectedChecks.Add(page);
+        }
+
+        while (visitItemAuronWep.Quantity > visitItemAuronWepQuantity)
+        {
+            ++visitItemAuronWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "AuronWep" + visitItemAuronWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemMulanWep.Quantity > visitItemMulanWepQuantity)
+        {
+            ++visitItemMulanWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "MulanWep" + visitItemMulanWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemBeastWep.Quantity > visitItemBeastWepQuantity)
+        {
+            ++visitItemBeastWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "BeastWep" + visitItemBeastWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemJackWep.Quantity > visitItemJackWepQuantity)
+        {
+            ++visitItemJackWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "JackWep" + visitItemJackWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemSimbaWep.Quantity > visitItemSimbaWepQuantity)
+        {
+            ++visitItemSimbaWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "SimbaWep" + visitItemSimbaWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemSparrowWep.Quantity > visitItemSparrowWepQuantity)
+        {
+            ++visitItemSparrowWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "SparrowWep" + visitItemSparrowWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemAladdinWep.Quantity > visitItemAladdinWepQuantity)
+        {
+            ++visitItemAladdinWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "AladdinWep" + visitItemAladdinWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemTronWep.Quantity > visitItemTronWepQuantity)
+        {
+            ++visitItemTronWepQuantity;
+            var visitItem = new Visit(null, 0, 0, "TronWep" + visitItemTronWepQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemMembershipCard.Quantity > visitItemMembershipCardQuantity)
+        {
+            ++visitItemMembershipCardQuantity;
+            var visitItem = new Visit(
+                null,
+                0,
+                0,
+                "MembershipCard" + visitItemMembershipCardQuantity
+            );
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemIceCream.Quantity > visitItemIceCreamQuantity)
+        {
+            ++visitItemIceCreamQuantity;
+            var visitItem = new Visit(null, 0, 0, "IceCream" + visitItemIceCreamQuantity);
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
+        }
+        while (visitItemDisneyCastleKey.Quantity > visitItemDisneyCastleKeyQuantity)
+        {
+            ++visitItemDisneyCastleKeyQuantity;
+            var visitItem = new Visit(
+                null,
+                0,
+                0,
+                "DisneyCastleKey" + visitItemDisneyCastleKeyQuantity
+            );
+            newChecks.Add(visitItem);
+            collectedChecks.Add(visitItem);
         }
     }
 

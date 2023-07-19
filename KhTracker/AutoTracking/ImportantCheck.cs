@@ -8,8 +8,8 @@ namespace KhTracker;
 internal class ImportantCheck : INotifyPropertyChanged
 {
     public string Name;
-    public int Address;
-    public int Bytes = 1;
+    protected int Address;
+    protected int Bytes = 1;
     private bool obtained;
     public bool Obtained
     {
@@ -19,12 +19,13 @@ internal class ImportantCheck : INotifyPropertyChanged
             obtained = value;
             if (App.Logger != null)
                 App.Logger.Record(Name + " obtained");
-            OnPropertyChanged("Obtained");
+            OnPropertyChanged(nameof(Obtained));
         }
     }
-    public int AddressOffset;
 
-    public MemoryReader Memory;
+    protected readonly int AddressOffset;
+
+    protected readonly MemoryReader Memory;
 
     public ImportantCheck(MemoryReader mem, int address, int offset, string name)
     {

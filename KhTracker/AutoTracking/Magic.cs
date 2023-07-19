@@ -9,7 +9,7 @@ internal class Magic : ImportantCheck
         set
         {
             level = value;
-            OnPropertyChanged("Level");
+            OnPropertyChanged(nameof(Level));
         }
     }
 

@@ -22,7 +22,7 @@ internal class Stats : INotifyPropertyChanged
         set
         {
             level = value;
-            OnPropertyChanged("Level");
+            OnPropertyChanged(nameof(Level));
         }
     }
     private string weapon;
@@ -32,7 +32,7 @@ internal class Stats : INotifyPropertyChanged
         set
         {
             weapon = value;
-            OnPropertyChanged("Weapon");
+            OnPropertyChanged(nameof(Weapon));
         }
     }
     private int strength;
@@ -42,7 +42,7 @@ internal class Stats : INotifyPropertyChanged
         set
         {
             strength = value;
-            OnPropertyChanged("Strength");
+            OnPropertyChanged(nameof(Strength));
         }
     }
     private int magic;
@@ -52,7 +52,7 @@ internal class Stats : INotifyPropertyChanged
         set
         {
             magic = value;
-            OnPropertyChanged("Magic");
+            OnPropertyChanged(nameof(Magic));
         }
     }
     private int defense;
@@ -62,7 +62,7 @@ internal class Stats : INotifyPropertyChanged
         set
         {
             defense = value;
-            OnPropertyChanged("Defense");
+            OnPropertyChanged(nameof(Defense));
         }
     }
     private int bonuslevel;
@@ -72,7 +72,7 @@ internal class Stats : INotifyPropertyChanged
         set
         {
             bonuslevel = value;
-            OnPropertyChanged("BonusLevel");
+            OnPropertyChanged(nameof(BonusLevel));
         }
     }
 
@@ -86,7 +86,7 @@ internal class Stats : INotifyPropertyChanged
         {
             levelCheck = value;
             window.NextLevelValue.Text = ">" + value;
-            OnPropertyChanged("LevelCheck");
+            OnPropertyChanged(nameof(LevelCheck));
         }
     }
 
@@ -167,9 +167,9 @@ internal class Stats : INotifyPropertyChanged
         BonusLevel = bonusData[0];
 
         //change levelreward number
-        if (level >= currentCheckArray[currentCheckArray.Length - 1])
+        if (level >= currentCheckArray[^1])
         {
-            LevelCheck = currentCheckArray[currentCheckArray.Length - 1];
+            LevelCheck = currentCheckArray[^1];
             return;
         }
 

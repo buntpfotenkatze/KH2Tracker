@@ -14,7 +14,7 @@ internal class DriveForm : ImportantCheck
         set
         {
             level = value;
-            OnPropertyChanged("Level");
+            OnPropertyChanged(nameof(Level));
         }
     }
     public int VisualLevel
@@ -23,7 +23,7 @@ internal class DriveForm : ImportantCheck
         set
         {
             visualLevel = value;
-            OnPropertyChanged("VisualLevel");
+            OnPropertyChanged(nameof(VisualLevel));
         }
     }
     private readonly int byteNum;
