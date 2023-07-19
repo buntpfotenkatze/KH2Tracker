@@ -20,24 +20,28 @@ internal class Ability : ImportantCheck
 
     private readonly int levelOffset;
 
+    private readonly bool isGrowthAbility;
+
     public Ability(MemoryReader mem, int address, int offset, string name, int save)
         : base(mem, address, offset, name)
     {
         Bytes = 158;
         levelOffset = 0;
         Address = AddressStart + save;
+        isGrowthAbility = false;
     }
 
     public Ability(MemoryReader mem, int address, int offset, int levOffset, string name)
         : base(mem, address, offset, name)
     {
-        Bytes = 2;
+        Bytes = 1;
         levelOffset = levOffset;
+        isGrowthAbility = true;
     }
 
     public override byte[] UpdateMemory()
     {
-        if (levelOffset == 0)
+        if (!isGrowthAbility)
         {
             var abilityData = base.UpdateMemory();
             for (var i = 0; i < abilityData.Length; i += 2)
@@ -60,16 +64,19 @@ internal class Ability : ImportantCheck
             return null;
         }
         var data = base.UpdateMemory();
-        int convertedData = BitConverter.ToUInt16(data, 0);
+        int convertedData = data[0]; //BitConverter.To(data, 0);
         var equipped = 0;
-        if (levelOffset > 0 && convertedData > 0)
+        if (isGrowthAbility && convertedData > 0)
         {
             if (convertedData > 32768)
             {
                 equipped = 32768;
             }
 
-            var curLevel = convertedData - levelOffset - equipped;
+            var curLevel =
+                convertedData
+                - /*levelOffset - */
+                equipped;
             //if (curLevel > Level)
             {
                 Level = curLevel;

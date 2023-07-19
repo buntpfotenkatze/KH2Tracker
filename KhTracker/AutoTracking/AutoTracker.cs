@@ -329,19 +329,31 @@ public partial class MainWindow
         #region Add ICs
         importantChecks = new List<ImportantCheck>();
         importantChecks.Add(
-            highJump = new Ability(memory, save + 0x25CE, addressOffset, 93, "HighJump")
+            highJump = new Ability(memory, save + 0x32F6 + 0x38 * 0, addressOffset, 93, "HighJump")
         );
         importantChecks.Add(
-            quickRun = new Ability(memory, save + 0x25D0, addressOffset, 97, "QuickRun")
+            quickRun = new Ability(memory, save + 0x32F6 + 0x38 * 1, addressOffset, 97, "QuickRun")
         );
         importantChecks.Add(
-            dodgeRoll = new Ability(memory, save + 0x25D2, addressOffset, 563, "DodgeRoll")
+            dodgeRoll = new Ability(
+                memory,
+                save + 0x32F6 + 0x38 * 2,
+                addressOffset,
+                563,
+                "DodgeRoll"
+            )
         );
         importantChecks.Add(
-            aerialDodge = new Ability(memory, save + 0x25D4, addressOffset, 101, "AerialDodge")
+            aerialDodge = new Ability(
+                memory,
+                save + 0x32F6 + 0x38 * 3,
+                addressOffset,
+                101,
+                "AerialDodge"
+            )
         );
         importantChecks.Add(
-            glide = new Ability(memory, save + 0x25D6, addressOffset, 105, "Glide")
+            glide = new Ability(memory, save + 0x32F6 + 0x38 * 4, addressOffset, 105, "Glide")
         );
 
         importantChecks.Add(
