@@ -874,5 +874,17 @@ namespace KhTracker.Properties {
                 this["AutoSaveProgress2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LuckyEmblems {
+            get {
+                return ((bool)(this["LuckyEmblems"]));
+            }
+            set {
+                this["LuckyEmblems"] = value;
+            }
+        }
     }
 }

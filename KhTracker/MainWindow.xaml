@@ -58,10 +58,10 @@
                           IsCheckable="True" IsChecked="True" />
             </MenuItem>
             <MenuItem Header="Display Toggles" Focusable="False">
+                <MenuItem Header="Lucky Emblems" Click="LuckyEmblemsToggle" x:Name="LuckyEmblemsOption" IsCheckable="True"
+                          IsChecked="True" />
                 <MenuItem Header="Torn Pages" Click="TornPagesToggle" x:Name="TornPagesOption" IsCheckable="True"
                           IsChecked="True" />
-                <MenuItem Header="Promise Charm" Click="PromiseCharmToggle" x:Name="PromiseCharmOption"
-                          IsCheckable="True" IsChecked="True" />
                 <MenuItem Header="Once More / Second Chance" Click="AbilitiesToggle" x:Name="AbilitiesOption"
                           IsCheckable="True" IsChecked="True" />
                 <MenuItem Header="Anti Form" Click="AntiFormToggle" x:Name="AntiFormOption" IsCheckable="True"
@@ -1985,7 +1985,7 @@
                             <!-- world value -->
                             <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Panel.ZIndex="3" Margin="0,2,5,0"
                                      HorizontalAlignment="Right" MaxHeight="25">
-                                <local:OutlinedTextBlock x:Name="TwtnwHint" FontFamily="{StaticResource Gummi}"
+                                <local:OutlinedTextBlock x:Name="TWTNWHint" FontFamily="{StaticResource Gummi}"
                                                          FontSize="25pt"
                                                          StrokeThickness="7" Fill="#FFEFECE9" Text="?"
                                                          Margin="0,-5,0,2" />
@@ -1995,7 +1995,7 @@
                                             Grid.ColumnSpan="2" HorizontalAlignment="Left" />
                         </Grid>
                         <!-- path hints icons -->
-                        <Grid Grid.Row="0" x:Name="TwtnwPath" Grid.Column="1">
+                        <Grid Grid.Row="0" x:Name="TWTNWPath" Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="0.18*" />
                                 <RowDefinition />
@@ -2011,7 +2011,7 @@
                                    Grid.Row="3" VerticalAlignment="Top" />
                         </Grid>
                         <!-- item grid -->
-                        <local:WorldGrid Grid.Row="0" x:Name="TwtnwGrid" Grid.Column="2" />
+                        <local:WorldGrid Grid.Row="0" x:Name="TWTNWGrid" Grid.Column="2" />
                         <!-- fancy spacer colors -->
                         <Rectangle Grid.Row="0" Grid.Column="0" Fill="#D81E1E1E" Panel.ZIndex="-1" />
                         <Rectangle Grid.Row="0" Grid.Column="1" Fill="#FF454545" Panel.ZIndex="-1" Opacity="0.9" />
@@ -2338,6 +2338,13 @@
                         <ColumnDefinition Width="1.35*" />
                         <ColumnDefinition Width="0.05*" />
 
+                        <!--<ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="0.2*" />
+                        <ColumnDefinition Width="1.5*" />-->
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+                        <ColumnDefinition Width="0*" />
+
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="0.2*" />
                         <ColumnDefinition Width="1.5*" />
@@ -2446,6 +2453,9 @@
                     <ContentControl Grid.Column="9" Content="{DynamicResource Chest}" Name="ChestIcon"
                                     HorizontalAlignment="Right" />
 
+                    <ContentControl Grid.Row="0" x:Name="LuckyEmblemsIcon" Content="{DynamicResource LuckyEmblem}"
+                                    Grid.Column="12" HorizontalAlignment="Right" />
+
                     <!-- IC Count -->
                     <Grid Grid.Column="11" x:Name="CollectionGrid" Visibility="Visible">
                         <Grid.ColumnDefinitions>
@@ -2529,6 +2539,91 @@
                             </local:OutlinedTextBlock>
                         </Viewbox>
                     </Grid>
+
+                    <!-- LuckyEmblemsCollected Count -->
+                    <Grid Grid.Column="14" x:Name="LuckyEmblemsGrid" Visibility="Visible">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0*" />
+                            <ColumnDefinition Width="1.15*" />
+                            <ColumnDefinition Width="0.3*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.15*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="0.05*" />
+                        </Grid.RowDefinitions>
+                        <!--ContentControl Content="{DynamicResource Min-Chest}" Name="ChestIcon"/-->
+                        <!-- Collected -->
+                        <Viewbox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                                 Margin="0,0,0,3">
+                            <Viewbox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform Y="0" X="-2" />
+                                </TransformGroup>
+                            </Viewbox.RenderTransform>
+                            <local:OutlinedTextBlock x:Name="LuckyEmblemsValue" FontFamily="{StaticResource Gummi}"
+                                                     FontSize="20" FontStretch="Medium"
+                                                     AllowDrop="False" IsHitTestVisible="False" StrokeThickness="1"
+                                                     Text="00">
+                                <local:OutlinedTextBlock.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFE47606" Offset="0.836" />
+                                        <GradientStop Color="#FFFFE435" Offset="0.237" />
+                                    </LinearGradientBrush>
+                                </local:OutlinedTextBlock.Fill>
+                            </local:OutlinedTextBlock>
+                        </Viewbox>
+                        <!-- Separator-->
+                        <Viewbox Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                 Margin="2,-1,1,-1" RenderTransformOrigin="0.5,0.5">
+                            <Viewbox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="0.75" ScaleY="1.25" />
+                                    <SkewTransform />
+                                    <RotateTransform Angle="8" />
+                                    <TranslateTransform X="0" Y="-2" />
+                                </TransformGroup>
+                            </Viewbox.RenderTransform>
+                            <local:OutlinedTextBlock x:Name="LuckyEmblemsBar" FontFamily="{StaticResource Gummi}"
+                                                     FontSize="20" FontStretch="Medium" AllowDrop="False"
+                                                     IsHitTestVisible="False" StrokeThickness="1" Text="|">
+                                <local:OutlinedTextBlock.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFE47606" Offset="0.836" />
+                                        <GradientStop Color="#FFFFE435" Offset="0.237" />
+                                    </LinearGradientBrush>
+                                </local:OutlinedTextBlock.Fill>
+                            </local:OutlinedTextBlock>
+                        </Viewbox>
+                        <!-- Total -->
+                        <Viewbox Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                                 Margin="0,0,0,3">
+                            <Viewbox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform />
+                                    <SkewTransform />
+                                    <RotateTransform />
+                                    <TranslateTransform Y="0" X="2" />
+                                </TransformGroup>
+                            </Viewbox.RenderTransform>
+                            <local:OutlinedTextBlock x:Name="LuckyEmblemsRequired" FontFamily="{StaticResource Gummi}"
+                                                     FontSize="20" FontStretch="Medium"
+                                                     AllowDrop="False" IsHitTestVisible="False" StrokeThickness="1"
+                                                     Text="40">
+                                <local:OutlinedTextBlock.Fill>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FFE47606" Offset="0.836" />
+                                        <GradientStop Color="#FFFFE435" Offset="0.237" />
+                                    </LinearGradientBrush>
+                                </local:OutlinedTextBlock.Fill>
+                            </local:OutlinedTextBlock>
+                        </Viewbox>
+                    </Grid>
+
                     <!-- Progression Points Count -->
                     <Grid Grid.Column="11" x:Name="ProgressionCollectionGrid" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
@@ -2988,7 +3083,6 @@
                     <local:Item x:Name="MunnyPouch1" Content="{DynamicResource Min-MunnyPouch1}" Grid.Column="22" />
                     <local:Item x:Name="MunnyPouch2" Content="{DynamicResource Min-MunnyPouch2}" Grid.Column="22" />
 
-
                     <!-- silhouettes -->
                     <ContentControl Grid.Row="0" x:Name="SFire" Content="{DynamicResource Min-Fire1}" Grid.Column="1"
                                     Panel.ZIndex="-2" Opacity="1">
@@ -3017,29 +3111,25 @@
                         </ContentControl.Effect>
                     </ContentControl>
                     <ContentControl Grid.Row="0" x:Name="SReflect" Content="{DynamicResource Min-Reflect1}"
-                                    Grid.Column="13"
-                                    Panel.ZIndex="-2" Opacity="1">
+                                    Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
                             <fx:BrightnessContrastEffect Brightness="-1" />
                         </ContentControl.Effect>
                     </ContentControl>
                     <ContentControl Grid.Row="0" x:Name="SMagnet" Content="{DynamicResource Min-Magnet1}"
-                                    Grid.Column="16"
-                                    Panel.ZIndex="-2" Opacity="1">
+                                    Grid.Column="16" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
                             <fx:BrightnessContrastEffect Brightness="-1" />
                         </ContentControl.Effect>
                     </ContentControl>
                     <ContentControl Grid.Row="0" x:Name="STornPage" Content="{DynamicResource Min-TornPage1}"
-                                    Grid.Column="19"
-                                    Panel.ZIndex="-2" Opacity="1">
+                                    Grid.Column="19" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
                             <fx:BrightnessContrastEffect Brightness="-1" />
                         </ContentControl.Effect>
                     </ContentControl>
                     <ContentControl Grid.Row="0" x:Name="SMunnyPouch" Content="{DynamicResource Min-MunnyPouch1}"
-                                    Grid.Column="22"
-                                    Panel.ZIndex="-2" Opacity="1">
+                                    Grid.Column="22" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
                             <fx:BrightnessContrastEffect Brightness="-1" />
                         </ContentControl.Effect>
@@ -3061,10 +3151,6 @@
                         <ColumnDefinition />
                         <ColumnDefinition x:Name="OnceMoreCol" Width="1*" />
                         <ColumnDefinition x:Name="SecondChanceCol" Width="1*" />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition x:Name="PromiseCharmCol" Width="1*" />
                     </Grid.ColumnDefinitions>
 
 
@@ -3080,10 +3166,6 @@
                     <local:Item x:Name="Feather" Content="{DynamicResource Min-Feather}" Grid.Column="9" />
                     <local:Item x:Name="OnceMore" Content="{DynamicResource Min-OnceMore}" Grid.Column="10" />
                     <local:Item x:Name="SecondChance" Content="{DynamicResource Min-SecondChance}" Grid.Column="11" />
-                    <local:Item x:Name="Connection" Content="{DynamicResource Min-Connection}" Grid.Column="12" />
-                    <local:Item x:Name="Nonexistence" Content="{DynamicResource Min-Nonexistence}" Grid.Column="13" />
-                    <local:Item x:Name="Peace" Content="{DynamicResource Min-Peace}" Grid.Column="14" />
-                    <local:Item x:Name="PromiseCharm" Content="{DynamicResource Min-PromiseCharm}" Grid.Column="15" />
 
                     <!-- silhouettes -->
                     <ContentControl Grid.Row="0" x:Name="SValor" Content="{DynamicResource Min-Valor}" Grid.Column="0"
@@ -3161,32 +3243,6 @@
                     </ContentControl>
                     <ContentControl Grid.Row="0" x:Name="SSecondChance" Content="{DynamicResource Min-SecondChance}"
                                     Grid.Column="11" Panel.ZIndex="-2" Opacity="1">
-                        <ContentControl.Effect>
-                            <fx:BrightnessContrastEffect Brightness="-1" />
-                        </ContentControl.Effect>
-                    </ContentControl>
-
-                    <ContentControl Grid.Row="0" x:Name="SConnection" Content="{DynamicResource Min-Connection}"
-                                    Grid.Column="12"
-                                    Panel.ZIndex="-2" Opacity="1">
-                        <ContentControl.Effect>
-                            <fx:BrightnessContrastEffect Brightness="-1" />
-                        </ContentControl.Effect>
-                    </ContentControl>
-                    <ContentControl Grid.Row="0" x:Name="SNonexistence" Content="{DynamicResource Min-Nonexistence}"
-                                    Grid.Column="13" Panel.ZIndex="-2" Opacity="1">
-                        <ContentControl.Effect>
-                            <fx:BrightnessContrastEffect Brightness="-1" />
-                        </ContentControl.Effect>
-                    </ContentControl>
-                    <ContentControl Grid.Row="0" x:Name="SPeace" Content="{DynamicResource Min-Peace}" Grid.Column="14"
-                                    Panel.ZIndex="-2" Opacity="1">
-                        <ContentControl.Effect>
-                            <fx:BrightnessContrastEffect Brightness="-1" />
-                        </ContentControl.Effect>
-                    </ContentControl>
-                    <ContentControl Grid.Row="0" x:Name="SPromiseCharm" Content="{DynamicResource Min-PromiseCharm}"
-                                    Grid.Column="15" Panel.ZIndex="-2" Opacity="1">
                         <ContentControl.Effect>
                             <fx:BrightnessContrastEffect Brightness="-1" />
                         </ContentControl.Effect>

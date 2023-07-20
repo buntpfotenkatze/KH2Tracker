@@ -206,7 +206,7 @@ public partial class MainWindow
         );
         Data.WorldsData.Add(
             "TWTNW",
-            new WorldData(TwtnwTop, TwtnwProgression, TwtnwHint, TwtnwGrid, 0)
+            new WorldData(TwtnwTop, TwtnwProgression, TWTNWHint, TWTNWGrid, 0)
         );
         Data.WorldsData.Add("GoA", new WorldData(GoATop, GoAProgression, GoAHint, GoAGrid, 0));
         Data.WorldsData.Add(
@@ -708,9 +708,6 @@ public partial class MainWindow
         #region Toggles
 
         //Items
-        PromiseCharmOption.IsChecked = Properties.Settings.Default.PromiseCharm;
-        PromiseCharmToggle(PromiseCharmOption.IsChecked);
-
         AbilitiesOption.IsChecked = Properties.Settings.Default.Abilities;
         AbilitiesToggle(AbilitiesOption.IsChecked);
 

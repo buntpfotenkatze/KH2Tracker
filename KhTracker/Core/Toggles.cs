@@ -191,22 +191,6 @@ public partial class MainWindow
     /// Toggles
     ///
 
-    private void PromiseCharmToggle(object sender, RoutedEventArgs e)
-    {
-        PromiseCharmToggle(PromiseCharmOption.IsChecked);
-    }
-
-    private void PromiseCharmToggle(bool toggle)
-    {
-        Properties.Settings.Default.PromiseCharm = toggle;
-        PromiseCharmOption.IsChecked = toggle;
-        PromiseCharmCol.Width = toggle
-            ? new GridLength(1.0, GridUnitType.Star)
-            : new GridLength(0, GridUnitType.Star);
-
-        HandleItemToggle(toggle, PromiseCharm, false);
-    }
-
     private void AbilitiesToggle(object sender, RoutedEventArgs e)
     {
         AbilitiesToggle(AbilitiesOption.IsChecked);
@@ -346,6 +330,28 @@ public partial class MainWindow
         }
 
         VisitLockCheck();
+    }
+
+    private void LuckyEmblemsToggle(object sender, RoutedEventArgs e)
+    {
+        LuckyEmblemsToggle(LuckyEmblemsOption.IsChecked);
+    }
+
+    private void LuckyEmblemsToggle(bool toggle)
+    {
+        Properties.Settings.Default.LuckyEmblems = toggle;
+        LuckyEmblemsOption.IsChecked = toggle;
+
+        if (toggle)
+        {
+            LuckyEmblemsIcon.Visibility = Visibility.Visible;
+            LuckyEmblemsGrid.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            LuckyEmblemsIcon.Visibility = Visibility.Collapsed;
+            LuckyEmblemsGrid.Visibility = Visibility.Collapsed;
+        }
     }
 
     private void TornPagesToggle(object sender, RoutedEventArgs e)
@@ -1206,7 +1212,7 @@ public partial class MainWindow
     {
         Properties.Settings.Default.TWTNW = toggle;
         TwtnwOption.IsChecked = toggle;
-        HandleWorldToggle(toggle, Twtnw, TwtnwGrid);
+        HandleWorldToggle(toggle, Twtnw, TWTNWGrid);
     }
 
     private void HundredAcreWoodToggle(object sender, RoutedEventArgs e)

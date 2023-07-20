@@ -50,7 +50,6 @@ public partial class MainWindow
 
     private Report reportItem;
     private Summon charmItem;
-    private ImportantCheck proofItem;
 
     private Visit visitItemAuronWep;
     private Visit visitItemMulanWep;
@@ -67,6 +66,8 @@ public partial class MainWindow
     private Visit visitItemWayToTheDawn;
 
     private ImportantCheck extraItem;
+
+    private LuckyEmblem luckyEmblems;
 
     private TornPage pages;
 
@@ -329,31 +330,19 @@ public partial class MainWindow
         #region Add ICs
         importantChecks = new List<ImportantCheck>();
         importantChecks.Add(
-            highJump = new Ability(memory, save + 0x32F6 + 0x38 * 0, addressOffset, 93, "HighJump")
+            highJump = new Ability(memory, save + 0x25DA, addressOffset, 0x05E, "HighJump")
         );
         importantChecks.Add(
-            quickRun = new Ability(memory, save + 0x32F6 + 0x38 * 1, addressOffset, 97, "QuickRun")
+            quickRun = new Ability(memory, save + 0x25DC, addressOffset, 0x62, "QuickRun")
         );
         importantChecks.Add(
-            dodgeRoll = new Ability(
-                memory,
-                save + 0x32F6 + 0x38 * 2,
-                addressOffset,
-                563,
-                "DodgeRoll"
-            )
+            dodgeRoll = new Ability(memory, save + 0x25DE, addressOffset, 0x234, "DodgeRoll")
         );
         importantChecks.Add(
-            aerialDodge = new Ability(
-                memory,
-                save + 0x32F6 + 0x38 * 3,
-                addressOffset,
-                101,
-                "AerialDodge"
-            )
+            aerialDodge = new Ability(memory, save + 0x25E0, addressOffset, 0x066, "AerialDodge")
         );
         importantChecks.Add(
-            glide = new Ability(memory, save + 0x32F6 + 0x38 * 4, addressOffset, 105, "Glide")
+            glide = new Ability(memory, save + 0x25E2, addressOffset, 0x6A, "Glide")
         );
 
         importantChecks.Add(
@@ -498,17 +487,6 @@ public partial class MainWindow
             charmItem = new Summon(memory, save + 0x36C4, addressOffset, 5, "Feather")
         );
 
-        importantChecks.Add(
-            proofItem = new Proof(memory, save + 0x3694, addressOffset, "PromiseCharm")
-        );
-        importantChecks.Add(proofItem = new Proof(memory, save + 0x36B4, addressOffset, "Peace"));
-        importantChecks.Add(
-            proofItem = new Proof(memory, save + 0x36B3, addressOffset, "Nonexistence")
-        );
-        importantChecks.Add(
-            proofItem = new Proof(memory, save + 0x36B2, addressOffset, "Connection")
-        );
-
         var visitItemAuronWepCount = visitItemAuronWep?.Quantity ?? 0;
         var visitItemMulanWepCount = visitItemMulanWep?.Quantity ?? 0;
         var visitItemBeastWepCount = visitItemBeastWep?.Quantity ?? 0;
@@ -611,6 +589,12 @@ public partial class MainWindow
         var count = pages?.Quantity ?? 0;
         importantChecks.Add(pages = new TornPage(memory, save + 0x3598, addressOffset, "TornPage"));
         pages.Quantity = count;
+
+        count = luckyEmblems?.Quantity ?? 0;
+        importantChecks.Add(
+            luckyEmblems = new LuckyEmblem(memory, save + 0x3641, addressOffset, "LuckyEmblem")
+        );
+        luckyEmblems.Quantity = count;
 
         #endregion
 
@@ -871,6 +855,7 @@ public partial class MainWindow
         StrengthValue.Text = stats.Strength.ToString();
         MagicValue.Text = stats.Magic.ToString();
         DefenseValue.Text = stats.Defense.ToString();
+        LuckyEmblemsValue.Text = luckyEmblems.Quantity.ToString("00");
         //forms
         ValorLevel.Text = valor.VisualLevel.ToString();
         WisdomLevel.Text = wisdom.VisualLevel.ToString();

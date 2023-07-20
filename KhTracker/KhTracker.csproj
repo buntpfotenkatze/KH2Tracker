@@ -326,6 +326,7 @@
     <Content Include="CustomImages\Worlds\the_world_that_never_was.png" />
     <Content Include="CustomImages\Worlds\twilight_town.png" />
     <Resource Include="Images\System\question.png" />
+    <Resource Include="Images\System\stats\lucky_emblem.png" />
     <Resource Include="Images\System\stats\ProgPoints2.png" />
     <Resource Include="Images\System\stats\ProgPoints.png" />
     <Resource Include="Images\System\settings\absent_silhouette_split.png" />

@@ -1,6 +1,6 @@
 ﻿namespace KhTracker;
 
-internal class Visit : ImportantCheck
+internal class LuckyEmblem : ImportantCheck
 {
     private int quantity;
     public int Quantity
@@ -13,7 +13,7 @@ internal class Visit : ImportantCheck
         }
     }
 
-    public Visit(MemoryReader mem, int address, int offset, string name)
+    public LuckyEmblem(MemoryReader mem, int address, int offset, string name)
         : base(mem, address, offset, name) { }
 
     public override byte[] UpdateMemory()
