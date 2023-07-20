@@ -34,7 +34,7 @@ internal class Ability : ImportantCheck
     public Ability(MemoryReader mem, int address, int offset, int levOffset, string name)
         : base(mem, address, offset, name)
     {
-        Bytes = 1;
+        Bytes = 2;
         levelOffset = levOffset;
         isGrowthAbility = true;
     }
@@ -63,21 +63,14 @@ internal class Ability : ImportantCheck
             }
             return null;
         }
+
         var data = base.UpdateMemory();
-        int convertedData = data[0]; //BitConverter.To(data, 0);
-        var equipped = 0;
+        data[1] = (byte)(data[1] & 0x0F);
+        int convertedData = BitConverter.ToUInt16(data, 0);
         if (isGrowthAbility && convertedData > 0)
         {
-            if (convertedData > 32768)
-            {
-                equipped = 32768;
-            }
-
-            var curLevel =
-                convertedData
-                - /*levelOffset - */
-                equipped;
-            //if (curLevel > Level)
+            var curLevel = convertedData - levelOffset + 1;
+            if (curLevel != Level)
             {
                 Level = curLevel;
                 if (curLevel > Level)
