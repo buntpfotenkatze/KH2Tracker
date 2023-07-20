@@ -203,7 +203,7 @@ public partial class MainWindow
         MainImg2Option.IsChecked = false;
         MainImg3Option.IsChecked = false;
 
-        Properties.Settings.Default.MainBG = 0;
+        App.Settings.MainBG = 0;
 
         if (MainDefOption.IsChecked)
         {
@@ -224,7 +224,7 @@ public partial class MainWindow
         MainImg2Option.IsChecked = false;
         MainImg3Option.IsChecked = false;
 
-        Properties.Settings.Default.MainBG = 1;
+        App.Settings.MainBG = 1;
 
         if (MainImg1Option.IsChecked)
         {
@@ -248,7 +248,7 @@ public partial class MainWindow
         MainImg1Option.IsChecked = false;
         MainImg3Option.IsChecked = false;
 
-        Properties.Settings.Default.MainBG = 2;
+        App.Settings.MainBG = 2;
 
         if (MainImg2Option.IsChecked)
         {
@@ -272,7 +272,7 @@ public partial class MainWindow
         MainImg1Option.IsChecked = false;
         MainImg2Option.IsChecked = false;
 
-        Properties.Settings.Default.MainBG = 3;
+        App.Settings.MainBG = 3;
 
         if (MainImg3Option.IsChecked)
         {

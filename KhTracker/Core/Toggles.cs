@@ -98,23 +98,23 @@ public partial class MainWindow
 
     private void AutoSaveProgressToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.AutoSaveProgress = AutoSaveProgressOption.IsChecked;
+        App.Settings.AutoSaveProgress = AutoSaveProgressOption.IsChecked;
     }
 
     private void AutoSaveProgress2Toggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.AutoSaveProgress2 = AutoSaveProgress2Option.IsChecked;
+        App.Settings.AutoSaveProgress2 = AutoSaveProgress2Option.IsChecked;
     }
 
     private void TopMostToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.TopMost = TopMostOption.IsChecked;
+        App.Settings.TopMost = TopMostOption.IsChecked;
         Topmost = TopMostOption.IsChecked;
     }
 
     private void DragDropToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.DragDrop = DragAndDropOption.IsChecked;
+        App.Settings.DragDrop = DragAndDropOption.IsChecked;
         Data.DragDrop = DragAndDropOption.IsChecked;
 
         var itempools = new List<Grid>();
@@ -154,12 +154,19 @@ public partial class MainWindow
 
     private void AutoConnectToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.AutoDetect = AutoConnectOption.IsChecked;
+        App.Settings.AutoConnect = AutoConnectOption.IsChecked;
+        AutoConnectToggle(AutoConnectOption.IsChecked);
+    }
+
+    private void AutoConnectToggle(bool toggle)
+    {
+        App.Settings.AutoConnect = toggle;
+        AutoConnectOption.IsChecked = toggle;
     }
 
     //private void AutoDetectToggle(object sender, RoutedEventArgs e)
     //{
-    //    Properties.Settings.Default.AutoDetect = AutoDetectOption.IsChecked;
+    //    App.Settings.AutoDetect = AutoDetectOption.IsChecked;
     //
     //    if (AutoDetectOption.IsChecked)
     //    {
@@ -198,7 +205,7 @@ public partial class MainWindow
 
     private void AbilitiesToggle(bool toggle)
     {
-        Properties.Settings.Default.Abilities = toggle;
+        App.Settings.Abilities = toggle;
         AbilitiesOption.IsChecked = toggle;
         if (toggle)
         {
@@ -222,7 +229,7 @@ public partial class MainWindow
 
     private void AntiFormToggle(bool toggle)
     {
-        Properties.Settings.Default.AntiForm = toggle;
+        App.Settings.AntiForm = toggle;
         AntiFormOption.IsChecked = toggle;
 
         AntiFormCol.Width = toggle
@@ -239,7 +246,7 @@ public partial class MainWindow
 
     private void VisitLockToggle(bool toggle)
     {
-        Properties.Settings.Default.WorldVisitLock = toggle;
+        App.Settings.WorldVisitLock = toggle;
         VisitLockOption.IsChecked = toggle;
 
         var value = 0;
@@ -339,7 +346,7 @@ public partial class MainWindow
 
     private void LuckyEmblemsToggle(bool toggle)
     {
-        Properties.Settings.Default.LuckyEmblems = toggle;
+        App.Settings.LuckyEmblems = toggle;
         LuckyEmblemsOption.IsChecked = toggle;
 
         if (toggle)
@@ -361,7 +368,7 @@ public partial class MainWindow
 
     private void TornPagesToggle(bool toggle)
     {
-        Properties.Settings.Default.TornPages = toggle;
+        App.Settings.TornPages = toggle;
         TornPagesOption.IsChecked = toggle;
 
         if (toggle)
@@ -391,7 +398,7 @@ public partial class MainWindow
 
     private void ExtraChecksToggle(bool toggle)
     {
-        Properties.Settings.Default.ExtraChecks = toggle;
+        App.Settings.ExtraChecks = toggle;
         ExtraChecksOption.IsChecked = toggle;
 
         if (toggle)
@@ -432,7 +439,7 @@ public partial class MainWindow
 
     private void SeedHashToggle(bool toggle)
     {
-        Properties.Settings.Default.SeedHash = toggle;
+        App.Settings.SeedHash = toggle;
         SeedHashOption.IsChecked = toggle;
 
         if (toggle)
@@ -450,7 +457,7 @@ public partial class MainWindow
 
     private void WorldProgressToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.WorldProgress = WorldProgressOption.IsChecked;
+        App.Settings.WorldProgress = WorldProgressOption.IsChecked;
         if (WorldProgressOption.IsChecked)
         {
             foreach (var key in Data.WorldsData.Keys.ToList())
@@ -471,7 +478,7 @@ public partial class MainWindow
 
     private void FormsGrowthToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.FormsGrowth = FormsGrowthOption.IsChecked;
+        App.Settings.FormsGrowth = FormsGrowthOption.IsChecked;
 
         if (FormsGrowthOption.IsChecked && _aTimer != null)
             FormRow.Height = new GridLength(0.5, GridUnitType.Star);
@@ -486,7 +493,7 @@ public partial class MainWindow
 
     private void NextLevelCheckToggle(bool toggle)
     {
-        Properties.Settings.Default.NextLevelCheck = toggle;
+        App.Settings.NextLevelCheck = toggle;
         NextLevelCheckOption.IsChecked = toggle;
 
         NextLevelDisplay();
@@ -541,7 +548,7 @@ public partial class MainWindow
 
     private void DeathCounterToggle(bool toggle)
     {
-        Properties.Settings.Default.DeathCounter = toggle;
+        App.Settings.DeathCounter = toggle;
         DeathCounterOption.IsChecked = toggle;
 
         DeathCounterDisplay();
@@ -574,7 +581,7 @@ public partial class MainWindow
 
     private void EmitProofKeystrokeToggle(bool toggle)
     {
-        Properties.Settings.Default.EmitProofKeystroke = toggle;
+        App.Settings.EmitProofKeystroke = toggle;
         EmitProofKeystrokeOption.IsChecked = toggle;
     }
 
@@ -593,9 +600,9 @@ public partial class MainWindow
         }
         SoraLevel50Option.IsChecked = false;
         SoraLevel99Option.IsChecked = false;
-        Properties.Settings.Default.WorldLevel50 = SoraLevel50Option.IsChecked;
-        Properties.Settings.Default.WorldLevel99 = SoraLevel99Option.IsChecked;
-        Properties.Settings.Default.WorldLevel1 = toggle;
+        App.Settings.WorldLevel50 = SoraLevel50Option.IsChecked;
+        App.Settings.WorldLevel99 = SoraLevel99Option.IsChecked;
+        App.Settings.WorldLevel1 = toggle;
 
         NextLevelDisplay();
     }
@@ -615,9 +622,9 @@ public partial class MainWindow
         }
         SoraLevel01Option.IsChecked = false;
         SoraLevel99Option.IsChecked = false;
-        Properties.Settings.Default.WorldLevel1 = SoraLevel50Option.IsChecked;
-        Properties.Settings.Default.WorldLevel99 = SoraLevel99Option.IsChecked;
-        Properties.Settings.Default.WorldLevel50 = toggle;
+        App.Settings.WorldLevel1 = SoraLevel50Option.IsChecked;
+        App.Settings.WorldLevel99 = SoraLevel99Option.IsChecked;
+        App.Settings.WorldLevel50 = toggle;
 
         NextLevelDisplay();
     }
@@ -637,9 +644,9 @@ public partial class MainWindow
         }
         SoraLevel50Option.IsChecked = false;
         SoraLevel01Option.IsChecked = false;
-        Properties.Settings.Default.WorldLevel50 = SoraLevel50Option.IsChecked;
-        Properties.Settings.Default.WorldLevel1 = SoraLevel01Option.IsChecked;
-        Properties.Settings.Default.WorldLevel99 = toggle;
+        App.Settings.WorldLevel50 = SoraLevel50Option.IsChecked;
+        App.Settings.WorldLevel1 = SoraLevel01Option.IsChecked;
+        App.Settings.WorldLevel99 = toggle;
 
         NextLevelDisplay();
     }
@@ -650,7 +657,7 @@ public partial class MainWindow
 
     private void WorldHighlightToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.WorldHighlight = WorldHighlightOption.IsChecked;
+        App.Settings.WorldHighlight = WorldHighlightOption.IsChecked;
 
         if (WorldHighlightOption.IsChecked && Data.Selected != null) //set previousl selected world to default colors
         {
@@ -674,32 +681,32 @@ public partial class MainWindow
         }
 
         OldWorldLayoutOption.IsChecked = false;
-        Properties.Settings.Default.NewWorldLayout = NewWorldLayoutOption.IsChecked;
-        Properties.Settings.Default.OldWorldLayout = OldWorldLayoutOption.IsChecked;
+        App.Settings.NewWorldLayout = NewWorldLayoutOption.IsChecked;
+        App.Settings.OldWorldLayout = OldWorldLayoutOption.IsChecked;
 
         if (!NewWorldLayoutOption.IsChecked)
             return;
 
         var tempWorldState = new bool[19];
-        tempWorldState[0] = Properties.Settings.Default.SoraHeart;
-        tempWorldState[1] = Properties.Settings.Default.Drives;
-        tempWorldState[2] = Properties.Settings.Default.Simulated;
-        tempWorldState[3] = Properties.Settings.Default.TwilightTown;
-        tempWorldState[4] = Properties.Settings.Default.HollowBastion;
-        tempWorldState[5] = Properties.Settings.Default.BeastCastle;
-        tempWorldState[6] = Properties.Settings.Default.Olympus;
-        tempWorldState[7] = Properties.Settings.Default.Agrabah;
-        tempWorldState[8] = Properties.Settings.Default.LandofDragons;
-        tempWorldState[9] = Properties.Settings.Default.DisneyCastle;
-        tempWorldState[10] = Properties.Settings.Default.PrideLands;
-        tempWorldState[11] = Properties.Settings.Default.PortRoyal;
-        tempWorldState[12] = Properties.Settings.Default.HalloweenTown;
-        tempWorldState[13] = Properties.Settings.Default.SpaceParanoids;
-        tempWorldState[14] = Properties.Settings.Default.TWTNW;
-        tempWorldState[15] = Properties.Settings.Default.HundredAcre;
-        tempWorldState[16] = Properties.Settings.Default.Atlantica;
-        tempWorldState[17] = Properties.Settings.Default.Puzzle;
-        tempWorldState[18] = Properties.Settings.Default.Synth;
+        tempWorldState[0] = App.Settings.SoraHeart;
+        tempWorldState[1] = App.Settings.Drives;
+        tempWorldState[2] = App.Settings.Simulated;
+        tempWorldState[3] = App.Settings.TwilightTown;
+        tempWorldState[4] = App.Settings.HollowBastion;
+        tempWorldState[5] = App.Settings.BeastCastle;
+        tempWorldState[6] = App.Settings.Olympus;
+        tempWorldState[7] = App.Settings.Agrabah;
+        tempWorldState[8] = App.Settings.LandofDragons;
+        tempWorldState[9] = App.Settings.DisneyCastle;
+        tempWorldState[10] = App.Settings.PrideLands;
+        tempWorldState[11] = App.Settings.PortRoyal;
+        tempWorldState[12] = App.Settings.HalloweenTown;
+        tempWorldState[13] = App.Settings.SpaceParanoids;
+        tempWorldState[14] = App.Settings.TWTNW;
+        tempWorldState[15] = App.Settings.HundredAcre;
+        tempWorldState[16] = App.Settings.Atlantica;
+        tempWorldState[17] = App.Settings.Puzzle;
+        tempWorldState[18] = App.Settings.Synth;
 
         ReloadWorlds(null);
 
@@ -759,32 +766,32 @@ public partial class MainWindow
         }
 
         NewWorldLayoutOption.IsChecked = false;
-        Properties.Settings.Default.NewWorldLayout = NewWorldLayoutOption.IsChecked;
-        Properties.Settings.Default.OldWorldLayout = OldWorldLayoutOption.IsChecked;
+        App.Settings.NewWorldLayout = NewWorldLayoutOption.IsChecked;
+        App.Settings.OldWorldLayout = OldWorldLayoutOption.IsChecked;
 
         if (!OldWorldLayoutOption.IsChecked)
             return;
 
         var tempWorldState = new bool[19];
-        tempWorldState[0] = Properties.Settings.Default.SoraHeart;
-        tempWorldState[1] = Properties.Settings.Default.Drives;
-        tempWorldState[2] = Properties.Settings.Default.Simulated;
-        tempWorldState[3] = Properties.Settings.Default.TwilightTown;
-        tempWorldState[4] = Properties.Settings.Default.HollowBastion;
-        tempWorldState[5] = Properties.Settings.Default.BeastCastle;
-        tempWorldState[6] = Properties.Settings.Default.Olympus;
-        tempWorldState[7] = Properties.Settings.Default.Agrabah;
-        tempWorldState[8] = Properties.Settings.Default.LandofDragons;
-        tempWorldState[9] = Properties.Settings.Default.DisneyCastle;
-        tempWorldState[10] = Properties.Settings.Default.PrideLands;
-        tempWorldState[11] = Properties.Settings.Default.PortRoyal;
-        tempWorldState[12] = Properties.Settings.Default.HalloweenTown;
-        tempWorldState[13] = Properties.Settings.Default.SpaceParanoids;
-        tempWorldState[14] = Properties.Settings.Default.TWTNW;
-        tempWorldState[15] = Properties.Settings.Default.HundredAcre;
-        tempWorldState[16] = Properties.Settings.Default.Atlantica;
-        tempWorldState[17] = Properties.Settings.Default.Puzzle;
-        tempWorldState[18] = Properties.Settings.Default.Synth;
+        tempWorldState[0] = App.Settings.SoraHeart;
+        tempWorldState[1] = App.Settings.Drives;
+        tempWorldState[2] = App.Settings.Simulated;
+        tempWorldState[3] = App.Settings.TwilightTown;
+        tempWorldState[4] = App.Settings.HollowBastion;
+        tempWorldState[5] = App.Settings.BeastCastle;
+        tempWorldState[6] = App.Settings.Olympus;
+        tempWorldState[7] = App.Settings.Agrabah;
+        tempWorldState[8] = App.Settings.LandofDragons;
+        tempWorldState[9] = App.Settings.DisneyCastle;
+        tempWorldState[10] = App.Settings.PrideLands;
+        tempWorldState[11] = App.Settings.PortRoyal;
+        tempWorldState[12] = App.Settings.HalloweenTown;
+        tempWorldState[13] = App.Settings.SpaceParanoids;
+        tempWorldState[14] = App.Settings.TWTNW;
+        tempWorldState[15] = App.Settings.HundredAcre;
+        tempWorldState[16] = App.Settings.Atlantica;
+        tempWorldState[17] = App.Settings.Puzzle;
+        tempWorldState[18] = App.Settings.Synth;
 
         ReloadWorlds(null);
 
@@ -884,7 +891,7 @@ public partial class MainWindow
 
     private void ColorHintToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.ColorHints = ColorHintOption.IsChecked;
+        App.Settings.ColorHints = ColorHintOption.IsChecked;
     }
 
     private void MinCheckToggle(object sender, RoutedEventArgs e)
@@ -897,8 +904,8 @@ public partial class MainWindow
         }
 
         OldCheckOption.IsChecked = false;
-        Properties.Settings.Default.MinCheck = MinCheckOption.IsChecked;
-        Properties.Settings.Default.OldCheck = OldCheckOption.IsChecked;
+        App.Settings.MinCheck = MinCheckOption.IsChecked;
+        App.Settings.OldCheck = OldCheckOption.IsChecked;
 
         SetItemImage();
         CustomChecksCheck();
@@ -914,8 +921,8 @@ public partial class MainWindow
         }
 
         MinCheckOption.IsChecked = false;
-        Properties.Settings.Default.MinCheck = MinCheckOption.IsChecked;
-        Properties.Settings.Default.OldCheck = OldCheckOption.IsChecked;
+        App.Settings.MinCheck = MinCheckOption.IsChecked;
+        App.Settings.OldCheck = OldCheckOption.IsChecked;
 
         SetItemImage();
         CustomChecksCheck();
@@ -931,8 +938,8 @@ public partial class MainWindow
         }
 
         OldWorldOption.IsChecked = false;
-        Properties.Settings.Default.MinWorld = MinWorldOption.IsChecked;
-        Properties.Settings.Default.OldWorld = OldWorldOption.IsChecked;
+        App.Settings.MinWorld = MinWorldOption.IsChecked;
+        App.Settings.OldWorld = OldWorldOption.IsChecked;
 
         SetWorldImage();
         CustomWorldCheck();
@@ -948,8 +955,8 @@ public partial class MainWindow
         }
 
         MinWorldOption.IsChecked = false;
-        Properties.Settings.Default.MinWorld = MinWorldOption.IsChecked;
-        Properties.Settings.Default.OldWorld = OldWorldOption.IsChecked;
+        App.Settings.MinWorld = MinWorldOption.IsChecked;
+        App.Settings.OldWorld = OldWorldOption.IsChecked;
 
         SetWorldImage();
         CustomWorldCheck();
@@ -965,8 +972,8 @@ public partial class MainWindow
         }
 
         OldProgOption.IsChecked = false;
-        Properties.Settings.Default.MinProg = MinProgOption.IsChecked;
-        Properties.Settings.Default.OldProg = OldProgOption.IsChecked;
+        App.Settings.MinProg = MinProgOption.IsChecked;
+        App.Settings.OldProg = OldProgOption.IsChecked;
 
         SetProgressIcons();
     }
@@ -981,15 +988,15 @@ public partial class MainWindow
         }
 
         MinProgOption.IsChecked = false;
-        Properties.Settings.Default.MinProg = MinProgOption.IsChecked;
-        Properties.Settings.Default.OldProg = OldProgOption.IsChecked;
+        App.Settings.MinProg = MinProgOption.IsChecked;
+        App.Settings.OldProg = OldProgOption.IsChecked;
 
         SetProgressIcons();
     }
 
     private void CustomImageToggle(object sender, RoutedEventArgs e)
     {
-        Properties.Settings.Default.CustomIcons = CustomFolderOption.IsChecked;
+        App.Settings.CustomIcons = CustomFolderOption.IsChecked;
 
         if (CustomFolderOption.IsChecked)
         {
@@ -1008,8 +1015,8 @@ public partial class MainWindow
 
     private void SetProgressIcons()
     {
-        var oldToggled = Properties.Settings.Default.OldProg;
-        var customToggled = Properties.Settings.Default.CustomIcons;
+        var oldToggled = App.Settings.OldProg;
+        var customToggled = App.Settings.CustomIcons;
         var prog = "Min-"; //Default
         if (oldToggled)
             prog = "Old-";
@@ -1042,7 +1049,7 @@ public partial class MainWindow
 
     private void SoraHeartToggle(bool toggle)
     {
-        Properties.Settings.Default.SoraHeart = toggle;
+        App.Settings.SoraHeart = toggle;
         SoraHeartOption.IsChecked = toggle;
         HandleWorldToggle(toggle, SorasHeart, SorasHeartGrid);
     }
@@ -1054,7 +1061,7 @@ public partial class MainWindow
 
     private void DrivesToggle(bool toggle)
     {
-        Properties.Settings.Default.Drives = toggle;
+        App.Settings.Drives = toggle;
         DrivesOption.IsChecked = toggle;
         HandleWorldToggle(toggle, DriveForms, DriveFormsGrid);
     }
@@ -1066,7 +1073,7 @@ public partial class MainWindow
 
     private void SimulatedToggle(bool toggle)
     {
-        Properties.Settings.Default.Simulated = toggle;
+        App.Settings.Simulated = toggle;
         SimulatedOption.IsChecked = toggle;
         HandleWorldToggle(toggle, SimulatedTwilightTown, SimulatedTwilightTownGrid);
     }
@@ -1078,7 +1085,7 @@ public partial class MainWindow
 
     private void TwilightTownToggle(bool toggle)
     {
-        Properties.Settings.Default.TwilightTown = toggle;
+        App.Settings.TwilightTown = toggle;
         TwilightTownOption.IsChecked = toggle;
         HandleWorldToggle(toggle, TwilightTown, TwilightTownGrid);
     }
@@ -1090,7 +1097,7 @@ public partial class MainWindow
 
     private void HollowBastionToggle(bool toggle)
     {
-        Properties.Settings.Default.HollowBastion = toggle;
+        App.Settings.HollowBastion = toggle;
         HollowBastionOption.IsChecked = toggle;
         HandleWorldToggle(toggle, HollowBastion, HollowBastionGrid);
     }
@@ -1102,7 +1109,7 @@ public partial class MainWindow
 
     private void BeastCastleToggle(bool toggle)
     {
-        Properties.Settings.Default.BeastCastle = toggle;
+        App.Settings.BeastCastle = toggle;
         BeastCastleOption.IsChecked = toggle;
         HandleWorldToggle(toggle, BeastsCastle, BeastsCastleGrid);
     }
@@ -1114,7 +1121,7 @@ public partial class MainWindow
 
     private void OlympusToggle(bool toggle)
     {
-        Properties.Settings.Default.Olympus = toggle;
+        App.Settings.Olympus = toggle;
         OlympusOption.IsChecked = toggle;
         HandleWorldToggle(toggle, OlympusColiseum, OlympusColiseumGrid);
     }
@@ -1126,7 +1133,7 @@ public partial class MainWindow
 
     private void AgrabahToggle(bool toggle)
     {
-        Properties.Settings.Default.Agrabah = toggle;
+        App.Settings.Agrabah = toggle;
         AgrabahOption.IsChecked = toggle;
         HandleWorldToggle(toggle, Agrabah, AgrabahGrid);
     }
@@ -1138,7 +1145,7 @@ public partial class MainWindow
 
     private void LandofDragonsToggle(bool toggle)
     {
-        Properties.Settings.Default.LandofDragons = toggle;
+        App.Settings.LandofDragons = toggle;
         LandofDragonsOption.IsChecked = toggle;
         HandleWorldToggle(toggle, LandofDragons, LandofDragonsGrid);
     }
@@ -1150,7 +1157,7 @@ public partial class MainWindow
 
     private void DisneyCastleToggle(bool toggle)
     {
-        Properties.Settings.Default.DisneyCastle = toggle;
+        App.Settings.DisneyCastle = toggle;
         DisneyCastleOption.IsChecked = toggle;
         HandleWorldToggle(toggle, DisneyCastle, DisneyCastleGrid);
     }
@@ -1162,7 +1169,7 @@ public partial class MainWindow
 
     private void PrideLandsToggle(bool toggle)
     {
-        Properties.Settings.Default.PrideLands = toggle;
+        App.Settings.PrideLands = toggle;
         PrideLandsOption.IsChecked = toggle;
         HandleWorldToggle(toggle, PrideLands, PrideLandsGrid);
     }
@@ -1174,7 +1181,7 @@ public partial class MainWindow
 
     private void PortRoyalToggle(bool toggle)
     {
-        Properties.Settings.Default.PortRoyal = toggle;
+        App.Settings.PortRoyal = toggle;
         PortRoyalOption.IsChecked = toggle;
         HandleWorldToggle(toggle, PortRoyal, PortRoyalGrid);
     }
@@ -1186,7 +1193,7 @@ public partial class MainWindow
 
     private void HalloweenTownToggle(bool toggle)
     {
-        Properties.Settings.Default.HalloweenTown = toggle;
+        App.Settings.HalloweenTown = toggle;
         HalloweenTownOption.IsChecked = toggle;
         HandleWorldToggle(toggle, HalloweenTown, HalloweenTownGrid);
     }
@@ -1198,7 +1205,7 @@ public partial class MainWindow
 
     private void SpaceParanoidsToggle(bool toggle)
     {
-        Properties.Settings.Default.SpaceParanoids = toggle;
+        App.Settings.SpaceParanoids = toggle;
         SpaceParanoidsOption.IsChecked = toggle;
         HandleWorldToggle(toggle, SpaceParanoids, SpaceParanoidsGrid);
     }
@@ -1210,7 +1217,7 @@ public partial class MainWindow
 
     private void TwtnwToggle(bool toggle)
     {
-        Properties.Settings.Default.TWTNW = toggle;
+        App.Settings.TWTNW = toggle;
         TwtnwOption.IsChecked = toggle;
         HandleWorldToggle(toggle, Twtnw, TWTNWGrid);
     }
@@ -1222,7 +1229,7 @@ public partial class MainWindow
 
     private void HundredAcreWoodToggle(bool toggle)
     {
-        Properties.Settings.Default.HundredAcre = toggle;
+        App.Settings.HundredAcre = toggle;
         HundredAcreWoodOption.IsChecked = toggle;
         HandleWorldToggle(toggle, HundredAcreWood, HundredAcreWoodGrid);
     }
@@ -1234,7 +1241,7 @@ public partial class MainWindow
 
     private void AtlanticaToggle(bool toggle)
     {
-        Properties.Settings.Default.Atlantica = toggle;
+        App.Settings.Atlantica = toggle;
         AtlanticaOption.IsChecked = toggle;
         HandleWorldToggle(toggle, Atlantica, AtlanticaGrid);
     }
@@ -1246,7 +1253,7 @@ public partial class MainWindow
 
     private void SynthToggle(bool toggle)
     {
-        Properties.Settings.Default.Synth = toggle;
+        App.Settings.Synth = toggle;
         SynthOption.IsChecked = toggle;
 
         //Check puzzle state
@@ -1274,7 +1281,7 @@ public partial class MainWindow
 
     private void PuzzleToggle(bool toggle)
     {
-        Properties.Settings.Default.Puzzle = toggle;
+        App.Settings.Puzzle = toggle;
         PuzzleOption.IsChecked = toggle;
 
         //Check synth state
@@ -1301,7 +1308,7 @@ public partial class MainWindow
     //
     //private void LegacyToggle(bool toggle)
     //{
-    //    Properties.Settings.Default.Legacy = toggle;
+    //    App.Settings.Legacy = toggle;
     //    LegacyOption.IsChecked = toggle;
     //}
 
@@ -1313,7 +1320,7 @@ public partial class MainWindow
 
     private void DisconnectToggle(bool toggle)
     {
-        Properties.Settings.Default.Disconnect = toggle;
+        App.Settings.Disconnect = toggle;
         Disconnect.IsChecked = toggle;
 
         //logic

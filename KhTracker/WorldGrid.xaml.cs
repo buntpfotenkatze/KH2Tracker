@@ -111,7 +111,7 @@ public partial class WorldGrid
             + (_proofOfNonExistenceObtained ? 1 : 0)
             + (_proofOfPeaceObtained ? 1 : 0);
 
-        if (_numProofsObtained != proofsObtained && Properties.Settings.Default.EmitProofKeystroke)
+        if (_numProofsObtained != proofsObtained && App.Settings.EmitProofKeystroke)
         {
             _numProofsObtained = proofsObtained;
             var simu = new InputSimulator();

@@ -1170,15 +1170,15 @@ public partial class MainWindow
 
     private void LoadHotkeyBind()
     {
-        if (!Directory.Exists("./KhTrackerSettings"))
+        if (!Directory.Exists("./KH2ArchipelagoTrackerSettings"))
         {
-            Directory.CreateDirectory("./KhTrackerSettings");
+            Directory.CreateDirectory("./KH2ArchipelagoTrackerSettings");
         }
 
-        if (!File.Exists("./KhTrackerSettings/AutoTrackerKeybinds.txt"))
+        if (!File.Exists("./KH2ArchipelagoTrackerSettings/AutoTrackerKeybinds.txt"))
         {
             //Console.WriteLine("File not found, making");
-            using var fs = File.Create("./KhTrackerSettings/AutoTrackerKeybinds.txt");
+            using var fs = File.Create("./KH2ArchipelagoTrackerSettings/AutoTrackerKeybinds.txt");
 
             // Add some text to file
             var title = new UTF8Encoding(true).GetBytes("Control\n");
@@ -1186,7 +1186,7 @@ public partial class MainWindow
             var author = new UTF8Encoding(true).GetBytes("F12");
             fs.Write(author, 0, author.Length);
         }
-        var lines = File.ReadAllLines("./KhTrackerSettings/AutoTrackerKeybinds.txt");
+        var lines = File.ReadAllLines("./KH2ArchipelagoTrackerSettings/AutoTrackerKeybinds.txt");
         var mod1 = "";
         var _mod1 = ModifierKeys.None;
         var mod2 = "";

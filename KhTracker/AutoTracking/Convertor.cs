@@ -43,7 +43,7 @@ public class WeaponConverter : IValueConverter
     private string enabledPath1 = "Images/System/stats/"; //sword
     private string enabledPath2 = "Images/System/stats/"; //shield
     private string enabledPath3 = "Images/System/stats/"; //staff
-    private readonly bool cusMode = Properties.Settings.Default.CustomIcons;
+    private readonly bool cusMode = App.Settings.CustomIcons;
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {

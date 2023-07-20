@@ -43,7 +43,7 @@ public partial class MainWindow
         LoadHotkeyBind();
 
         //start auto-connect if enabled
-        AutoConnectOption.IsChecked = Properties.Settings.Default.AutoConnect;
+        AutoConnectOption.IsChecked = App.Settings.AutoConnect;
         if (AutoConnectOption.IsChecked)
             InitTracker();
     }
@@ -694,55 +694,55 @@ public partial class MainWindow
     {
         #region Options
 
-        TopMostOption.IsChecked = Properties.Settings.Default.TopMost;
+        TopMostOption.IsChecked = App.Settings.TopMost;
         TopMostToggle(null, null);
 
-        DragAndDropOption.IsChecked = Properties.Settings.Default.DragDrop;
+        DragAndDropOption.IsChecked = App.Settings.DragDrop;
         DragDropToggle(null, null);
 
-        AutoSaveProgressOption.IsChecked = Properties.Settings.Default.AutoSaveProgress;
-        AutoSaveProgress2Option.IsChecked = Properties.Settings.Default.AutoSaveProgress;
+        AutoSaveProgressOption.IsChecked = App.Settings.AutoSaveProgress;
+        AutoSaveProgress2Option.IsChecked = App.Settings.AutoSaveProgress;
 
         #endregion
 
         #region Toggles
 
         //Items
-        AbilitiesOption.IsChecked = Properties.Settings.Default.Abilities;
+        AbilitiesOption.IsChecked = App.Settings.Abilities;
         AbilitiesToggle(AbilitiesOption.IsChecked);
 
-        AntiFormOption.IsChecked = Properties.Settings.Default.AntiForm;
+        AntiFormOption.IsChecked = App.Settings.AntiForm;
         AntiFormToggle(AntiFormOption.IsChecked);
 
-        VisitLockOption.IsChecked = Properties.Settings.Default.WorldVisitLock;
+        VisitLockOption.IsChecked = App.Settings.WorldVisitLock;
         VisitLockToggle(VisitLockOption.IsChecked);
 
-        TornPagesOption.IsChecked = Properties.Settings.Default.TornPages;
+        TornPagesOption.IsChecked = App.Settings.TornPages;
         TornPagesToggle(TornPagesOption.IsChecked);
 
-        ExtraChecksOption.IsChecked = Properties.Settings.Default.ExtraChecks;
+        ExtraChecksOption.IsChecked = App.Settings.ExtraChecks;
         ExtraChecksToggle(ExtraChecksOption.IsChecked);
 
         //Visual
-        SeedHashOption.IsChecked = Properties.Settings.Default.SeedHash;
+        SeedHashOption.IsChecked = App.Settings.SeedHash;
         SeedHashToggle(SeedHashOption.IsChecked);
 
-        WorldProgressOption.IsChecked = Properties.Settings.Default.WorldProgress;
+        WorldProgressOption.IsChecked = App.Settings.WorldProgress;
         WorldProgressToggle(null, null);
 
-        FormsGrowthOption.IsChecked = Properties.Settings.Default.FormsGrowth;
+        FormsGrowthOption.IsChecked = App.Settings.FormsGrowth;
         FormsGrowthToggle(null, null);
 
         //Levelvisuals
-        NextLevelCheckOption.IsChecked = Properties.Settings.Default.NextLevelCheck;
+        NextLevelCheckOption.IsChecked = App.Settings.NextLevelCheck;
         NextLevelCheckToggle(NextLevelCheckOption.IsChecked);
 
-        DeathCounterOption.IsChecked = Properties.Settings.Default.DeathCounter;
+        DeathCounterOption.IsChecked = App.Settings.DeathCounter;
         DeathCounterToggle(DeathCounterOption.IsChecked);
 
-        SoraLevel01Option.IsChecked = Properties.Settings.Default.WorldLevel1;
-        SoraLevel50Option.IsChecked = Properties.Settings.Default.WorldLevel50;
-        SoraLevel99Option.IsChecked = Properties.Settings.Default.WorldLevel99;
+        SoraLevel01Option.IsChecked = App.Settings.WorldLevel1;
+        SoraLevel50Option.IsChecked = App.Settings.WorldLevel50;
+        SoraLevel99Option.IsChecked = App.Settings.WorldLevel99;
         if (SoraLevel01Option.IsChecked)
             SoraLevel01Toggle(null, null);
         if (SoraLevel50Option.IsChecked)
@@ -750,56 +750,56 @@ public partial class MainWindow
         if (SoraLevel99Option.IsChecked)
             SoraLevel99Toggle(null, null);
 
-        WorldHighlightOption.IsChecked = Properties.Settings.Default.WorldHighlight;
+        WorldHighlightOption.IsChecked = App.Settings.WorldHighlight;
 
         //message box
-        Disconnect.IsChecked = Properties.Settings.Default.Disconnect;
+        Disconnect.IsChecked = App.Settings.Disconnect;
         DisconnectToggle(Disconnect.IsChecked);
 
         #endregion
 
         #region Visual
 
-        NewWorldLayoutOption.IsChecked = Properties.Settings.Default.NewWorldLayout;
+        NewWorldLayoutOption.IsChecked = App.Settings.NewWorldLayout;
         if (NewWorldLayoutOption.IsChecked)
             NewWorldLayoutToggle(null, null);
 
-        OldWorldLayoutOption.IsChecked = Properties.Settings.Default.OldWorldLayout;
+        OldWorldLayoutOption.IsChecked = App.Settings.OldWorldLayout;
         if (OldWorldLayoutOption.IsChecked)
             OldWorldLayoutToggle(null, null);
 
-        MinWorldOption.IsChecked = Properties.Settings.Default.MinWorld;
+        MinWorldOption.IsChecked = App.Settings.MinWorld;
         if (MinWorldOption.IsChecked)
             MinWorldToggle(null, null);
 
-        OldWorldOption.IsChecked = Properties.Settings.Default.OldWorld;
+        OldWorldOption.IsChecked = App.Settings.OldWorld;
         if (OldWorldOption.IsChecked)
             OldWorldToggle(null, null);
 
-        MinCheckOption.IsChecked = Properties.Settings.Default.MinCheck;
+        MinCheckOption.IsChecked = App.Settings.MinCheck;
         if (MinCheckOption.IsChecked)
             MinCheckToggle(null, null);
 
-        OldCheckOption.IsChecked = Properties.Settings.Default.OldCheck;
+        OldCheckOption.IsChecked = App.Settings.OldCheck;
         if (OldCheckOption.IsChecked)
             OldCheckToggle(null, null);
 
-        MinProgOption.IsChecked = Properties.Settings.Default.MinProg;
+        MinProgOption.IsChecked = App.Settings.MinProg;
         if (MinProgOption.IsChecked)
             MinProgToggle(null, null);
 
-        OldProgOption.IsChecked = Properties.Settings.Default.OldProg;
+        OldProgOption.IsChecked = App.Settings.OldProg;
         if (OldProgOption.IsChecked)
             OldProgToggle(null, null);
 
-        CustomFolderOption.IsChecked = Properties.Settings.Default.CustomIcons;
+        CustomFolderOption.IsChecked = App.Settings.CustomIcons;
         CustomImageToggle(null, null);
 
-        ColorHintOption.IsChecked = Properties.Settings.Default.ColorHints;
+        ColorHintOption.IsChecked = App.Settings.ColorHints;
 
         //testing background settings stuff (i thought this would be simplier than the above methods)
         //maybe i was wrong. (at least everything is done by 2 settings instead of 8)
-        var mainBg = Properties.Settings.Default.MainBG;
+        var mainBg = App.Settings.MainBG;
         switch (mainBg)
         {
             case 1:
@@ -836,72 +836,72 @@ public partial class MainWindow
 
         #region Worlds
 
-        SoraHeartOption.IsChecked = Properties.Settings.Default.SoraHeart;
+        SoraHeartOption.IsChecked = App.Settings.SoraHeart;
         SoraHeartToggle(SoraHeartOption.IsChecked);
 
-        DrivesOption.IsChecked = Properties.Settings.Default.Drives;
+        DrivesOption.IsChecked = App.Settings.Drives;
         DrivesToggle(DrivesOption.IsChecked);
 
-        SimulatedOption.IsChecked = Properties.Settings.Default.Simulated;
+        SimulatedOption.IsChecked = App.Settings.Simulated;
         SimulatedToggle(SimulatedOption.IsChecked);
 
-        TwilightTownOption.IsChecked = Properties.Settings.Default.TwilightTown;
+        TwilightTownOption.IsChecked = App.Settings.TwilightTown;
         TwilightTownToggle(TwilightTownOption.IsChecked);
 
-        HollowBastionOption.IsChecked = Properties.Settings.Default.HollowBastion;
+        HollowBastionOption.IsChecked = App.Settings.HollowBastion;
         HollowBastionToggle(HollowBastionOption.IsChecked);
 
-        BeastCastleOption.IsChecked = Properties.Settings.Default.BeastCastle;
+        BeastCastleOption.IsChecked = App.Settings.BeastCastle;
         BeastCastleToggle(BeastCastleOption.IsChecked);
 
-        OlympusOption.IsChecked = Properties.Settings.Default.Olympus;
+        OlympusOption.IsChecked = App.Settings.Olympus;
         OlympusToggle(OlympusOption.IsChecked);
 
-        AgrabahOption.IsChecked = Properties.Settings.Default.Agrabah;
+        AgrabahOption.IsChecked = App.Settings.Agrabah;
         AgrabahToggle(AgrabahOption.IsChecked);
 
-        LandofDragonsOption.IsChecked = Properties.Settings.Default.LandofDragons;
+        LandofDragonsOption.IsChecked = App.Settings.LandofDragons;
         LandofDragonsToggle(LandofDragonsOption.IsChecked);
 
-        DisneyCastleOption.IsChecked = Properties.Settings.Default.DisneyCastle;
+        DisneyCastleOption.IsChecked = App.Settings.DisneyCastle;
         DisneyCastleToggle(DisneyCastleOption.IsChecked);
 
-        PrideLandsOption.IsChecked = Properties.Settings.Default.PrideLands;
+        PrideLandsOption.IsChecked = App.Settings.PrideLands;
         PrideLandsToggle(PrideLandsOption.IsChecked);
 
-        PortRoyalOption.IsChecked = Properties.Settings.Default.PortRoyal;
+        PortRoyalOption.IsChecked = App.Settings.PortRoyal;
         PortRoyalToggle(PortRoyalOption.IsChecked);
 
-        HalloweenTownOption.IsChecked = Properties.Settings.Default.HalloweenTown;
+        HalloweenTownOption.IsChecked = App.Settings.HalloweenTown;
         HalloweenTownToggle(HalloweenTownOption.IsChecked);
 
-        SpaceParanoidsOption.IsChecked = Properties.Settings.Default.SpaceParanoids;
+        SpaceParanoidsOption.IsChecked = App.Settings.SpaceParanoids;
         SpaceParanoidsToggle(SpaceParanoidsOption.IsChecked);
 
-        TwtnwOption.IsChecked = Properties.Settings.Default.TWTNW;
+        TwtnwOption.IsChecked = App.Settings.TWTNW;
         TwtnwToggle(TwtnwOption.IsChecked);
 
-        HundredAcreWoodOption.IsChecked = Properties.Settings.Default.HundredAcre;
+        HundredAcreWoodOption.IsChecked = App.Settings.HundredAcre;
         HundredAcreWoodToggle(HundredAcreWoodOption.IsChecked);
 
-        AtlanticaOption.IsChecked = Properties.Settings.Default.Atlantica;
+        AtlanticaOption.IsChecked = App.Settings.Atlantica;
         AtlanticaToggle(AtlanticaOption.IsChecked);
 
-        PuzzleOption.IsChecked = Properties.Settings.Default.Puzzle;
+        PuzzleOption.IsChecked = App.Settings.Puzzle;
         PuzzleToggle(PuzzleOption.IsChecked);
 
-        SynthOption.IsChecked = Properties.Settings.Default.Synth;
+        SynthOption.IsChecked = App.Settings.Synth;
         SynthToggle(SynthOption.IsChecked);
 
         #endregion
 
-        Top = Properties.Settings.Default.WindowY;
-        Left = Properties.Settings.Default.WindowX;
+        Top = App.Settings.WindowY;
+        Left = App.Settings.WindowX;
 
-        Width = Properties.Settings.Default.Width;
-        Height = Properties.Settings.Default.Height;
+        Width = App.Settings.Width;
+        Height = App.Settings.Height;
 
-        EmitProofKeystrokeOption.IsChecked = Properties.Settings.Default.EmitProofKeystroke;
+        EmitProofKeystrokeOption.IsChecked = App.Settings.EmitProofKeystroke;
         if (EmitProofKeystrokeOption.IsChecked)
             EmitProofKeystrokeToggle(null, null);
     }
@@ -1063,31 +1063,31 @@ public partial class MainWindow
     {
         if (AutoSaveProgressOption.IsChecked)
         {
-            if (!Directory.Exists("KhTrackerAutoSaves"))
+            if (!Directory.Exists("KH2ArchipelagoTrackerAutoSaves"))
             {
-                Directory.CreateDirectory("KhTrackerAutoSaves\\");
+                Directory.CreateDirectory("KH2ArchipelagoTrackerAutoSaves\\");
             }
 
             Save(
-                "KhTrackerAutoSaves\\"
+                "KH2ArchipelagoTrackerAutoSaves\\"
                     + "Tracker-Backup_"
                     + DateTime.Now.ToString("yy-MM-dd_H-m")
                     + ".tsv"
             );
         }
-        Properties.Settings.Default.Save();
+        App.Settings.Save();
     }
 
     private void Window_LocationChanged(object sender, EventArgs e)
     {
-        Properties.Settings.Default.WindowY = RestoreBounds.Top;
-        Properties.Settings.Default.WindowX = RestoreBounds.Left;
+        App.Settings.WindowY = RestoreBounds.Top;
+        App.Settings.WindowX = RestoreBounds.Left;
     }
 
     private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
     {
-        Properties.Settings.Default.Width = RestoreBounds.Width;
-        Properties.Settings.Default.Height = RestoreBounds.Height;
+        App.Settings.Width = RestoreBounds.Width;
+        App.Settings.Height = RestoreBounds.Height;
     }
 
     private void ResetSize(object sender, RoutedEventArgs e)

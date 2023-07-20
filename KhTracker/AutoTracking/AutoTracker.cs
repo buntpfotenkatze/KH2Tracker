@@ -753,12 +753,12 @@ public partial class MainWindow
 
             if (AutoSaveProgress2Option.IsChecked)
             {
-                if (!Directory.Exists("KhTrackerAutoSaves"))
+                if (!Directory.Exists("KH2ArchipelagoTrackerAutoSaves"))
                 {
-                    Directory.CreateDirectory("KhTrackerAutoSaves\\");
+                    Directory.CreateDirectory("KH2ArchipelagoTrackerAutoSaves\\");
                 }
                 Save(
-                    "KhTrackerAutoSaves\\"
+                    "KH2ArchipelagoTrackerAutoSaves\\"
                         + "ConnectionLost-Backup_"
                         + DateTime.Now.ToString("yy-MM-dd_H-m")
                         + ".tsv"
@@ -1082,8 +1082,8 @@ public partial class MainWindow
         var progressionM = Data.WorldsData[wName].Progression;
 
         //Get current icon prefixes (simple, game, or custom icons)
-        var oldToggled = Properties.Settings.Default.OldProg;
-        var customToggled = Properties.Settings.Default.CustomIcons;
+        var oldToggled = App.Settings.OldProg;
+        var customToggled = App.Settings.CustomIcons;
         var prog = "Min-"; //Default
         if (oldToggled)
             prog = "Old-";
@@ -2791,8 +2791,8 @@ public partial class MainWindow
     private void UpdateFormProgression()
     {
         var found = 0;
-        var oldToggled = Properties.Settings.Default.OldProg;
-        var customToggled = Properties.Settings.Default.CustomIcons;
+        var oldToggled = App.Settings.OldProg;
+        var customToggled = App.Settings.CustomIcons;
         var prog = "Min-"; //Default
         if (oldToggled)
             prog = "Old-";

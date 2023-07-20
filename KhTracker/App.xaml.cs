@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
+using Microsoft.Extensions.Configuration;
 
 namespace KhTracker;
 
@@ -8,7 +10,11 @@ namespace KhTracker;
 /// </summary>
 public partial class App
 {
-    public static Log Logger;
+    public static Log Logger { get; private set; }
+
+    public static IConfiguration Config { get; private set; }
+
+    internal static Settings Settings { get; private set; }
 
     private App()
     {
@@ -19,6 +25,10 @@ public partial class App
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
                     + "\\KhTracker\\log.txt"
             );
+            Config = new ConfigurationBuilder()
+                .AddJsonFile("./KH2ArchipelagoTrackerSettings/settings.json", true)
+                .Build();
+            Settings = Config.Get<Settings>() ?? new Settings();
         }
         catch { }
     }
@@ -33,8 +43,12 @@ public partial class App
         System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e
     )
     {
+        if (!Directory.Exists("KH2ArchipelagoTrackerAutoSaves"))
+        {
+            Directory.CreateDirectory("KH2ArchipelagoTrackerAutoSaves\\");
+        }
         (MainWindow as MainWindow)!.Save(
-            "KhTrackerAutoSaves\\"
+            "KH2ArchipelagoTrackerAutoSaves\\"
                 + "Tracker-CrashBackup_"
                 + DateTime.Now.ToString("yy-MM-dd_H-m")
                 + ".tsv"
