@@ -198,6 +198,39 @@ public partial class MainWindow
     /// Toggles
     ///
 
+    private void ProofsToggle(object sender, RoutedEventArgs e)
+    {
+        ProofsToggle(ProofsOption.IsChecked);
+    }
+
+    private void ProofsToggle(bool toggle)
+    {
+        App.Settings.Proofs = toggle;
+        ProofsOption.IsChecked = toggle;
+        var width = toggle
+            ? new GridLength(1.0, GridUnitType.Star)
+            : new GridLength(0, GridUnitType.Star);
+        ConnectionCol.Width = width;
+        NonexistenceCol.Width = width;
+        PeaceCol.Width = width;
+    }
+
+    private void PromiseCharmToggle(object sender, RoutedEventArgs e)
+    {
+        PromiseCharmToggle(PromiseCharmOption.IsChecked);
+    }
+
+    private void PromiseCharmToggle(bool toggle)
+    {
+        App.Settings.PromiseCharm = toggle;
+        PromiseCharmOption.IsChecked = toggle;
+        PromiseCharmCol.Width = toggle
+            ? new GridLength(1.0, GridUnitType.Star)
+            : new GridLength(0, GridUnitType.Star);
+
+        HandleItemToggle(toggle, PromiseCharm, false);
+    }
+
     private void AbilitiesToggle(object sender, RoutedEventArgs e)
     {
         AbilitiesToggle(AbilitiesOption.IsChecked);

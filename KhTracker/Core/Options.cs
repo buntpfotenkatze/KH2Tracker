@@ -62,44 +62,6 @@ public partial class MainWindow
 
     public void Save(string filename)
     {
-        #region Settings
-        var settingInfo = new bool[31];
-        //Display toggles
-        settingInfo[0] = false;
-        settingInfo[1] = TornPagesOption.IsChecked;
-        settingInfo[2] = false;
-        settingInfo[3] = AbilitiesOption.IsChecked;
-        settingInfo[4] = AntiFormOption.IsChecked;
-        settingInfo[5] = VisitLockOption.IsChecked;
-        settingInfo[6] = ExtraChecksOption.IsChecked;
-        settingInfo[7] = SoraLevel01Option.IsChecked;
-        settingInfo[8] = SoraLevel50Option.IsChecked;
-        settingInfo[9] = SoraLevel99Option.IsChecked;
-        //World toggles
-        settingInfo[10] = SoraHeartOption.IsChecked;
-        settingInfo[11] = DrivesOption.IsChecked;
-        settingInfo[12] = SimulatedOption.IsChecked;
-        settingInfo[13] = TwilightTownOption.IsChecked;
-        settingInfo[14] = HollowBastionOption.IsChecked;
-        settingInfo[15] = BeastCastleOption.IsChecked;
-        settingInfo[16] = OlympusOption.IsChecked;
-        settingInfo[17] = AgrabahOption.IsChecked;
-        settingInfo[18] = LandofDragonsOption.IsChecked;
-        settingInfo[19] = DisneyCastleOption.IsChecked;
-        settingInfo[20] = PrideLandsOption.IsChecked;
-        settingInfo[21] = PortRoyalOption.IsChecked;
-        settingInfo[22] = HalloweenTownOption.IsChecked;
-        settingInfo[23] = SpaceParanoidsOption.IsChecked;
-        settingInfo[24] = TwtnwOption.IsChecked;
-        settingInfo[25] = HundredAcreWoodOption.IsChecked;
-        settingInfo[26] = AtlanticaOption.IsChecked;
-        settingInfo[27] = SynthOption.IsChecked;
-        settingInfo[28] = PuzzleOption.IsChecked;
-        //other
-        settingInfo[29] = false;
-        settingInfo[30] = false;
-        #endregion
-
         #region WorldInfo
         var worldvalueInfo = new Dictionary<string, object>();
         foreach (var worldKey in Data.WorldsData.Keys.ToList())
@@ -127,14 +89,13 @@ public partial class MainWindow
         #endregion
 
         #region Counters
-        var counterInfo = new[] { 1, 1, 1, 1, 1, 1, 0, 0 };
+        var counterInfo = new int[8];
         counterInfo[0] = Data.DriveLevels[0];
         counterInfo[1] = Data.DriveLevels[1];
         counterInfo[2] = Data.DriveLevels[2];
         counterInfo[3] = Data.DriveLevels[3];
         counterInfo[4] = Data.DriveLevels[4];
-        if (stats != null)
-            counterInfo[5] = stats.Level;
+        counterInfo[5] = stats?.Level ?? 1;
         counterInfo[6] = deathCounter;
         counterInfo[7] = Data.UsedPages;
         #endregion
@@ -145,7 +106,7 @@ public partial class MainWindow
         {
             Version = Title,
             SeedHash = Data.SeedHashVisual,
-            Settings = settingInfo,
+            App.Settings,
             RandomSeed = Data.ConvertedSeedHash,
             Worlds = worldvalueInfo,
             Counters = counterInfo,
@@ -230,39 +191,42 @@ public partial class MainWindow
         //Check Settings
         if (savefile.TryGetValue("Settings", out var value))
         {
-            var setting = JsonSerializer.Deserialize<bool[]>(value.ToString()!);
+            var setting = JsonSerializer.Deserialize<Settings>(value.ToString()!);
             //Display toggles
-            TornPagesToggle(setting[1]);
-            AbilitiesToggle(setting[3]);
-            AntiFormToggle(setting[4]);
-            VisitLockToggle(setting[5]);
-            ExtraChecksToggle(setting[6]);
-            if (setting[7])
+            ProofsToggle(setting.Proofs);
+            TornPagesToggle(setting.TornPages);
+            PromiseCharmToggle(setting.PromiseCharm);
+            LuckyEmblemsToggle(setting.LuckyEmblems);
+            AbilitiesToggle(setting.Abilities);
+            AntiFormToggle(setting.AntiForm);
+            VisitLockToggle(setting.WorldVisitLock);
+            ExtraChecksToggle(setting.ExtraChecks);
+            if (setting.WorldLevel1)
                 SoraLevel01Toggle(true);
-            else if (setting[8])
+            else if (setting.WorldLevel50)
                 SoraLevel50Toggle(true);
-            else if (setting[9])
+            else if (setting.WorldLevel99)
                 SoraLevel99Toggle(true);
             //World toggles
-            SoraHeartToggle(setting[10]);
-            DrivesToggle(setting[11]);
-            SimulatedToggle(setting[12]);
-            TwilightTownToggle(setting[13]);
-            HollowBastionToggle(setting[14]);
-            BeastCastleToggle(setting[15]);
-            OlympusToggle(setting[16]);
-            AgrabahToggle(setting[17]);
-            LandofDragonsToggle(setting[18]);
-            DisneyCastleToggle(setting[19]);
-            PrideLandsToggle(setting[20]);
-            PortRoyalToggle(setting[21]);
-            HalloweenTownToggle(setting[22]);
-            SpaceParanoidsToggle(setting[23]);
-            TwtnwToggle(setting[24]);
-            HundredAcreWoodToggle(setting[25]);
-            AtlanticaToggle(setting[26]);
-            SynthToggle(setting[27]);
-            PuzzleToggle(setting[28]);
+            SoraHeartToggle(setting.SoraHeart);
+            DrivesToggle(setting.Drives);
+            SimulatedToggle(setting.Simulated);
+            TwilightTownToggle(setting.TwilightTown);
+            HollowBastionToggle(setting.HollowBastion);
+            BeastCastleToggle(setting.BeastCastle);
+            OlympusToggle(setting.Olympus);
+            AgrabahToggle(setting.Agrabah);
+            LandofDragonsToggle(setting.LandofDragons);
+            DisneyCastleToggle(setting.DisneyCastle);
+            PrideLandsToggle(setting.PrideLands);
+            PortRoyalToggle(setting.PortRoyal);
+            HalloweenTownToggle(setting.HalloweenTown);
+            SpaceParanoidsToggle(setting.SpaceParanoids);
+            TwtnwToggle(setting.TWTNW);
+            HundredAcreWoodToggle(setting.HundredAcre);
+            AtlanticaToggle(setting.Atlantica);
+            SynthToggle(setting.Synth);
+            PuzzleToggle(setting.Puzzle);
             ////other
             //settingInfo[29] = GhostItemOption.IsChecked;
             //settingInfo[30] = GhostMathOption.IsChecked;
@@ -437,6 +401,8 @@ public partial class MainWindow
 
         var settings = deserializer.Deserialize<ArchipelagoSettings>(file);
 
+        PromiseCharmToggle(settings.KingdomHearts2.PromiseCharm);
+
         if (settings.KingdomHearts2.SuperBosses)
         {
             SettingAbsent.Width = new GridLength(1, GridUnitType.Star);
@@ -464,9 +430,11 @@ public partial class MainWindow
             case "level_1":
                 SoraLevel01Toggle(true);
                 break;
+            case "level_50_sanity": // TODO implement
             case "level_50":
                 SoraLevel50Toggle(true);
                 break;
+            case "level_99_sanity": // TODO implement
             case "level_99":
                 SoraLevel99Toggle(true);
                 break;
@@ -485,16 +453,25 @@ public partial class MainWindow
 
         switch (settings.KingdomHearts2.Goal)
         {
+            case "three_proofs":
+                ProofsToggle(true);
+                LuckyEmblemsToggle(false);
+                break;
             case "lucky_emblem_hunt":
+                ProofsToggle(false);
                 LuckyEmblemsToggle(true);
                 LuckyEmblemsRequired.Text = settings.KingdomHearts2.LuckyEmblemsRequired.ToString(
                     "00"
                 );
                 break;
+            case "hitlist": // TODO implement hitlist
             default:
+                ProofsToggle(false);
                 LuckyEmblemsToggle(false);
                 break;
         }
+
+        PromiseCharmToggle(settings.KingdomHearts2.PromiseCharm);
 
         if (Data.WasTracking)
         {
@@ -511,7 +488,7 @@ public partial class MainWindow
         {
             public string LevelDepth { get; set; }
 
-            [YamlMember(Alias = "Promise_Charm")]
+            [YamlMember(Alias = "Promise_Charm", ApplyNamingConventions = false)]
             public bool PromiseCharm { get; set; }
 
             public bool SuperBosses { get; set; }
@@ -538,6 +515,8 @@ public partial class MainWindow
     private void LoadSettings(string settings)
     {
         //item settings
+        ProofsToggle(true);
+        PromiseCharmToggle(false);
         AbilitiesToggle(false);
         VisitLockToggle(false);
         ExtraChecksToggle(false);
@@ -572,6 +551,12 @@ public partial class MainWindow
             var trimmed = setting.Trim();
             switch (trimmed)
             {
+                case "Proofs":
+                    ProofsToggle(true);
+                    break;
+                case "Promise Charm":
+                    PromiseCharmToggle(true);
+                    break;
                 case "Second Chance & Once More":
                     AbilitiesToggle(true);
                     break;

@@ -708,6 +708,12 @@ public partial class MainWindow
         #region Toggles
 
         //Items
+        ProofsOption.IsChecked = App.Settings.Proofs;
+        ProofsToggle(ProofsOption.IsChecked);
+
+        PromiseCharmOption.IsChecked = App.Settings.PromiseCharm;
+        PromiseCharmToggle(PromiseCharmOption.IsChecked);
+
         AbilitiesOption.IsChecked = App.Settings.Abilities;
         AbilitiesToggle(AbilitiesOption.IsChecked);
 

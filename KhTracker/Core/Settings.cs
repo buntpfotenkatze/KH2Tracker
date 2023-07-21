@@ -5,9 +5,9 @@ namespace KhTracker;
 
 public class Settings
 {
-    public bool PromiseCharm { get; set; }
+    public bool Proofs { get; set; } = true;
 
-    public bool AnsemReports { get; set; } = true;
+    public bool PromiseCharm { get; set; }
 
     public bool Abilities { get; set; } = true;
 
@@ -58,12 +58,6 @@ public class Settings
     public bool CustomIcons { get; set; }
 
     public bool SeedHash { get; set; } = true;
-
-    public bool Level1 { get; set; } = true;
-
-    public bool Level50 { get; set; }
-
-    public bool Level99 { get; set; }
 
     public bool CheckCount { get; set; }
 

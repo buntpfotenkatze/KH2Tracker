@@ -103,6 +103,19 @@ public partial class MainWindow
                 ("Cus-Baseball", SBaseball, "CustomImages/Checks/summon_chicken_little.png")
             },
             { Feather, ("Cus-Feather", SFeather, "CustomImages/Checks/summon_peter_pan.png") },
+            {
+                Nonexistence,
+                ("Cus-Nonexistence", SNonexistence, "CustomImages/Checks/proof_nonexistence.png")
+            },
+            {
+                Connection,
+                ("Cus-Connection", SConnection, "CustomImages/Checks/proof_connection.png")
+            },
+            { Peace, ("Cus-Peace", SPeace, "CustomImages/Checks/proof_peace.png") },
+            {
+                PromiseCharm,
+                ("Cus-PromiseCharm", SPromiseCharm, "CustomImages/Checks/promise_charm.png")
+            },
             { OnceMore, ("Cus-OnceMore", SOnceMore, "CustomImages/Checks/once_more.png") },
             {
                 SecondChance,

@@ -50,6 +50,7 @@ public partial class MainWindow
 
     private Report reportItem;
     private Summon charmItem;
+    private ImportantCheck proofItem;
 
     private Visit visitItemAuronWep;
     private Visit visitItemMulanWep;
@@ -485,6 +486,17 @@ public partial class MainWindow
         );
         importantChecks.Add(
             charmItem = new Summon(memory, save + 0x36C4, addressOffset, 5, "Feather")
+        );
+
+        importantChecks.Add(
+            proofItem = new Proof(memory, save + 0x3694, addressOffset, "PromiseCharm")
+        );
+        importantChecks.Add(proofItem = new Proof(memory, save + 0x36B4, addressOffset, "Peace"));
+        importantChecks.Add(
+            proofItem = new Proof(memory, save + 0x36B3, addressOffset, "Nonexistence")
+        );
+        importantChecks.Add(
+            proofItem = new Proof(memory, save + 0x36B2, addressOffset, "Connection")
         );
 
         var visitItemAuronWepCount = visitItemAuronWep?.Quantity ?? 0;
