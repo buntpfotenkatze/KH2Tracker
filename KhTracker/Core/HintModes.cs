@@ -297,6 +297,20 @@ namespace KhTracker
             }
             catch { }
 
+            //BossHomeHinting TEST
+            try
+            {
+                var points = JsonSerializer.Deserialize<Dictionary<string, int>>(hintObject["checkValue"].ToString());
+
+                foreach (var point in points)
+                {
+                    if (point.Key == "boss_final" && point.Value == 269)
+                    {
+                        data.BossHomeHinting = true;
+                    }
+                }
+            }
+            catch { }
 
             //set if world value should change color on completion
             if (reveals.Contains("complete"))
@@ -754,7 +768,7 @@ namespace KhTracker
 
         public void UpdatePointScore(int points)
         {
-            if (data.mode != Mode.PointsHints && !data.ScoreMode)
+            if (data.mode != Mode.PointsHints && !data.ScoreMode || data.BossHomeHinting)
                 return;
 
             int WorldBlue = 0;
@@ -1210,118 +1224,118 @@ namespace KhTracker
             }
             else if (data.BossRandoFound && TMP_bossReports)
             {
-                //get random based on seed hash
-                Random rand = new Random(data.convertedSeedHash);
+                    //get random based on seed hash
+                    Random rand = new Random(data.convertedSeedHash);
 
-                //setup lists
-                List<string> keyList = new List<string>(data.BossList.Keys);
+                    //setup lists
+                    List<string> keyList = new List<string>(data.BossList.Keys);
 
-                //Remove bosses for worlds not enabled and remove "duplicates"
-                foreach (var key in data.BossList.Keys)
-                {
-                    if (!data.enabledWorlds.Contains(Codes.bossLocations[key]))
-                        keyList.Remove(key);
-                    else if (key.Contains("Cups"))
-                        keyList.Remove(key);
-                    else if (key == "Hades II")
-                        keyList.Remove(key);
-                    else if (key.Contains("(Data)"))
+                    //Remove bosses for worlds not enabled and remove "duplicates"
+                    foreach (var key in data.BossList.Keys)
                     {
-                        //special case for some datas. we normally don't want
-                        //to hint datas unless the world the normally are in is off
-                        // (only applies for datas where the data fight is in a different world)
-                        switch (key)
+                        if (!data.enabledWorlds.Contains(Codes.bossLocations[key]))
+                            keyList.Remove(key);
+                        else if (key.Contains("Cups"))
+                            keyList.Remove(key);
+                        else if (key == "Hades II")
+                            keyList.Remove(key);
+                        else if (key.Contains("(Data)"))
                         {
-                            case "Axel (Data)":
-                                if (data.enabledWorlds.Contains("STT"))
+                            //special case for some datas. we normally don't want
+                            //to hint datas unless the world the normally are in is off
+                            // (only applies for datas where the data fight is in a different world)
+                            switch (key)
+                            {
+                                case "Axel (Data)":
+                                    if (data.enabledWorlds.Contains("STT"))
+                                        keyList.Remove(key);
+                                    break;
+                                case "Luxord (Data)":
+                                case "Roxas (Data)":
+                                case "Xigbar (Data)":
+                                    if (data.enabledWorlds.Contains("TWTNW"))
+                                        keyList.Remove(key);
+                                    break;
+                                default:
                                     keyList.Remove(key);
-                                break;
-                            case "Luxord (Data)":
-                            case "Roxas (Data)":
-                            case "Xigbar (Data)":
-                                if (data.enabledWorlds.Contains("TWTNW"))
-                                    keyList.Remove(key);
-                                break;
-                            default:
-                                keyList.Remove(key);
-                                break;
+                                    break;
+                            }
                         }
                     }
-                }
 
-                //get report info
-                foreach (var report in reportKeys)
-                {
-                    //get a boss
-                    string boss = keyList[rand.Next(0, keyList.Count)];
-                    //get boss types
-                    string origType = Codes.FindBossType(boss);
-                    string replaceType = Codes.FindBossType(data.BossList[boss]);
-
-                    //prioritize special arenas and bosses (50%?)
-                    while (origType == "boss_other" && replaceType == "boss_other")
+                    //get report info
+                    foreach (var report in reportKeys)
                     {
-                        int reroll = rand.Next(1, 10);
-                        if (reroll > 5) //50% chance to keep basic bosses
+                        //get a boss
+                        string boss = keyList[rand.Next(0, keyList.Count)];
+                        //get boss types
+                        string origType = Codes.FindBossType(boss);
+                        string replaceType = Codes.FindBossType(data.BossList[boss]);
+
+                        //prioritize special arenas and bosses (50%?)
+                        while (origType == "boss_other" && replaceType == "boss_other")
                         {
-                            break;
+                            int reroll = rand.Next(1, 10);
+                            if (reroll > 5) //50% chance to keep basic bosses
+                            {
+                                break;
+                            }
+
+                            boss = keyList[rand.Next(0, keyList.Count)];
+                            origType = Codes.FindBossType(boss);
+                            replaceType = Codes.FindBossType(data.BossList[boss]);
                         }
 
-                        boss = keyList[rand.Next(0, keyList.Count)];
-                        origType = Codes.FindBossType(boss);
-                        replaceType = Codes.FindBossType(data.BossList[boss]);
+                        //report location and final hint string
+                        string worldhint;
+
+                        if (boss == data.BossList[boss])
+                        {
+                            string tmp_origBoss = boss;
+                            if (tmp_origBoss == "Hades II (1)")
+                            {
+                                tmp_origBoss = "Hades";
+                            }
+                            if (tmp_origBoss == "Pete OC II")
+                            {
+                                tmp_origBoss = "Pete";
+                            }
+
+                            worldhint = tmp_origBoss + " is unchanged";
+                        }
+                        else
+                        {
+                            string tmp_origBoss = boss;
+                            string tmp_replBoss = data.BossList[boss];
+
+                            if (tmp_origBoss == "Hades II (1)")
+                            {
+                                tmp_origBoss = "Hades";
+                            }
+                            if (tmp_origBoss == "Pete OC II")
+                            {
+                                tmp_origBoss = "Pete";
+                            }
+
+                            if (tmp_replBoss == "Hades II (1)")
+                            {
+                                tmp_replBoss = "Hades";
+                            }
+                            if (tmp_replBoss == "Pete OC II")
+                            {
+                                tmp_replBoss = "Pete";
+                            }
+
+                            worldhint = tmp_origBoss + " became " + tmp_replBoss;
+                        }
+
+                        int dummyvalue = -12345; //use this for boss reports i guess
+                        data.reportInformation.Add(new Tuple<string, string, int>(worldhint, null, dummyvalue));
+                        var location = Codes.ConvertSeedGenName(reports[report.ToString()]["Location"].ToString());
+                        data.reportLocations.Add(location);
+
+                        keyList.Remove(boss);
                     }
-
-                    //report location and final hint string
-                    string worldhint;
-
-                    if (boss == data.BossList[boss])
-                    {
-                        string tmp_origBoss = boss;
-                        if (tmp_origBoss == "Hades II (1)")
-                        {
-                            tmp_origBoss = "Hades";
-                        }
-                        if (tmp_origBoss == "Pete OC II")
-                        {
-                            tmp_origBoss = "Pete";
-                        }
-
-                        worldhint = tmp_origBoss + " is unchanged";
-                    }
-                    else
-                    {
-                        string tmp_origBoss = boss;
-                        string tmp_replBoss = data.BossList[boss];
-
-                        if (tmp_origBoss == "Hades II (1)")
-                        {
-                            tmp_origBoss = "Hades";
-                        }
-                        if (tmp_origBoss == "Pete OC II")
-                        {
-                            tmp_origBoss = "Pete";
-                        }
-
-                        if (tmp_replBoss == "Hades II (1)")
-                        {
-                            tmp_replBoss = "Hades";
-                        }
-                        if (tmp_replBoss == "Pete OC II")
-                        {
-                            tmp_replBoss = "Pete";
-                        }
-
-                        worldhint = tmp_origBoss + " became " + tmp_replBoss;
-                    }
-
-                    int dummyvalue = -12345; //use this for boss reports i guess
-                    data.reportInformation.Add(new Tuple<string, string, int>(worldhint, null, dummyvalue));
-                    var location = Codes.ConvertSeedGenName(reports[report.ToString()]["Location"].ToString());
-                    data.reportLocations.Add(location);
-
-                    keyList.Remove(boss);
-                }
 
                 data.hintsLoaded = true;
             }
@@ -1802,6 +1816,12 @@ namespace KhTracker
     
         public void ProgressionBossHints()
         {
+            if (data.BossHomeHinting)
+            {
+                BossHomeHinting();
+                return;
+            }
+
             data.progBossInformation.Clear();
             int TempCost = data.HintCosts[0];
 
@@ -1936,5 +1956,85 @@ namespace KhTracker
             data.HintCosts.Add(TempCost);
         }
 
+        //TEST
+        public void BossHomeHinting()
+        {
+            data.progBossInformation.Clear();
+            int TempCost = data.HintCosts[0];
+            data.HintCosts = new List<int>();
+            data.WorldsEnabled = data.BossList.Count + 1;
+
+            for (int i = 0; i < data.WorldsEnabled; ++i)
+            {
+                data.HintCosts.Add(TempCost);
+            }
+            data.HintCosts.Add(TempCost);
+
+            for (int i = 0; i < data.STT_ProgressionValues.Count; ++i)
+            {
+                data.STT_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.TT_ProgressionValues.Count; ++i)
+            {
+                data.TT_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.HB_ProgressionValues.Count; ++i)
+            {
+                data.HB_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.CoR_ProgressionValues.Count; ++i)
+            {
+                data.CoR_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.BC_ProgressionValues.Count; ++i)
+            {
+                data.BC_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.OC_ProgressionValues.Count; ++i)
+            {
+                data.OC_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.AG_ProgressionValues.Count; ++i)
+            {
+                data.AG_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.LoD_ProgressionValues.Count; ++i)
+            {
+                data.LoD_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.HAW_ProgressionValues.Count; ++i)
+            {
+                data.HAW_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.PL_ProgressionValues.Count; ++i)
+            {
+                data.PL_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.AT_ProgressionValues.Count; ++i)
+            {
+                data.AT_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.DC_ProgressionValues.Count; ++i)
+            {
+                data.DC_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.HT_ProgressionValues.Count; ++i)
+            {
+                data.HT_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.PR_ProgressionValues.Count; ++i)
+            {
+                data.PR_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.SP_ProgressionValues.Count; ++i)
+            {
+                data.SP_ProgressionValues[i] = 0;
+            }
+            for (int i = 0; i < data.TWTNW_ProgressionValues.Count; ++i)
+            {
+                data.TWTNW_ProgressionValues[i] = 0;
+            }
+
+        }
     }
 }

@@ -194,6 +194,9 @@ namespace KhTracker
         //Hotkey stuff
         public bool usedHotkey = false;
         public GlobalHotkey startAutoTracker1, startAutoTracker2;
+
+        //BossHomeHinting TEST
+        public bool BossHomeHinting = false;
     }
 
     public class WorldData

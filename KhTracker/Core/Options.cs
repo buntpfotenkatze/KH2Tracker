@@ -1430,6 +1430,9 @@ namespace KhTracker
                         case "sys.yml":
                             hashfileBackup = entry;
                             break;
+                        //case "bosshintshome.txt":
+                        //    data.BossHomeHinting = true;
+                        //    break;
                         default:
                             break;
                     }
@@ -2347,6 +2350,8 @@ namespace KhTracker
             data.hintsLoaded = false;
             data.seedLoaded = false;
             data.saveFileLoaded = false;
+
+            data.BossHomeHinting = false;
 
             //prog boss hint stuff
             BossHintTextMiddle.Text = "";
