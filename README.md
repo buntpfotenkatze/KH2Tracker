@@ -108,6 +108,19 @@ session from a save point in STT or the checks there will be tracked incorrectly
 When playing multiple seeds in a row be sure to fully close and reopen pcsx2 or wait to start the auto tracker again
 after starting a new game to make sure the memory has been reset
 
+## Troubleshooting
+
+### On Windows 11, the cursor spins for a second as if its opening but then nothing opens
+apparently this is a workaround:
+- it seems for wahtever reason your PC isnt allowing the tracker to make the needed folder in appdata
+- you can try running as admin
+- or what fixed it for them was running it in compatiblity mode for some reason
+- they were on windows 11
+- can check by looking at appdata/local
+- there should be a KhTracker folder
+- then inside that a folder per version of tracker
+- if youve only ever used 1 just a folder inside of KhTracker
+
 ## Thanks
 
 * Dee-Ayy
