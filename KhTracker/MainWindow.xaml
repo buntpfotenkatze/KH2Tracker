@@ -1949,7 +1949,7 @@
                                 <ColumnDefinition Width="0.5*" />
                             </Grid.ColumnDefinitions>
                             <!-- main icon -->
-                            <Button Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="Twtnw" Background="Transparent"
+                            <Button Grid.RowSpan="2" Grid.ColumnSpan="3" x:Name="TWTNW" Background="Transparent"
                                     PreviewMouseDown="OnMouseDown" MouseWheel="OnMouseWheel"
                                     Template="{StaticResource DefaultButton}" FocusVisualStyle="{x:Null}"
                                     Content="{DynamicResource Min-TWTNWImage}" />
@@ -1966,9 +1966,18 @@
                                 </Image.RenderTransform>
                             </Image>
                             <!-- lock icons -->
-                            <Image Grid.Row="0" Grid.Column="0" x:Name="TwtnwLock"
+                            <Image Grid.Row="0" Grid.Column="0" x:Name="TwtnwLock1"
                                    Source="Images/Worlds/Locks/TT2.png" Grid.RowSpan="2" Grid.ColumnSpan="3"
-                                   Panel.ZIndex="1" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
+                                   Panel.ZIndex="1" RenderTransformOrigin="0,0.5" IsHitTestVisible="False">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                            <Image Grid.Row="0" Grid.Column="0" x:Name="TwtnwLock2"
+                                   Source="Images/Worlds/Locks/TT2.png" Grid.RowSpan="2" Grid.ColumnSpan="3"
+                                   Panel.ZIndex="1" RenderTransformOrigin="1,0.5" IsHitTestVisible="False">
                                 <Image.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleX="0.5" ScaleY="0.5" />
@@ -3514,7 +3523,7 @@
                         <local:OutlinedTextBlock x:Name="WayToTheDawnCount" FontFamily="{StaticResource Gummi}"
                                                  TextAlignment="Center" Margin="0,7,0,7" FontSize="8pt"
                                                  AllowDrop="False" IsHitTestVisible="False" StrokeThickness="4"
-                                                 Text="1">
+                                                 Text="2">
                             <local:OutlinedTextBlock.Fill>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                     <GradientStop Color="#827D7D" Offset="1" />
@@ -3553,7 +3562,8 @@
                                 Grid.Column="34" />
                     <local:Item x:Name="DisneyCastleKey2" Content="{DynamicResource Min-DisneyCastleKey2}"
                                 Grid.Column="34" />
-                    <local:Item x:Name="WayToTheDawn" Content="{DynamicResource Min-WayToTheDawn}" Grid.Column="37" />
+                    <local:Item x:Name="WayToTheDawn1" Content="{DynamicResource Min-WayToTheDawn1}" Grid.Column="37" />
+                    <local:Item x:Name="WayToTheDawn2" Content="{DynamicResource Min-WayToTheDawn2}" Grid.Column="37" />
 
                     <!-- silhouettes -->
                     <ContentControl Grid.Row="0" x:Name="SBeastWep" Content="{DynamicResource Min-BeastWep1}"

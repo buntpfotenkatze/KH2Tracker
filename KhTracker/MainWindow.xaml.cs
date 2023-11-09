@@ -82,7 +82,8 @@ public partial class MainWindow
         Data.VisitLocks.Add(NaminesSketches);
         Data.VisitLocks.Add(DisneyCastleKey1);
         Data.VisitLocks.Add(DisneyCastleKey2);
-        Data.VisitLocks.Add(WayToTheDawn);
+        Data.VisitLocks.Add(WayToTheDawn1);
+        Data.VisitLocks.Add(WayToTheDawn2);
 
         Data.WorldsData.Add(
             "SorasHeart",
@@ -1463,14 +1464,22 @@ public partial class MainWindow
                     switch (Data.WorldsData["TWTNW"].VisitLocks)
                     {
                         case 0:
-                            TwtnwLock.Visibility = Visibility.Collapsed;
-                            Twtnw.Opacity = 1;
+                            TwtnwLock1.Visibility = Visibility.Collapsed;
+                            TwtnwLock2.Visibility = Visibility.Collapsed;
+                            TWTNW.Opacity = 1;
                             WayToTheDawnCount.Text = " ";
                             break;
-                        default:
-                            TwtnwLock.Visibility = Visibility.Visible;
-                            Twtnw.Opacity = 0.45;
+                        case 1:
+                            TwtnwLock1.Visibility = Visibility.Collapsed;
+                            TwtnwLock2.Visibility = Visibility.Visible;
+                            TWTNW.Opacity = 1;
                             WayToTheDawnCount.Text = "1";
+                            break;
+                        default:
+                            TwtnwLock1.Visibility = Visibility.Visible;
+                            TwtnwLock2.Visibility = Visibility.Visible;
+                            TWTNW.Opacity = 0.45;
+                            WayToTheDawnCount.Text = "2";
                             break;
                     }
                     break;

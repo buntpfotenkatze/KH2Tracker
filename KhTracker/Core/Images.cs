@@ -164,8 +164,12 @@ public partial class MainWindow
                 ("Cus-DisneyCastleKey2", null, "CustomImages/Checks/lock_DisneyCastleKey.png")
             },
             {
-                WayToTheDawn,
+                WayToTheDawn1,
                 ("Cus-WayToTheDawn", SWayToTheDawn, "CustomImages/Checks/lock_WayToTheDawn.png")
+            },
+            {
+                WayToTheDawn2,
+                ("Cus-WayToTheDawn", null, "CustomImages/Checks/lock_WayToTheDawn.png")
             },
             {
                 MembershipCard1,
@@ -486,7 +490,13 @@ public partial class MainWindow
                         UriKind.Absolute
                     )
                 );
-                TwtnwLock.Source = new BitmapImage(
+                TwtnwLock1.Source = new BitmapImage(
+                    new Uri(
+                        "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
+                        UriKind.Absolute
+                    )
+                );
+                TwtnwLock2.Source = new BitmapImage(
                     new Uri(
                         "pack://application:,,,/CustomImages/Worlds/Locks/TT2.png",
                         UriKind.Absolute
@@ -700,7 +710,7 @@ public partial class MainWindow
             }
             if (File.Exists("CustomImages/Worlds/the_world_that_never_was.png"))
             {
-                Twtnw.SetResourceReference(ContentProperty, "Cus-TWTNWImage");
+                TWTNW.SetResourceReference(ContentProperty, "Cus-TWTNWImage");
             }
             if (File.Exists("CustomImages/Worlds/atlantica.png"))
             {
@@ -840,7 +850,7 @@ public partial class MainWindow
         Agrabah.SetResourceReference(ContentProperty, type + "AgrabahImage");
         HundredAcreWood.SetResourceReference(ContentProperty, type + "HundredAcreImage");
         PortRoyal.SetResourceReference(ContentProperty, type + "PortRoyalImage");
-        Twtnw.SetResourceReference(ContentProperty, type + "TWTNWImage");
+        TWTNW.SetResourceReference(ContentProperty, type + "TWTNWImage");
         Atlantica.SetResourceReference(ContentProperty, type + "AtlanticaImage");
         DisneyCastle.SetResourceReference(ContentProperty, type + "DisneyCastleImage");
 

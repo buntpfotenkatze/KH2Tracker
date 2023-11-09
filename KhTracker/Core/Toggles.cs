@@ -362,7 +362,7 @@ public partial class MainWindow
         Data.WorldsData["SpaceParanoids"].VisitLocks = value * 2;
         Data.WorldsData["SimulatedTwilightTown"].VisitLocks = value;
         Data.WorldsData["DisneyCastle"].VisitLocks = value * 2;
-        Data.WorldsData["TWTNW"].VisitLocks = value;
+        Data.WorldsData["TWTNW"].VisitLocks = value * 2;
 
         foreach (var visitLock in Data.VisitLocks)
         {
@@ -1254,7 +1254,7 @@ public partial class MainWindow
     {
         App.Settings.TWTNW = toggle;
         TwtnwOption.IsChecked = toggle;
-        HandleWorldToggle(toggle, Twtnw, TWTNWGrid);
+        HandleWorldToggle(toggle, TWTNW, TWTNWGrid);
     }
 
     private void HundredAcreWoodToggle(object sender, RoutedEventArgs e)

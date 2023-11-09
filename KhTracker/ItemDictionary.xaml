@@ -114,7 +114,8 @@
     <Image x:Key="Min-NaminesSketches" Source="Images\Checks\Min\Lock_NaminesSketches.png" x:Shared="false" />
     <Image x:Key="Min-DisneyCastleKey1" Source="Images\Checks\Min\Lock_DisneyCastleKey.png" x:Shared="false" />
     <Image x:Key="Min-DisneyCastleKey2" Source="Images\Checks\Min\Lock_DisneyCastleKey.png" x:Shared="false" />
-    <Image x:Key="Min-WayToTheDawn" Source="Images\Checks\Min\Lock_WayToTheDawn.png" x:Shared="false" />
+    <Image x:Key="Min-WayToTheDawn1" Source="Images\Checks\Min\Lock_WayToTheDawn.png" x:Shared="false" />
+    <Image x:Key="Min-WayToTheDawn2" Source="Images\Checks\Min\Lock_WayToTheDawn.png" x:Shared="false" />
     <Image x:Key="Min-OnceMore" Source="Images\Checks\once_more.png" x:Shared="false" />
     <Image x:Key="Min-SecondChance" Source="Images\Checks\second_chance.png" x:Shared="false" />
     <!-- Extra -->
