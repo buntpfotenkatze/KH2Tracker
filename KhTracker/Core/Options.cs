@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.IO;
-using Microsoft.Win32;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using Path = System.IO.Path;
-using KhTracker.Hotkeys;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using KhTracker.Hotkeys;
+using Microsoft.Win32;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 using MessageForm = System.Windows.Forms;
+using Path = System.IO.Path;
 
 namespace KhTracker;
 
@@ -460,9 +460,10 @@ public partial class MainWindow
             case "lucky_emblem_hunt":
                 ProofsToggle(false);
                 LuckyEmblemsToggle(true);
-                LuckyEmblemsRequired.Text = settings.KingdomHearts2.LuckyEmblemsRequired.ToString(
-                    "00"
-                );
+                LuckyEmblemsRequired.Text = settings
+                    .KingdomHearts2
+                    .LuckyEmblemsRequired
+                    .ToString("00");
                 break;
             case "hitlist": // TODO implement hitlist
             default:
@@ -726,9 +727,10 @@ public partial class MainWindow
         if (Data.PreviousWorldHinted != "")
         {
             foreach (
-                var box in Data.WorldsData[
-                    Data.PreviousWorldHinted
-                ].Top.Children.OfType<Rectangle>()
+                var box in Data.WorldsData[Data.PreviousWorldHinted]
+                    .Top
+                    .Children
+                    .OfType<Rectangle>()
             )
             {
                 if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
@@ -872,7 +874,9 @@ public partial class MainWindow
 
             //reset highlighted world
             foreach (
-                var box in Data.WorldsData[key].Top.Children
+                var box in Data.WorldsData[key]
+                    .Top
+                    .Children
                     .OfType<Rectangle>()
                     .Where(box => box.Name.EndsWith("SelWG"))
             )
@@ -1131,11 +1135,9 @@ public partial class MainWindow
                 caption = "Hints Load Confirmation";
             }
 
-            var result = MessageForm.MessageBox.Show(
-                message,
-                caption,
-                MessageForm.MessageBoxButtons.OKCancel
-            );
+            var result = MessageForm
+                .MessageBox
+                .Show(message, caption, MessageForm.MessageBoxButtons.OKCancel);
             if (result == MessageForm.DialogResult.Cancel)
             {
                 return false;

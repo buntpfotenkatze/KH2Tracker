@@ -2030,12 +2030,14 @@ public partial class MainWindow
             .Select(reward => reward.Item2)
             .ToList();
         // Get drive rewards between previous level and current level
-        var driveRewards = rewards.ValorChecks
+        var driveRewards = rewards
+            .ValorChecks
             .Where(reward => reward.Item1 > valor.PreviousLevels[0] && reward.Item1 <= valor.Level)
             .Select(reward => reward.Item2)
             .ToList();
         driveRewards.AddRange(
-            rewards.WisdomChecks
+            rewards
+                .WisdomChecks
                 .Where(
                     reward =>
                         reward.Item1 > wisdom.PreviousLevels[0] && reward.Item1 <= wisdom.Level
@@ -2043,14 +2045,16 @@ public partial class MainWindow
                 .Select(reward => reward.Item2)
         );
         driveRewards.AddRange(
-            rewards.LimitChecks
+            rewards
+                .LimitChecks
                 .Where(
                     reward => reward.Item1 > limit.PreviousLevels[0] && reward.Item1 <= limit.Level
                 )
                 .Select(reward => reward.Item2)
         );
         driveRewards.AddRange(
-            rewards.MasterChecks
+            rewards
+                .MasterChecks
                 .Where(
                     reward =>
                         reward.Item1 > master.PreviousLevels[0] && reward.Item1 <= master.Level
@@ -2058,7 +2062,8 @@ public partial class MainWindow
                 .Select(reward => reward.Item2)
         );
         driveRewards.AddRange(
-            rewards.FinalChecks
+            rewards
+                .FinalChecks
                 .Where(
                     reward => reward.Item1 > final.PreviousLevels[0] && reward.Item1 <= final.Level
                 )
@@ -2706,7 +2711,9 @@ public partial class MainWindow
         )
         {
             foreach (
-                var box in value.Top.Children
+                var box in value
+                    .Top
+                    .Children
                     .OfType<Rectangle>()
                     .Where(box => box.Name.EndsWith("SelWG"))
             )
@@ -2718,7 +2725,9 @@ public partial class MainWindow
         if (Data.WorldsData.TryGetValue(world.WorldName, out var worldData))
         {
             foreach (
-                var box in worldData.Top.Children
+                var box in worldData
+                    .Top
+                    .Children
                     .OfType<Rectangle>()
                     .Where(box => box.Name.EndsWith("SelWG"))
             )

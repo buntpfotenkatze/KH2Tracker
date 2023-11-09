@@ -61,35 +61,25 @@ public class OutlinedTextBlock : FrameworkElement
         )
     );
 
-    public static readonly DependencyProperty FontFamilyProperty =
-        TextElement.FontFamilyProperty.AddOwner(
-            typeof(OutlinedTextBlock),
-            new FrameworkPropertyMetadata(OnFormattedTextUpdated)
-        );
+    public static readonly DependencyProperty FontFamilyProperty = TextElement
+        .FontFamilyProperty
+        .AddOwner(typeof(OutlinedTextBlock), new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
-    public static readonly DependencyProperty FontSizeProperty =
-        TextElement.FontSizeProperty.AddOwner(
-            typeof(OutlinedTextBlock),
-            new FrameworkPropertyMetadata(OnFormattedTextUpdated)
-        );
+    public static readonly DependencyProperty FontSizeProperty = TextElement
+        .FontSizeProperty
+        .AddOwner(typeof(OutlinedTextBlock), new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
-    public static readonly DependencyProperty FontStretchProperty =
-        TextElement.FontStretchProperty.AddOwner(
-            typeof(OutlinedTextBlock),
-            new FrameworkPropertyMetadata(OnFormattedTextUpdated)
-        );
+    public static readonly DependencyProperty FontStretchProperty = TextElement
+        .FontStretchProperty
+        .AddOwner(typeof(OutlinedTextBlock), new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
-    public static readonly DependencyProperty FontStyleProperty =
-        TextElement.FontStyleProperty.AddOwner(
-            typeof(OutlinedTextBlock),
-            new FrameworkPropertyMetadata(OnFormattedTextUpdated)
-        );
+    public static readonly DependencyProperty FontStyleProperty = TextElement
+        .FontStyleProperty
+        .AddOwner(typeof(OutlinedTextBlock), new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
-    public static readonly DependencyProperty FontWeightProperty =
-        TextElement.FontWeightProperty.AddOwner(
-            typeof(OutlinedTextBlock),
-            new FrameworkPropertyMetadata(OnFormattedTextUpdated)
-        );
+    public static readonly DependencyProperty FontWeightProperty = TextElement
+        .FontWeightProperty
+        .AddOwner(typeof(OutlinedTextBlock), new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
         nameof(Text),

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Linq;
-using System.IO;
-using System.ComponentModel;
-using Button = System.Windows.Controls.Button;
 using KhTracker.Hotkeys;
+using Button = System.Windows.Controls.Button;
 
 namespace KhTracker;
 
@@ -926,9 +926,10 @@ public partial class MainWindow
                 {
                     preButton = Data.Selected;
                     foreach (
-                        var box in Data.WorldsData[
-                            Data.Selected.Name
-                        ].Top.Children.OfType<Rectangle>()
+                        var box in Data.WorldsData[Data.Selected.Name]
+                            .Top
+                            .Children
+                            .OfType<Rectangle>()
                     )
                     {
                         if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))
@@ -942,9 +943,10 @@ public partial class MainWindow
                 if (preButton != null && preButton == button)
                 {
                     foreach (
-                        var box in Data.WorldsData[
-                            Data.Selected.Name
-                        ].Top.Children.OfType<Rectangle>()
+                        var box in Data.WorldsData[Data.Selected.Name]
+                            .Top
+                            .Children
+                            .OfType<Rectangle>()
                     )
                     {
                         if (Math.Abs(box.Opacity - 0.9) > 0.0001 && !box.Name.EndsWith("SelWG"))

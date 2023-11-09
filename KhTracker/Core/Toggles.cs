@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace KhTracker;
 
@@ -1061,10 +1061,12 @@ public partial class MainWindow
             if (worldName is "SorasHeart" or "DriveForms" or "PuzzSynth")
                 continue;
 
-            Data.WorldsData[worldName].Progression.SetResourceReference(
-                ContentProperty,
-                prog + Data.ProgressKeys[worldName][Data.WorldsData[worldName].Progress]
-            );
+            Data.WorldsData[worldName]
+                .Progression
+                .SetResourceReference(
+                    ContentProperty,
+                    prog + Data.ProgressKeys[worldName][Data.WorldsData[worldName].Progress]
+                );
             Data.WorldsData[worldName].Progression.ToolTip = Data.ProgressKeys[worldName + "Desc"][
                 Data.WorldsData[worldName].Progress
             ];

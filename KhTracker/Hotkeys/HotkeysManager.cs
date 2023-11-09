@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Diagnostics;
-using System.Windows.Input;
+using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Input;
 
 /*
     Credits to Kettlesimulator's YouTube video for the simple solution - https://www.youtube.com/watch?v=qLxqoh1JLnM

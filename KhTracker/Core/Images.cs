@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Media.Imaging;
-using System.Windows.Media;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace KhTracker;
 
@@ -789,10 +789,9 @@ public partial class MainWindow
             //dirty way of doing this, but oh well
             //shadows
             if (cusItemCheck[Data.Items[item].Item1].Item2 != null)
-                cusItemCheck[Data.Items[item].Item1].Item2.SetResourceReference(
-                    ContentProperty,
-                    type + item
-                );
+                cusItemCheck[Data.Items[item].Item1]
+                    .Item2
+                    .SetResourceReference(ContentProperty, type + item);
         }
 
         // Ghost icons
