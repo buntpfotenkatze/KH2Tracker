@@ -507,11 +507,11 @@ public partial class MainWindow
         var visitItemSparrowWepCount = visitItemSparrowWep?.Quantity ?? 0;
         var visitItemAladdinWepCount = visitItemAladdinWep?.Quantity ?? 0;
         var visitItemTronWepCount = visitItemTronWep?.Quantity ?? 0;
-        var visitItemMembershipCarpCount = visitItemMembershipCard?.Quantity ?? 0;
-        var visitItemIceCreapCount = visitItemIceCream?.Quantity ?? 0;
-        var visitItemNaminesSketchepCount = visitItemNaminesSketches?.Quantity ?? 0;
-        var visitItemDisneyCastleKepCount = visitItemDisneyCastleKey?.Quantity ?? 0;
-        var visitItemWayToTheDawpCount = visitItemWayToTheDawn?.Quantity ?? 0;
+        var visitItemMembershipCardCount = visitItemMembershipCard?.Quantity ?? 0;
+        var visitItemIceCreamCount = visitItemIceCream?.Quantity ?? 0;
+        var visitItemNaminesSketchesCount = visitItemNaminesSketches?.Quantity ?? 0;
+        var visitItemDisneyCastleKeyCount = visitItemDisneyCastleKey?.Quantity ?? 0;
+        var visitItemWayToTheDawnCount = visitItemWayToTheDawn?.Quantity ?? 0;
 
         importantChecks.Add(
             visitItemAuronWep = new Visit(memory, save + 0x35AE, addressOffset, "AuronWep")
@@ -576,11 +576,11 @@ public partial class MainWindow
         visitItemSparrowWep.Quantity = visitItemSparrowWepCount;
         visitItemAladdinWep.Quantity = visitItemAladdinWepCount;
         visitItemTronWep.Quantity = visitItemTronWepCount;
-        visitItemMembershipCard.Quantity = visitItemMembershipCarpCount;
-        visitItemIceCream.Quantity = visitItemIceCreapCount;
-        visitItemNaminesSketches.Quantity = visitItemNaminesSketchepCount;
-        visitItemDisneyCastleKey.Quantity = visitItemDisneyCastleKepCount;
-        visitItemWayToTheDawn.Quantity = visitItemWayToTheDawpCount;
+        visitItemMembershipCard.Quantity = visitItemMembershipCardCount;
+        visitItemIceCream.Quantity = visitItemIceCreamCount;
+        visitItemNaminesSketches.Quantity = visitItemNaminesSketchesCount;
+        visitItemDisneyCastleKey.Quantity = visitItemDisneyCastleKeyCount;
+        visitItemWayToTheDawn.Quantity = visitItemWayToTheDawnCount;
 
         importantChecks.Add(
             extraItem = new Extra(memory, save + 0x3696, addressOffset, "HadesCup")

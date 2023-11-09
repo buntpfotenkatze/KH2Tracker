@@ -127,6 +127,8 @@ public class Settings
 
     public bool LuckyEmblems { get; set; }
 
+    public int LuckyEmblemsRequired { get; set; } = 40;
+
     public void Save()
     {
         if (!Directory.Exists("KH2ArchipelagoTrackerSettings"))

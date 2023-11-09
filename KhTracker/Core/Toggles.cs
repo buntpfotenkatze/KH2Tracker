@@ -394,6 +394,13 @@ public partial class MainWindow
         }
     }
 
+    private void SetLuckyEmblemsRequired(int? num)
+    {
+        num ??= 40;
+        App.Settings.LuckyEmblemsRequired = num.Value;
+        LuckyEmblemsRequired.Text = num.Value.ToString("00");
+    }
+
     private void TornPagesToggle(object sender, RoutedEventArgs e)
     {
         TornPagesToggle(TornPagesOption.IsChecked);

@@ -197,6 +197,7 @@ public partial class MainWindow
             TornPagesToggle(setting.TornPages);
             PromiseCharmToggle(setting.PromiseCharm);
             LuckyEmblemsToggle(setting.LuckyEmblems);
+            SetLuckyEmblemsRequired(setting.LuckyEmblemsRequired);
             AbilitiesToggle(setting.Abilities);
             AntiFormToggle(setting.AntiForm);
             VisitLockToggle(setting.WorldVisitLock);
@@ -460,10 +461,7 @@ public partial class MainWindow
             case "lucky_emblem_hunt":
                 ProofsToggle(false);
                 LuckyEmblemsToggle(true);
-                LuckyEmblemsRequired.Text = settings
-                    .KingdomHearts2
-                    .LuckyEmblemsRequired
-                    .ToString("00");
+                SetLuckyEmblemsRequired(settings.KingdomHearts2.LuckyEmblemsRequired);
                 break;
             case "hitlist": // TODO implement hitlist
             default:
