@@ -139,7 +139,7 @@ internal class Stats : INotifyPropertyChanged
             0 when Weapon != "Sword" => "Sword",
             1 when Weapon != "Shield" => "Shield",
             2 when Weapon != "Staff" => "Staff",
-            _ => Weapon
+            _ => Weapon,
         };
 
         PreviousLevels[0] = PreviousLevels[1];
@@ -186,7 +186,7 @@ internal class Stats : INotifyPropertyChanged
         {
             50 => levelChecks50,
             99 => levelChecks99,
-            _ => levelChecks1
+            _ => levelChecks1,
         };
     }
 

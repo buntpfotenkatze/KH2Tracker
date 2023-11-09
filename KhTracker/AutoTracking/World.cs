@@ -63,7 +63,7 @@ internal class World
             { 16, "PortRoyal" },
             { 17, "SpaceParanoids" },
             { 18, "TWTNW" },
-            { 255, "GoA" }
+            { 255, "GoA" },
         };
     }
 

@@ -120,7 +120,7 @@ public partial class WorldGrid
                 1 => VirtualKeyCode.F6,
                 2 => VirtualKeyCode.F7,
                 3 => VirtualKeyCode.F8,
-                _ => VirtualKeyCode.F5
+                _ => VirtualKeyCode.F5,
             };
 
             simu.Keyboard

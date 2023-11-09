@@ -103,7 +103,7 @@ public class Codes
             "DriveForms" => "Drive Forms",
             "SorasHeart" => "Sora's Heart",
             "PuzzSynth" => "Creations",
-            _ => worldName
+            _ => worldName,
         };
     }
 
@@ -204,7 +204,7 @@ public class Codes
             { 370, "OlympusStone" },
             { 462, "UnknownDisk" },
             { 362, "MunnyPouch1" },
-            { 535, "MunnyPouch2" }
+            { 535, "MunnyPouch2" },
         };
 
     private static readonly Dictionary<string, string> ShortNames =
@@ -251,7 +251,7 @@ public class Codes
             { "Halloween Town", "HT" },
             { "Port Royal", "PR" },
             { "Space Paranoids", "SP" },
-            { "Atlantica", "AT" }
+            { "Atlantica", "AT" },
         };
 
     private static readonly Dictionary<string, string> ItemTypes =
@@ -383,7 +383,7 @@ public class Codes
             { "Hades Cup Trophy", "other" },
             { "Olympus Stone", "other" },
             { "Unknown Disk", "other" },
-            { "Munny Pouch", "other" }
+            { "Munny Pouch", "other" },
         };
 
     private static readonly Dictionary<string, string> ConvertItemNames =
@@ -431,7 +431,7 @@ public class Codes
             { "Anti-Form", "Anti" },
             { "Hades Cup Trophy", "HadesCup" },
             { "Olympus Stone", "OlympusStone" },
-            { "Unknown Disk", "UnknownDisk" }
+            { "Unknown Disk", "UnknownDisk" },
         };
 
     private static readonly Dictionary<string, string> ConvertOpenKh =
@@ -512,7 +512,7 @@ public class Codes
             { "Critical Bonuses", "GoA" },
             { "Creations", "PuzzSynth" },
             { "Empty", "Empty" },
-            { "Munny Pouch", "MunnyPouch" }
+            { "Munny Pouch", "MunnyPouch" },
         };
 
     private static readonly Dictionary<string, string> BossTypes =
@@ -606,7 +606,7 @@ public class Codes
             { "Boat Pete", "boss_other" },
             { "Pete TR", "boss_other" },
             { "Oogie Boogie", "boss_other" },
-            { "MCP", "boss_other" }
+            { "MCP", "boss_other" },
         };
 
     public static Dictionary<string, string> BossLocations =
@@ -823,7 +823,7 @@ public class Codes
             { "Cure Element", "Green" },
             { "Magnet Element", "Pink" },
             { "Reflect Element", "WhiteBlue" },
-            { "Torn Pages", "Gold" }
+            { "Torn Pages", "Gold" },
         };
 
     public static readonly Dictionary<string, int> HashInt =
@@ -864,7 +864,7 @@ public class Codes
             { "rank-s", 33 },
             { "weapon-keyblade", 34 },
             { "weapon-shield", 35 },
-            { "weapon-staff", 36 }
+            { "weapon-staff", 36 },
         };
 
     //private Dictionary<string, int> GetItemPool = new Dictionary<string, int>()
@@ -1019,7 +1019,7 @@ public class Codes
         "TwilightTown",
         "TWTNW",
         "TWTNW",
-        "TWTNW"
+        "TWTNW",
     };
 
     private readonly string[] free =
@@ -1033,7 +1033,7 @@ public class Codes
         "11D18DE4",
         "11D18DE6",
         "11D18DE0",
-        "11D18DE2"
+        "11D18DE2",
     };
 
     private readonly string[] simulatedTwilightTown =
@@ -1064,7 +1064,7 @@ public class Codes
         "11CE062A",
         "11CE0642",
         "11CE064E",
-        "11CE0B0A" // data roxas
+        "11CE0B0A", // data roxas
     };
 
     private readonly string[] twilightTown =
@@ -1119,7 +1119,7 @@ public class Codes
         "11CE0966",
         "11CE09AE",
         "11CE0A0E",
-        "11CE0ACE" //data axel
+        "11CE0ACE", //data axel
     };
 
     private readonly string[] hollowBastion =
@@ -1184,7 +1184,7 @@ public class Codes
         "11CE05BE",
         "11CE05CA",
         "11CE05D6",
-        "11CE0AB6" //data demyx
+        "11CE0AB6", //data demyx
     };
 
     private readonly string[] landOfDragons =
@@ -1217,7 +1217,7 @@ public class Codes
         "11CE06C6",
         "11CE06DE",
         "11CE06EA",
-        "11CE0AE6" //data xigbar
+        "11CE0AE6", //data xigbar
     };
 
     private readonly string[] beastsCastle =
@@ -1250,7 +1250,7 @@ public class Codes
         "11CE0852",
         "11CE085E",
         "11CE09C6",
-        "11CE0AC2" //data xaldin
+        "11CE0AC2", //data xaldin
     };
 
     private readonly string[] olympusColiseum =
@@ -1296,7 +1296,7 @@ public class Codes
         "11CE095A",
         "11CE0996", //hades cup
         "11CE0A56", //AS zexion
-        "11CE0A92" //data zexion
+        "11CE0A92", //data zexion
     };
 
     private readonly string[] disneyCastle =
@@ -1326,7 +1326,7 @@ public class Codes
         "11CE0732",
         "11CE0762",
         "11CE0A6E", //AS marluxia
-        "11CE0AAA" //data marluxia
+        "11CE0AAA", //data marluxia
     };
 
     private readonly string[] portRoyal =
@@ -1361,7 +1361,7 @@ public class Codes
         "11CE086A",
         "11CE0876",
         "11CE09DE",
-        "11CE0AFE" //data luxord
+        "11CE0AFE", //data luxord
     };
 
     private readonly string[] agrabah =
@@ -1399,7 +1399,7 @@ public class Codes
         "11CE079E",
         "11CE08B2",
         "11CE0A4A", //AS lexaeus
-        "11CE0A86" //data lexaeus
+        "11CE0A86", //data lexaeus
     };
 
     private readonly string[] halloweenTown =
@@ -1424,7 +1424,7 @@ public class Codes
         "11CE08CA",
         "11CE08D6",
         "11CE0A3E", //AS vexen
-        "11CE0A7A" //data vexen
+        "11CE0A7A", //data vexen
     };
 
     private readonly string[] prideLands =
@@ -1457,7 +1457,7 @@ public class Codes
         "21D10C18",
         "11CE07B6",
         "11CE07C2",
-        "11CE0AF2" //data saix
+        "11CE0AF2", //data saix
     };
 
     private readonly string[] atlantica = { "11CE0846", "11CE08E2", "11CE08EE", "11CE08FA" };
@@ -1487,7 +1487,7 @@ public class Codes
         "11CE0906",
         "11CE0912",
         "11CE091E",
-        "11CE092A"
+        "11CE092A",
     };
 
     private readonly string[] spaceParanoids =
@@ -1511,7 +1511,7 @@ public class Codes
         "21D10C78",
         "11CE0816",
         "11CE0A62", //AS larxene
-        "11CE0A9E" //data larxene
+        "11CE0A9E", //data larxene
     };
 
     private readonly string[] theWorldThatNeverWas =
@@ -1546,7 +1546,7 @@ public class Codes
         "11CE0A1A",
         "11CE0A26",
         "11CE0A32",
-        "11CE0ADA" //data xemnas
+        "11CE0ADA", //data xemnas
     };
 
     private readonly string[] forms =
@@ -1580,7 +1580,7 @@ public class Codes
         "11D1A31E",
         "11D1A326",
         "11D1A32E",
-        "11D1A336"
+        "11D1A336",
     };
 
     private readonly string[] levels =
@@ -1681,6 +1681,6 @@ public class Codes
         "11D0BCA0",
         "11D0BCB0",
         "11D0BCC0",
-        "11D0BCD0"
+        "11D0BCD0",
     };
 }

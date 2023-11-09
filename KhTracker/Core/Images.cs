@@ -199,7 +199,7 @@ public partial class MainWindow
                 ("Cus-MunnyPouch1", SMunnyPouch, "CustomImages/Checks/aux_munny_pouch.png")
             },
             { MunnyPouch2, ("Cus-MunnyPouch2", null, "CustomImages/Checks/aux_munny_pouch.png") },
-            { Anti, ("Cus-Anti", SAnti, "CustomImages/Checks/form_anti.png") }
+            { Anti, ("Cus-Anti", SAnti, "CustomImages/Checks/form_anti.png") },
         };
     }
 

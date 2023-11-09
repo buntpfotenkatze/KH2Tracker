@@ -230,7 +230,7 @@ public partial class MainWindow
                 "Struggle",
                 "ComputerRoom",
                 "Axel",
-                "DataRoxas"
+                "DataRoxas",
             }
         );
         Data.ProgressKeys.Add(
@@ -244,7 +244,7 @@ public partial class MainWindow
                 "Sandlot",
                 "Mansion",
                 "BetwixtAndBetween",
-                "DataAxel"
+                "DataAxel",
             }
         );
         Data.ProgressKeys.Add(
@@ -262,7 +262,7 @@ public partial class MainWindow
                 "1000Heartless",
                 "Sephiroth",
                 "DataDemyx",
-                "SephiDemyx"
+                "SephiDemyx",
             }
         );
         Data.ProgressKeys.Add(
@@ -276,7 +276,7 @@ public partial class MainWindow
                 "DarkThorn",
                 "Dragoons",
                 "Xaldin",
-                "DataXaldin"
+                "DataXaldin",
             }
         );
         Data.ProgressKeys.Add(
@@ -293,7 +293,7 @@ public partial class MainWindow
                 "AuronStatue",
                 "Hades",
                 "Zexion",
-                "ZexionData"
+                "ZexionData",
             }
         );
         Data.ProgressKeys.Add(
@@ -309,7 +309,7 @@ public partial class MainWindow
                 "Carpet",
                 "GenieJafar",
                 "Lexaeus",
-                "LexaeusData"
+                "LexaeusData",
             }
         );
         Data.ProgressKeys.Add(
@@ -325,7 +325,7 @@ public partial class MainWindow
                 "ShanYu",
                 "ThroneRoom",
                 "StormRider",
-                "DataXigbar"
+                "DataXigbar",
             }
         );
         Data.ProgressKeys.Add(
@@ -338,7 +338,7 @@ public partial class MainWindow
                 "Rabbit",
                 "Kanga",
                 "SpookyCave",
-                "StarryHill"
+                "StarryHill",
             }
         );
         Data.ProgressKeys.Add(
@@ -352,7 +352,7 @@ public partial class MainWindow
                 "Scar",
                 "Hyenas2",
                 "GroundShaker",
-                "DataSaix"
+                "DataSaix",
             }
         );
         Data.ProgressKeys.Add(
@@ -370,7 +370,7 @@ public partial class MainWindow
                 "MarluxiaData",
                 "LingeringWill",
                 "Marluxia_LingeringWill",
-                "MarluxiaData_LingeringWill"
+                "MarluxiaData_LingeringWill",
             }
         );
         Data.ProgressKeys.Add(
@@ -386,7 +386,7 @@ public partial class MainWindow
                 "Presents",
                 "Experiment",
                 "Vexen",
-                "VexenData"
+                "VexenData",
             }
         );
         Data.ProgressKeys.Add(
@@ -403,7 +403,7 @@ public partial class MainWindow
                 "GrimReaper1",
                 "Gambler",
                 "GrimReaper",
-                "DataLuxord"
+                "DataLuxord",
             }
         );
         Data.ProgressKeys.Add(
@@ -417,7 +417,7 @@ public partial class MainWindow
                 "SolarSailer",
                 "MCP",
                 "Larxene",
-                "LarxeneData"
+                "LarxeneData",
             }
         );
         Data.ProgressKeys.Add(
@@ -431,7 +431,7 @@ public partial class MainWindow
                 "Luxord",
                 "Saix",
                 "Xemnas1",
-                "DataXemnas"
+                "DataXemnas",
             }
         );
         Data.ProgressKeys.Add("Atlantica", new List<string> { "", "Tutorial", "Ursula", "NewDay" });
@@ -454,7 +454,7 @@ public partial class MainWindow
                 "Beat Setzer",
                 "Mansion Computer Room",
                 "Axel 2 (Boss)",
-                "Roxas (Data)"
+                "Roxas (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -468,7 +468,7 @@ public partial class MainWindow
                 "Sandlot Fight",
                 "Mansion Gate Fight",
                 "Betwixt And Between",
-                "Axel (Data)"
+                "Axel (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -486,7 +486,7 @@ public partial class MainWindow
                 "1000 Heartless",
                 "Sephiroth (Boss)",
                 "Demyx (Data)",
-                "Sephiroth and Demyx"
+                "Sephiroth and Demyx",
             }
         );
         Data.ProgressKeys.Add(
@@ -500,7 +500,7 @@ public partial class MainWindow
                 "Dark Thorn (Boss)",
                 "Dragoons Forced Fight",
                 "Xaldin (Boss)",
-                "Xaldin (Data)"
+                "Xaldin (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -517,7 +517,7 @@ public partial class MainWindow
                 "Hades' Chamber Fight",
                 "Hades (Boss)",
                 "Zexion (AS)",
-                "Zexion (Data)"
+                "Zexion (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -533,7 +533,7 @@ public partial class MainWindow
                 "Carpet Magic Minigame",
                 "Genie Jafar (Boss)",
                 "Lexaeus (AS)",
-                "Lexaeus (Data)"
+                "Lexaeus (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -549,7 +549,7 @@ public partial class MainWindow
                 "Shan Yu (Boss)",
                 "Throne Room",
                 "Storm Rider (Boss)",
-                "Xigbar (Data)"
+                "Xigbar (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -562,7 +562,7 @@ public partial class MainWindow
                 "Entered Rabbit's House",
                 "Entered Kanga's House",
                 "Entered Spooky Cave",
-                "Entered Starry Hill"
+                "Entered Starry Hill",
             }
         );
         Data.ProgressKeys.Add(
@@ -576,7 +576,7 @@ public partial class MainWindow
                 "Scar (Boss)",
                 "Hyenas Fight (2nd Visit)",
                 "Ground Shaker (Boss)",
-                "Saix (Data)"
+                "Saix (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -594,7 +594,7 @@ public partial class MainWindow
                 "Marluxia (Data)",
                 "Lingering Will (Boss)",
                 "Marluxia (AS) and Lingering Will",
-                "Marluxia (Data) and Lingering Will"
+                "Marluxia (Data) and Lingering Will",
             }
         );
         Data.ProgressKeys.Add(
@@ -610,7 +610,7 @@ public partial class MainWindow
                 "Made Decoy Presents",
                 "The Experiment (Boss)",
                 "Vexen (AS)",
-                "Vexen (Data)"
+                "Vexen (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -627,7 +627,7 @@ public partial class MainWindow
                 "Grim Reaper 1 (Boss)",
                 "1st Gambler Medallion",
                 "Grim Reaper 2 (Boss)",
-                "Luxord (Data)"
+                "Luxord (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -641,7 +641,7 @@ public partial class MainWindow
                 "Solar Sailer",
                 "MCP (Boss)",
                 "Larxene (AS)",
-                "Larxene (Data)"
+                "Larxene (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -655,7 +655,7 @@ public partial class MainWindow
                 "Luxord (Boss)",
                 "Saix (Boss)",
                 "Xemnas 1 (Boss)",
-                "Xemnas (Data)"
+                "Xemnas (Data)",
             }
         );
         Data.ProgressKeys.Add(
@@ -671,7 +671,7 @@ public partial class MainWindow
                 "Forced Fight 1",
                 "Forced Fight 2",
                 "Transport to Rememberance",
-                "Steam Valves (CoR Skip)"
+                "Steam Valves (CoR Skip)",
             }
         );
 

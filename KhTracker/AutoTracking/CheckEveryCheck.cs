@@ -714,7 +714,7 @@ internal class CheckEveryCheck
             {
                 { "Sword", swordLevel },
                 { "Shield", shieldLevel },
-                { "Staff", staffLevel }
+                { "Staff", staffLevel },
             };
             onLevels = true;
         }

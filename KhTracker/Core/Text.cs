@@ -18,7 +18,7 @@ public class OutlinedTextBlock : FrameworkElement
             DashCap = PenLineCap.Round,
             EndLineCap = PenLineCap.Round,
             LineJoin = PenLineJoin.Round,
-            StartLineCap = PenLineCap.Round
+            StartLineCap = PenLineCap.Round,
         };
 
         InvalidateVisual();

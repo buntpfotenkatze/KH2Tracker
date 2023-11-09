@@ -136,7 +136,7 @@ public class Data
             { "TWTNW", 0 },
             { "GoA", 0 },
             { "Atlantica", 0 },
-            { "PuzzSynth", 0 }
+            { "PuzzSynth", 0 },
         };
 
     //                                              Sora Level - 10 20 30 40 50
@@ -203,5 +203,5 @@ public class WorldData
 
 public enum Mode
 {
-    None
+    None,
 }

@@ -212,7 +212,7 @@ internal class Rewards
         {
             "Sword" => SwordChecks,
             "Shield" => ShieldChecks,
-            _ => StaffChecks
+            _ => StaffChecks,
         };
     }
 }

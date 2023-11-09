@@ -65,7 +65,7 @@ public class WeaponConverter : IValueConverter
             "Sword" => enabledPath1 + "sword.png",
             "Shield" => enabledPath2 + "shield.png",
             "Staff" => enabledPath3 + "staff.png",
-            _ => null
+            _ => null,
         };
     }
 

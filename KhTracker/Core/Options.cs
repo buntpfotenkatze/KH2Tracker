@@ -52,7 +52,7 @@ public partial class MainWindow
             DefaultExt = ".tsv",
             Filter = "Tracker Save File (*.tsv)|*.tsv",
             FileName = "kh2fm-tracker-save",
-            InitialDirectory = AppDomain.CurrentDomain.BaseDirectory
+            InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
         };
         if (saveFileDialog.ShowDialog() == true)
         {
@@ -76,7 +76,7 @@ public partial class MainWindow
             {
                 //Value = worldData.value.Text, //do i need this?
                 //Progression = worldData.progress, //or this?
-                Items = worldItems
+                Items = worldItems,
                 //Hinted = worldData.hinted,
                 //HintedHint = worldData.hintedHint,
                 //GhostHint = worldData.containsGhost,
@@ -129,7 +129,7 @@ public partial class MainWindow
             DefaultExt = ".tsv",
             Filter = "Tracker Save File (*.tsv)|*.tsv",
             FileName = "kh2fm-tracker-save",
-            InitialDirectory = AppDomain.CurrentDomain.BaseDirectory
+            InitialDirectory = AppDomain.CurrentDomain.BaseDirectory,
         };
         if (openFileDialog.ShowDialog() == true)
         {
@@ -381,7 +381,7 @@ public partial class MainWindow
         {
             DefaultExt = ".yaml",
             Filter = "Archipelago Settings (*.yaml)|*.yaml",
-            Title = "Select Settings File"
+            Title = "Select Settings File",
         };
         if (openFileDialog.ShowDialog() == true)
             LoadArchipelagoSettings(openFileDialog.FileName);
@@ -761,7 +761,7 @@ public partial class MainWindow
             { "TWTNW", 0 },
             { "GoA", 0 },
             { "Atlantica", 0 },
-            { "PuzzSynth", 0 }
+            { "PuzzSynth", 0 },
         };
         // csharpier-ignore-start
         Data.SttProgressionValues = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -1363,7 +1363,7 @@ public partial class MainWindow
             "+" => "OemPlus",
             "=" => "OemPlus",
             "|" => "OemPipe",
-            _ => key
+            _ => key,
         };
     }
 
@@ -1380,7 +1380,7 @@ public partial class MainWindow
             "7" => type ? "D7" : "NumPad7",
             "8" => type ? "D8" : "NumPad8",
             "9" => type ? "D9" : "NumPad9",
-            _ => type ? "D0" : "NumPad0"
+            _ => type ? "D0" : "NumPad0",
         };
     }
 }
