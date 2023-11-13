@@ -402,9 +402,9 @@ public partial class MainWindow
 
         var settings = deserializer.Deserialize<ArchipelagoSettings>(file);
 
-        PromiseCharmToggle(settings.KingdomHearts2.PromiseCharm);
+        PromiseCharmToggle(settings.KingdomHearts2.PromiseCharm is true);
 
-        if (settings.KingdomHearts2.SuperBosses)
+        if (settings.KingdomHearts2.SuperBosses is true)
         {
             SettingAbsent.Width = new GridLength(1, GridUnitType.Star);
             SettingSephiroth.Width = new GridLength(1, GridUnitType.Star);
@@ -461,7 +461,7 @@ public partial class MainWindow
             case "lucky_emblem_hunt":
                 ProofsToggle(false);
                 LuckyEmblemsToggle(true);
-                SetLuckyEmblemsRequired(settings.KingdomHearts2.LuckyEmblemsRequired);
+                SetLuckyEmblemsRequired(settings.KingdomHearts2.LuckyEmblemsRequired as int? ?? 40);
                 break;
             case "hitlist": // TODO implement hitlist
             default:
@@ -470,7 +470,7 @@ public partial class MainWindow
                 break;
         }
 
-        PromiseCharmToggle(settings.KingdomHearts2.PromiseCharm);
+        PromiseCharmToggle(settings.KingdomHearts2.PromiseCharm is true);
 
         if (Data.WasTracking)
         {
@@ -485,27 +485,27 @@ public partial class MainWindow
 
         public class KingdomHearts2Settings
         {
-            public string LevelDepth { get; set; }
+            public object LevelDepth { get; set; }
 
             [YamlMember(Alias = "Promise_Charm", ApplyNamingConventions = false)]
-            public bool PromiseCharm { get; set; }
+            public object PromiseCharm { get; set; }
 
-            public bool SuperBosses { get; set; }
+            public object SuperBosses { get; set; }
 
-            public string Cups { get; set; }
+            public object Cups { get; set; }
 
             [YamlMember(Alias = "Visitlocking")]
-            public string VisitLocking { get; set; }
+            public object VisitLocking { get; set; }
 
-            public string Goal { get; set; }
+            public object Goal { get; set; }
 
-            public int LuckyEmblemsAmount { get; set; }
+            public object LuckyEmblemsAmount { get; set; }
 
-            public int LuckyEmblemsRequired { get; set; }
+            public object LuckyEmblemsRequired { get; set; }
 
-            public int BountyAmount { get; set; }
+            public object BountyAmount { get; set; }
 
-            public int BountyRequired { get; set; }
+            public object BountyRequired { get; set; }
         }
     }
 
